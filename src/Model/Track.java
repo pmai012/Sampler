@@ -74,7 +74,7 @@ public class Track {
     public String getGenre() {
         return genre;
     }
-
+//blub
     /**
      * Get Comment
      * @return Gibt den kommentar von dem Stück als String zurueck.
