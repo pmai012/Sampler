@@ -7,16 +7,14 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+public class Main  {
 
-    @Override
-    public void start(Stage primaryStage) throws Exception{
 
-    }
 
 
     public static void main(String[] args) {
-        MainFrame.launch(args);
+        Application.launch(MainFrame.class, args);
+     //   MainFrame.launch(args);
    //     launch(args);
     }
 }
