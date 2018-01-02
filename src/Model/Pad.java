@@ -4,20 +4,25 @@ import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
 
+
 import java.io.IOException;
 
 /**
  * Created by User on 21.12.2017.
  */
 public class Pad {
-private Mp3File file ;
-private long startpoint;
-private long endpoint;
-    public void play() {
-        
+    private Mp3File file;
+    private long startpoint;
+    private long endpoint;
+
+
+
+    public void setMp3File(Mp3File file) {
+        this.file = file;
     }
 
-    public void delete() {
+    public Mp3File getMp3File() {
+        return file;
     }
 
 
@@ -31,10 +36,14 @@ private long endpoint;
         } catch (InvalidDataException e) {
             e.printStackTrace();
         }
+
+
+
     }
 
     public void setStartpoint(long time) {
-       startpoint = time;
+
+        startpoint = time;
     }
 
     public void setEndpoint(long time) {
