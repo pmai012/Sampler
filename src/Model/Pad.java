@@ -3,6 +3,12 @@ package Model;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
+import ddf.minim.AudioOutput;
+import ddf.minim.AudioPlayer;
+import ddf.minim.spi.AudioOut;
+import ddf.minim.ugens.Delay;
+import de.hsrm.mi.eibo.simpleplayer.SimpleAudioPlayer;
+import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
 
 
 import java.io.IOException;
@@ -14,8 +20,16 @@ public class Pad {
     private Mp3File file;
     private long startpoint;
     private long endpoint;
+    private AudioOutput audioOut;
 
 
+    public Pad() {
+    }
+
+
+    public AudioOutput getoutput(){
+        return audioOut;
+    }
 
     public void setMp3File(Mp3File file) {
         this.file = file;
@@ -36,8 +50,9 @@ public class Pad {
         } catch (InvalidDataException e) {
             e.printStackTrace();
         }
-
-
+        SimpleMinim simpleMinim = new SimpleMinim(true);
+        simpleMinim.loadMP3File(path);
+          audioOut = simpleMinim.getLineOut();
 
     }
 
