@@ -1,5 +1,6 @@
 package Model.Effects;
 
+import ddf.minim.UGen;
 import ddf.minim.ugens.*;
 
 public class DelayEffect extends Effect {
@@ -10,6 +11,11 @@ public class DelayEffect extends Effect {
 
         super();
         delay = new Delay( rate, decay,true,true);
-        delay.patch(out);
+
+    }
+
+    @Override
+    void patchToOutput(UGen tone) {
+        tone.patch(delay).patch(out);
     }
 }

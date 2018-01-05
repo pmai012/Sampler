@@ -2,6 +2,7 @@ package Model.Effects;
 
 import ddf.minim.AudioOutput;
 import ddf.minim.Minim;
+import ddf.minim.UGen;
 
 /**
  * Created by Pascal on 05.01.2018.
@@ -16,4 +17,6 @@ public abstract class Effect {
         minim = new Minim(this);
         out = minim.getLineOut();
     }
+
+    abstract void patchToOutput(UGen tone);
 }
