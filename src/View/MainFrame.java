@@ -5,6 +5,7 @@ package View;/**
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class MainFrame extends Application {
@@ -17,22 +18,30 @@ public class MainFrame extends Application {
     private RecordView recordView;
     private SettingView settingView;
     private SoundView soundView;
+    private VBox configBox;
 
     public MainFrame(){
         root = new BorderPane();
+        configBox = new VBox(10);
         padView = new PadView();
         recordView = new RecordView();
-        settingView = new SettingView();
         soundView = new SoundView();
+        settingView = new SettingView();
+
     }
 
 
     @Override
     public void start(Stage primaryStage) {
-        root.setTop(padView);
-        root.setRight(settingView);
-        root.setLeft(recordView);
-        root.setBottom(soundView);
+
+        configBox.getChildren().add(recordView);
+        configBox.getChildren().add(soundView);
+        configBox.getChildren().add(settingView);
+
+
+        root.setRight(configBox);
+        root.setLeft(padView);
+
 
         Scene scene = new Scene(root, WIDTH, HEIGHT);
         scene.getStylesheets().add("CSS/MainFrameGUI.css");
@@ -41,7 +50,8 @@ public class MainFrame extends Application {
         primaryStage.setMinHeight(640);
         primaryStage.setMinWidth(1200);
 
-        root.getStylesheets().addAll("root");
+        root.getStyleClass().addAll("root");
+        configBox.getStyleClass().addAll("configBox");
 
 
         primaryStage.show();
