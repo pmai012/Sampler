@@ -17,6 +17,7 @@ import java.io.IOException;
  * Created by User on 21.12.2017.
  */
 public class Pad {
+
     private Mp3File file;
     private long startpoint;
     private long endpoint;
