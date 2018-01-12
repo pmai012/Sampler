@@ -13,7 +13,7 @@ public class Player extends SimpleMinim {
 
     public void setFile(String path){
         minim.loadMP3File(path);
-        super = minim;
+        
     }
 
     public AudioOutput getAudioOutput() {

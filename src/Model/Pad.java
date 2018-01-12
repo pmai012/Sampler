@@ -53,7 +53,7 @@ public class Pad {
         }
         SimpleMinim simpleMinim = new SimpleMinim(true);
         simpleMinim.loadMP3File(path);
-          audioOut = simpleMinim.getLineOut();
+        audioOut = simpleMinim.getLineOut();
 
     }
 

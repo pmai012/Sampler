@@ -27,7 +27,6 @@ public class MainFrame extends Application {
         recordView = new RecordView();
         soundView = new SoundView();
         settingView = new SettingView();
-
     }
 
 
@@ -38,6 +37,10 @@ public class MainFrame extends Application {
         configBox.getChildren().add(soundView);
         configBox.getChildren().add(settingView);
 
+
+        VBox test = new VBox(10);
+
+        test.setStyle("-fx-background-color: " + "#612");
 
         root.setRight(configBox);
         root.setLeft(padView);
