@@ -4,6 +4,7 @@ package View;/**
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -50,11 +51,13 @@ public class MainFrame extends Application {
         scene.getStylesheets().add("CSS/SamplerGUI.css");
         primaryStage.setScene(scene);
         primaryStage.setTitle("Sampler");
+        primaryStage.getIcons().add(new Image("Picture/LogoSampler.png"));
         primaryStage.setMinHeight(640);
         primaryStage.setMinWidth(1200);
 
         root.getStyleClass().addAll("root");
         configBox.getStyleClass().addAll("configBox");
+        padView.getStyleClass().addAll("pad");
 
 
         primaryStage.show();

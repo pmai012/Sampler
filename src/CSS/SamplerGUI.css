@@ -6,3 +6,7 @@
 .configBox {
     -fx-background-color: #292929;
 }
+
+.pad {
+    -fx-graphic: url("../Picture/Pad.png");
+}
