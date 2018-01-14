@@ -47,7 +47,7 @@ public class MainFrame extends Application {
 
 
         Scene scene = new Scene(root, WIDTH, HEIGHT);
-        scene.getStylesheets().add("CSS/MainFrameGUI.css");
+        scene.getStylesheets().add("CSS/SamplerGUI.css");
         primaryStage.setScene(scene);
         primaryStage.setTitle("Sampler");
         primaryStage.setMinHeight(640);
