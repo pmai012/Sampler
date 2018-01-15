@@ -7,8 +7,10 @@
     -fx-background-color: #292929;
 }
 
-.padView {
+.padBox {
     -fx-padding: 200 10 10 150;
+    -fx-background-color: #292929;
+
 }
 
 .pad {

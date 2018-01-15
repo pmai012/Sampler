@@ -19,16 +19,6 @@ public class PadView extends Pane {
     private Button pad1, pad2, pad3, pad4, pad5, pad6, pad7, pad8,
             pad9, pad10, pad11, pad12, pad13, pad14, pad15, pad16;
 
-    /*
-    Rectangle pad1;
-    Rectangle pad2;
-    Rectangle pad3;
-    Rectangle pad4;
-    Rectangle pad5;
-    Rectangle pad6;
-    Rectangle pad7;
-    Rectangle pad8;
-    */
 
     public PadView(){
         rootPV = new BorderPane();
@@ -37,17 +27,8 @@ public class PadView extends Pane {
         padBox.setVgap(10);
         padBox.setMaxHeight(HEIGHT);
         padBox.setMaxWidth(WIDTH);
-        this.getStylesheets().add("CSS/SamplerGUI.css");
-        /*
-        pad1 = new Rectangle(100,100, Paint.valueOf("GREEN"));
-        pad2 = new Rectangle(100,100, Paint.valueOf("RED"));
-        pad3 = new Rectangle(100,100, Paint.valueOf("BLUE"));
-        pad4 = new Rectangle(100,100, Paint.valueOf("YELLOW"));
-        pad5 = new Rectangle(100,100, Paint.valueOf("PURPLE"));
-        pad6 = new Rectangle(100,100, Paint.valueOf("PINK"));
-        pad7 = new Rectangle(100,100, Paint.valueOf("CYAN"));
-        pad8 = new Rectangle(100,100, Paint.valueOf("ORANGE"));
-        */
+        //this.getStylesheets().add("CSS/SamplerGUI.css");
+
         pad1 = new Button();
         pad2 = new Button();
         pad3 = new Button();
@@ -70,7 +51,7 @@ public class PadView extends Pane {
                 pad9, pad10, pad11,pad12, pad13, pad14, pad15, pad16);
         this.getChildren().add(padBox);
 
-        padBox.getStyleClass().addAll("padView");
+        padBox.getStyleClass().addAll("padBox");
 
         pad1.getStyleClass().addAll("pad");
         pad2.getStyleClass().addAll("pad");

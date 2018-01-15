@@ -23,7 +23,7 @@ public class MainFrame extends Application {
 
     public MainFrame(){
         root = new BorderPane();
-        configBox = new VBox(10);
+        configBox = new VBox(50);
         padView = new PadView();
         recordView = new RecordView();
         soundView = new SoundView();
@@ -33,7 +33,8 @@ public class MainFrame extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-
+        //configBox.setMaxHeight(800);
+        //configBox.setMaxWidth(600);
         configBox.getChildren().add(recordView);
         configBox.getChildren().add(soundView);
         configBox.getChildren().add(settingView);
@@ -42,7 +43,7 @@ public class MainFrame extends Application {
         VBox test = new VBox(10);
 
         test.setStyle("-fx-background-color: " + "#610002");
-    //
+
         root.setRight(configBox);
         root.setLeft(padView);
 
