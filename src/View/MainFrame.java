@@ -42,7 +42,7 @@ public class MainFrame extends Application {
 
         VBox test = new VBox(10);
 
-        test.setStyle("-fx-background-color: " + "#610002");
+        //test.setStyle("-fx-background-color: " + "#610002");
 
         root.setRight(configBox);
         root.setLeft(padView);
