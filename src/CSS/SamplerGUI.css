@@ -7,6 +7,16 @@
     -fx-background-color: #292929;
 }
 
+.padView {
+    -fx-padding: 150 10 10 150;
+}
+
 .pad {
+    -fx-background-color: transparent;
+    -fx-background-radius: 20px;
     -fx-graphic: url("../Picture/Pad.png");
+}
+
+.pad:pressed {
+    -fx-graphic: url("../Picture/PadOnPress.png");
 }

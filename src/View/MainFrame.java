@@ -41,7 +41,7 @@ public class MainFrame extends Application {
 
         VBox test = new VBox(10);
 
-        test.setStyle("-fx-background-color: " + "#612");
+        test.setStyle("-fx-background-color: " + "#610002");
 
         root.setRight(configBox);
         root.setLeft(padView);
@@ -57,8 +57,6 @@ public class MainFrame extends Application {
 
         root.getStyleClass().addAll("root");
         configBox.getStyleClass().addAll("configBox");
-        padView.getStyleClass().addAll("pad");
-
 
         primaryStage.show();
     }
