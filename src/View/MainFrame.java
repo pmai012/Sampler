@@ -55,7 +55,7 @@ public class MainFrame extends Application {
         primaryStage.setMinHeight(640);
         primaryStage.setMinWidth(1200);
 
-        root.getStyleClass().addAll("root");
+        root.getStyleClass().addAll("mainFrame");
         configBox.getStyleClass().addAll("configBox");
 
         primaryStage.show();
