@@ -22,3 +22,15 @@
 .pad:pressed {
     -fx-graphic: url("../Picture/PadOnPress.png");
 }
+
+.recordButton {
+    -fx-background-color: transparent;
+    -fx-background-radius: 20px;
+    -fx-graphic: url("../Picture/Record.png");
+}
+
+.stopButton {
+     -fx-background-color: transparent;
+    -fx-background-radius: 20px;
+    -fx-graphic: url("../Picture/Stop.png");
+}

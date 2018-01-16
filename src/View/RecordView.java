@@ -18,10 +18,14 @@ public class RecordView extends Pane {
 
     public RecordView(){
         recordButtons = new HBox(20);
-        record = new Button("RECORD");
-        stop = new Button("STOP");
+        record = new Button();
+        stop = new Button();
 
         recordButtons.getChildren().addAll(record, stop);
         this.getChildren().add(recordButtons);
+
+        record.getStyleClass().add("recordButton");
+        stop.getStyleClass().add("stopButton");
+
     }
 }
