@@ -12,8 +12,8 @@ import javafx.scene.layout.*;
  */
 public class PadView extends Pane {
 
-    final int WIDTH = 600;
-    final int HEIGHT = 600;
+    private final int WIDTH = 600;
+    private final int HEIGHT = 600;
     private PadController padController;
     private BorderPane rootPV;
     private FlowPane padBox;
@@ -23,7 +23,7 @@ public class PadView extends Pane {
             pad9, pad10, pad11, pad12, pad13, pad14, pad15, pad16;
 
 
-    public PadView(){
+    protected PadView(){
 
         rootPV = new BorderPane();
         padBox = new FlowPane(Orientation.HORIZONTAL);

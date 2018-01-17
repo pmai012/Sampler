@@ -10,14 +10,6 @@ import ddf.minim.UGen;
  */
 public abstract class Effect {
 
-    Minim minim;
-    AudioOutput out;
-
-    public Effect()
-    {
-        minim = new Minim(this);
-        out = minim.getLineOut();
-    }
 
     abstract void patchToOutput(Pad actualPad);
 }

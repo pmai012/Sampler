@@ -23,7 +23,7 @@ public class MainFrame extends Application {
 
     public MainFrame(){
         root = new BorderPane();
-        configBox = new VBox(50);
+        configBox = new VBox(40);
         padView = new PadView();
         recordView = new RecordView();
         soundView = new SoundView();

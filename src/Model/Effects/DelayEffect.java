@@ -9,8 +9,7 @@ public class DelayEffect extends Effect {
     Delay delay;
 
     public DelayEffect(float rate, float decay){
-        super();
-        delay = new Delay( rate, decay,true,true);
+        delay = new Delay( rate, decay,false,true);
     }
 
     @Override
