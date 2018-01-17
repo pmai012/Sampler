@@ -3,6 +3,7 @@ package View;
 import Controller.PadController;
 import javafx.geometry.Orientation;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 
 
@@ -86,8 +87,10 @@ public class PadView extends Pane {
 
         for (Button pad:pads) {
             pad.setOnAction(padController.play);
+            pad.addEventHandler(MouseEvent.MOUSE_RELEASED,padController.rightclick);
             pad.setOnDragOver(padController.acceptdrag);
             pad.setOnDragDropped(padController.getData);
+
         }
         /*
         pad1.setOnAction(padController.play);

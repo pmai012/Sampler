@@ -4,9 +4,7 @@ import Model.Pad;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.input.DragEvent;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.TransferMode;
+import javafx.scene.input.*;
 
 import java.io.File;
 import java.util.List;
@@ -33,6 +31,8 @@ public class PadController {
         @Override
         public void handle(ActionEvent event) {
 
+
+
             for (int i = 0; i < ANZAHL; i++) {
                 if (event.getSource().equals(button[i])) {
                     System.out.println(i);
@@ -41,11 +41,27 @@ public class PadController {
 
                     return;
                 }
+
+
             }
         }
 
 
     };
+
+
+public EventHandler<MouseEvent> rightclick = new EventHandler<MouseEvent>() {
+    @Override
+    public void handle(MouseEvent event) {
+       if (event.getButton() == MouseButton.SECONDARY){
+           System.out.println("rechtsclick");
+       }
+    }
+};
+
+
+
+
 
     /**
      * Acceptdrag allows to drop something
