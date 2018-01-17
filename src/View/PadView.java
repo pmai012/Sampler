@@ -86,6 +86,8 @@ public class PadView extends Pane {
 
         for (Button pad:pads) {
             pad.setOnAction(padController.play);
+            pad.setOnDragOver(padController.acceptdrag);
+            pad.setOnDragDropped(padController.getData);
         }
         /*
         pad1.setOnAction(padController.play);
