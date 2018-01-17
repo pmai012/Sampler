@@ -71,7 +71,7 @@ public class PadController {
 
             for (int i = 0; i < ANZAHL; i++) {
                 if (event.getSource().equals(button[i])) {
-
+                    threadrun = false;
 
                     //LINKSKLICK
                     if (event.getButton() == MouseButton.PRIMARY) {
@@ -82,7 +82,7 @@ public class PadController {
 
                               pad[i].stop();
                             }
-                            threadrun = false;
+
 
                         }
 
