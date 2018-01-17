@@ -34,11 +34,14 @@ public EventHandler<MouseEvent> rightclick = new EventHandler<MouseEvent>() {
 
         for (int i = 0; i < ANZAHL; i++) {
             if (event.getSource().equals(button[i])) {
+
+
                 //LINKSKLICK
                 if (event.getButton() == MouseButton.PRIMARY) {
                     System.out.println(i + " linksclick");
-                    //  pad[i].playSound();
-
+                    if (pad[i] != null) {
+                        pad[i].playSound();
+                    }
 
                     return;
                 }

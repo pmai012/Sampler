@@ -29,7 +29,9 @@ public class MainFrame extends Application {
         soundView = new SoundView();
 
     }
-
+    public void stop() {
+        System.exit(1);
+    }
 
     @Override
     public void start(Stage primaryStage) {
