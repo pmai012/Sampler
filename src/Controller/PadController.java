@@ -66,8 +66,12 @@ public class PadController {
 
                         List<File> list = dragboard.getFiles();
                         String path = list.get(0).toPath().toString();
-                        System.out.println(path);
-                        pad[i] = new Pad(path);
+
+
+                        if ( path.endsWith(".mp3") ||path.endsWith(".wav")) {
+                            pad[i] = new Pad(path);
+                            System.out.println(path);
+                        }
                     }
                 }
             }
