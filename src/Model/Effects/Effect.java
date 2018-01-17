@@ -1,5 +1,6 @@
 package Model.Effects;
 
+import Model.Pad;
 import ddf.minim.AudioOutput;
 import ddf.minim.Minim;
 import ddf.minim.UGen;
@@ -18,5 +19,5 @@ public abstract class Effect {
         out = minim.getLineOut();
     }
 
-    abstract void patchToOutput(UGen tone);
+    abstract void patchToOutput(Pad actualPad);
 }
