@@ -1,7 +1,6 @@
 package Controller;
 
 import Model.Pad;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.input.*;
@@ -16,6 +15,9 @@ public class PadController {
     private final int ANZAHL = 16;
     Pad pad[] = new Pad[ANZAHL];
     Button button[] = new Button[ANZAHL];
+    private long presstime = -5;
+    private boolean threadrun = false;
+
 
     public PadController(Button[] pads) {
         pad = new Pad[ANZAHL];
@@ -25,42 +27,79 @@ public class PadController {
         }
     }
 
-
-
-
-public EventHandler<MouseEvent> rightclick = new EventHandler<MouseEvent>() {
-    @Override
-    public void handle(MouseEvent event) {
-
-        for (int i = 0; i < ANZAHL; i++) {
-            if (event.getSource().equals(button[i])) {
-
-
-                //LINKSKLICK
-                if (event.getButton() == MouseButton.PRIMARY) {
-                    System.out.println(i + " linksclick");
-                    if (pad[i] != null) {
-                        pad[i].playSound();
-                    }
-
-                    return;
+    Thread time = new Thread() {
+        @Override
+        public void run() {
+            long start = System.currentTimeMillis();
+            while (threadrun){
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
+                presstime = System.currentTimeMillis()- start;
+                System.out.println(presstime);
+            }
+
+        }
+    };
 
 
+    public EventHandler<MouseEvent> pressed = new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent event) {
 
-                //RECHTSCLICK
-                if (event.getButton() == MouseButton.SECONDARY) {
-                    System.out.println(i + " rechtsclick");
-                    return;
+            for (int i = 0; i < ANZAHL; i++) {
+                if (event.getSource().equals(button[i])) {
+                    threadrun = true;
+                    time.start();
+                    pad[i].playSound();
+
+                    pad[i].setPressed(true);
+
                 }
-
             }
         }
-    }
-};
+    };
 
 
 
+
+    public EventHandler<MouseEvent> rightclick = new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent event) {
+
+            for (int i = 0; i < ANZAHL; i++) {
+                if (event.getSource().equals(button[i])) {
+
+
+                    //LINKSKLICK
+                    if (event.getButton() == MouseButton.PRIMARY) {
+                        System.out.println(i + " linksclick");
+                        if (pad[i] != null) {
+
+                            if (presstime > 400) {
+
+                              pad[i].stop();
+                            }
+                            threadrun = false;
+
+                        }
+
+                        return;
+                    }
+
+
+                    //RECHTSCLICK
+                    if (event.getButton() == MouseButton.SECONDARY) {
+                        System.out.println(i + " rechtsclick");
+                        return;
+                    }
+
+                }
+            }
+        }
+    };
 
 
     /**
@@ -89,11 +128,11 @@ public EventHandler<MouseEvent> rightclick = new EventHandler<MouseEvent>() {
 
                         List<File> list = dragboard.getFiles();
 
-                        for (int f = 0; f < list.size(); f++){
+                        for (int f = 0; f < list.size(); f++) {
                             String path = list.get(f).toPath().toString();
 
 
-                            if ( path.endsWith(".mp3") ||path.endsWith(".wav")) {
+                            if (path.endsWith(".mp3") || path.endsWith(".wav")) {
                                 pad[i] = new Pad(path);
                                 System.out.println(path);
                                 return;

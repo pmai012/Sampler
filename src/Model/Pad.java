@@ -24,11 +24,23 @@ public class Pad {
 
 
     private Mp3File file;
-    private long startpoint;
+    private int startpoint = 0;
     private long endpoint;
+
     private AudioOutput audioOut;
     FilePlayer filePlayer;
     Minim minim;
+    private boolean pressed = false;
+
+
+    public boolean isPressed() {
+        return pressed;
+    }
+
+    public void setPressed(boolean pressed) {
+        this.pressed = pressed;
+    }
+
 
 
 
@@ -39,21 +51,24 @@ public class Pad {
 
     }
     public void playSound(){
-        filePlayer.play();
+        filePlayer.play(startpoint);
         filePlayer.patch(audioOut);
     }
     public void playSound(UGen effect){
-        filePlayer.play();
+        filePlayer.play(startpoint);
         filePlayer.patch(effect).patch(audioOut);
     }
 
+    public void stop(){
+       filePlayer.pause();
+    }
     public AudioOutput getOutput(){
         return audioOut;
     }
 
 
 
-    public void setStartpoint(long time) {
+    public void setStartpoint(int time) {
 
         startpoint = time;
     }
