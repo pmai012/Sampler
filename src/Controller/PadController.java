@@ -36,7 +36,7 @@ public EventHandler<MouseEvent> rightclick = new EventHandler<MouseEvent>() {
             if (event.getSource().equals(button[i])) {
                 //LINKSKLICK
                 if (event.getButton() == MouseButton.PRIMARY) {
-                    System.out.println(i + " rechtsclick");
+                    System.out.println(i + " linksclick");
                     //  pad[i].playSound();
 
 
@@ -47,9 +47,10 @@ public EventHandler<MouseEvent> rightclick = new EventHandler<MouseEvent>() {
 
                 //RECHTSCLICK
                 if (event.getButton() == MouseButton.SECONDARY) {
-                    System.out.println(i + " linksclick");
+                    System.out.println(i + " rechtsclick");
                     return;
                 }
+
             }
         }
     }
