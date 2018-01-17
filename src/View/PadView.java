@@ -17,6 +17,7 @@ public class PadView extends Pane {
     private BorderPane rootPV;
     private FlowPane padBox;
 
+    private Button[] pads;
     private Button pad1, pad2, pad3, pad4, pad5, pad6, pad7, pad8,
             pad9, pad10, pad11, pad12, pad13, pad14, pad15, pad16;
 
@@ -29,7 +30,6 @@ public class PadView extends Pane {
         padBox.setVgap(10);
         padBox.setMaxHeight(HEIGHT);
         padBox.setMaxWidth(WIDTH);
-        //this.getStylesheets().add("CSS/SamplerGUI.css");
 
         pad1 = new Button();
         pad2 = new Button();
@@ -47,16 +47,23 @@ public class PadView extends Pane {
         pad14 = new Button();
         pad15 = new Button();
         pad16 = new Button();
-
-
+        pads = new Button[]{pad1, pad2, pad3, pad4, pad5, pad6, pad7, pad8,
+                pad9, pad10, pad11,pad12, pad13, pad14, pad15, pad16};
 
         rootPV.setCenter(padBox);
-        padBox.getChildren().addAll(pad1, pad2, pad3, pad4, pad5, pad6, pad7, pad8,
-                pad9, pad10, pad11,pad12, pad13, pad14, pad15, pad16);
+
+        for (Button pad: pads) {
+            padBox.getChildren().add(pad);
+        }
+        //padBox.getChildren().addAll(pad1, pad2, pad3, pad4, pad5, pad6, pad7, pad8,
+         //       pad9, pad10, pad11,pad12, pad13, pad14, pad15, pad16);
         this.getChildren().add(padBox);
 
         padBox.getStyleClass().addAll("padBox");
-
+        for (Button pad: pads) {
+            pad.getStyleClass().add("pad");
+        }
+        /*
         pad1.getStyleClass().addAll("pad");
         pad2.getStyleClass().addAll("pad");
         pad3.getStyleClass().addAll("pad");
@@ -73,8 +80,14 @@ public class PadView extends Pane {
         pad14.getStyleClass().addAll("pad");
         pad15.getStyleClass().addAll("pad");
         pad16.getStyleClass().addAll("pad");
+        */
 
-        padController = new PadController(new Button[]{pad1,pad2, pad3,pad4,pad5,pad6, pad7,pad8,pad9,pad10,pad11,pad12,pad13,pad14,pad15,pad16});
+        padController = new PadController(pads);
+
+        for (Button pad:pads) {
+            pad.setOnAction(padController.play);
+        }
+        /*
         pad1.setOnAction(padController.play);
         pad2.setOnAction(padController.play);
         pad3.setOnAction(padController.play);
@@ -91,10 +104,7 @@ public class PadView extends Pane {
         pad14.setOnAction(padController.play);
         pad15.setOnAction(padController.play);
         pad16.setOnAction(padController.play);
-
-        //Versuch
-        pad1.setOnDragOver(padController.acceptdrag);
-        pad1.setOnDragDropped(padController.getData);
+        */
 
     }
 
