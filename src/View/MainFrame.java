@@ -27,23 +27,25 @@ public class MainFrame extends Application {
         padView = new PadView();
         recordView = new RecordView();
         soundView = new SoundView();
-        settingView = new SettingView();
+
     }
 
 
     @Override
     public void start(Stage primaryStage) {
+        settingView = new SettingView();
         //configBox.setMaxHeight(800);
         //configBox.setMaxWidth(600);
         configBox.getChildren().add(recordView);
         configBox.getChildren().add(soundView);
-        configBox.getChildren().add(settingView);
+        //configBox.getChildren().add(settingView);
 
 
         VBox test = new VBox(10);
 
         //test.setStyle("-fx-background-color: " + "#610002");
 
+        root.setTop(settingView);
         root.setRight(configBox);
         root.setLeft(padView);
 
