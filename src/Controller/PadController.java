@@ -51,12 +51,14 @@ public class PadController {
 
             for (int i = 0; i < ANZAHL; i++) {
                 if (event.getSource().equals(button[i])) {
-                    threadrun = true;
-                    time.start();
-                    pad[i].playSound();
 
-                    pad[i].setPressed(true);
+                    if (pad[i] != null) {
+                        threadrun = true;
+                        time.start();
+                        pad[i].playSound();
 
+                        pad[i].setPressed(true);
+                    }
                 }
             }
         }
