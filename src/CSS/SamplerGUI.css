@@ -34,3 +34,7 @@
     -fx-background-radius: 20px;
     -fx-graphic: url("../Picture/Stop.png");
 }
+
+.title {
+    -fx-text-fill: #f9f9f9;
+}
