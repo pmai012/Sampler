@@ -13,6 +13,7 @@ public class SettingView extends Pane {
     private Menu menuFile;
     private Menu menuEdit;
     private Menu menuView;
+    private Menu menuHelp;
 
 
     public SettingView(){
@@ -20,8 +21,12 @@ public class SettingView extends Pane {
         menuFile = new Menu("File");
         menuEdit = new Menu("Edit");
         menuView = new Menu("View");
-        samplermenu.getMenus().addAll(menuFile, menuEdit, menuView);
+        menuHelp = new Menu("Help");
+        samplermenu.getMenus().addAll(menuFile, menuEdit, menuView, menuHelp);
+        samplermenu.prefWidthProperty().bind(this.widthProperty());
         this.getChildren().add(samplermenu);
+        samplermenu.getStyleClass().add("menuBar");
+        menuFile.getStyleClass().addAll("menuTitle","label");
 
     }
 }

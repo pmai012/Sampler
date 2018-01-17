@@ -7,6 +7,14 @@
     -fx-background-color: #292929;
 }
 
+.menuBar {
+    -fx-background-color: #101010;
+}
+
+.menuTitle .label {
+    -fx-text-fill: white;
+}
+
 .padBox {
     -fx-padding: 200 10 10 150;
     -fx-background-color: #292929;
