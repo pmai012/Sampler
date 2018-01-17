@@ -4,6 +4,12 @@ import Model.Pad;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
+
+import java.io.File;
+import java.util.List;
 
 /**
  * Created by User on 21.12.2017.
@@ -13,15 +19,13 @@ public class PadController {
     Pad pad[] = new Pad[ANZAHL];
     Button button[] = new Button[ANZAHL];
 
-    public PadController(Button[] pads){
-    pad = new Pad[ANZAHL];
+    public PadController(Button[] pads) {
+        pad = new Pad[ANZAHL];
 
-    for (int i = 0; i< ANZAHL; i++){
-    button[i] = pads[i];
+        for (int i = 0; i < ANZAHL; i++) {
+            button[i] = pads[i];
         }
     }
-
-
 
 
     public EventHandler<ActionEvent> play = new EventHandler<ActionEvent>() {
@@ -29,10 +33,10 @@ public class PadController {
         @Override
         public void handle(ActionEvent event) {
 
-            for (int i = 0; i< ANZAHL; i++){
-                if (event.getSource().equals(button[i])){
-
-                    pad[i].playSound();
+            for (int i = 0; i < ANZAHL; i++) {
+                if (event.getSource().equals(button[i])) {
+                    System.out.println(i);
+                    //  pad[i].playSound();
 
 
                     return;
@@ -41,9 +45,33 @@ public class PadController {
         }
 
 
-
-
     };
 
+    public EventHandler<DragEvent> acceptdrag = new EventHandler<DragEvent>() {
+        @Override
+        public void handle(DragEvent event) {
+            event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+        }
+    };
+
+    public EventHandler<DragEvent> getData = new EventHandler<DragEvent>() {
+        @Override
+        public void handle(DragEvent event) {
+
+            for (int i = 0; i < ANZAHL; i++) {
+                if (event.getSource().equals(button[i])) {
+                    Dragboard dragboard = event.getDragboard();
+
+                    if (dragboard.hasFiles()) {
+
+                        List<File> list = dragboard.getFiles();
+                        String path = list.get(0).toPath().toString();
+                        System.out.println(path);
+                        pad[i] = new Pad(path);
+                    }
+                }
+            }
+        }
+    };
 
 }

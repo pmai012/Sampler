@@ -1,7 +1,6 @@
 package View;
 
 import Controller.PadController;
-import Model.Pad;
 import javafx.geometry.Orientation;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
@@ -93,6 +92,9 @@ public class PadView extends Pane {
         pad15.setOnAction(padController.play);
         pad16.setOnAction(padController.play);
 
+        //Versuch
+        pad1.setOnDragOver(padController.acceptdrag);
+        pad1.setOnDragDropped(padController.getData);
 
     }
 
