@@ -26,20 +26,32 @@ public class Pad {
     private Mp3File file;
     private int startpoint = 0;
     private long endpoint;
+    private long presstime = -5;
+    private boolean threadrun = false;
 
     private AudioOutput audioOut;
     FilePlayer filePlayer;
     Minim minim;
-    private boolean pressed = false;
 
-
-    public boolean isPressed() {
-        return pressed;
+    public long getPresstime() {
+        return presstime;
     }
 
-    public void setPressed(boolean pressed) {
-        this.pressed = pressed;
+    public void setPresstime(long presstime) {
+        this.presstime = presstime;
     }
+
+    public boolean isThreadrun() {
+        return threadrun;
+    }
+
+    public void setThreadrun(boolean threadrun) {
+        this.threadrun = threadrun;
+    }
+
+
+
+
 
 
 
@@ -76,4 +88,23 @@ public class Pad {
     public void setEndpoint(long time) {
         endpoint = time;
     }
+
+
+
+    public Thread time = new Thread() {
+            @Override
+        public void run() {
+                long start = System.currentTimeMillis();
+                while (threadrun) {
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    presstime = System.currentTimeMillis() - start;
+
+                }
+            }
+
+    };
 }

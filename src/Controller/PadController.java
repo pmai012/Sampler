@@ -15,8 +15,7 @@ public class PadController {
     private final int ANZAHL = 16;
     Pad pad[] = new Pad[ANZAHL];
     Button button[] = new Button[ANZAHL];
-    private long presstime = -5;
-    private boolean threadrun = false;
+
 
 
     public PadController(Button[] pads) {
@@ -27,22 +26,7 @@ public class PadController {
         }
     }
 
-    Thread time = new Thread() {
-        @Override
-        public void run() {
-            long start = System.currentTimeMillis();
-            while (threadrun){
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                presstime = System.currentTimeMillis()- start;
-                System.out.println(presstime);
-            }
 
-        }
-    };
 
 
     public EventHandler<MouseEvent> pressed = new EventHandler<MouseEvent>() {
@@ -53,11 +37,11 @@ public class PadController {
                 if (event.getSource().equals(button[i])) {
 
                     if (pad[i] != null) {
-                        threadrun = true;
-                        time.start();
+                        pad[i].setThreadrun(true);
+                        pad[i].time.start();
                         pad[i].playSound();
 
-                        pad[i].setPressed(true);
+
                     }
                 }
             }
@@ -73,14 +57,14 @@ public class PadController {
 
             for (int i = 0; i < ANZAHL; i++) {
                 if (event.getSource().equals(button[i])) {
-                    threadrun = false;
+                    pad[i].setThreadrun(false);
 
                     //LINKSKLICK
                     if (event.getButton() == MouseButton.PRIMARY) {
                         System.out.println(i + " linksclick");
                         if (pad[i] != null) {
 
-                            if (presstime > 400) {
+                            if (pad[i].getPresstime() > 400) {
 
                               pad[i].stop();
                             }
