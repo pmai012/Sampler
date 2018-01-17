@@ -47,6 +47,9 @@ public class PadController {
 
     };
 
+    /**
+     * Acceptdrag allows to drop something
+     */
     public EventHandler<DragEvent> acceptdrag = new EventHandler<DragEvent>() {
         @Override
         public void handle(DragEvent event) {
@@ -54,6 +57,10 @@ public class PadController {
         }
     };
 
+
+    /**
+     * getData get the Data. it has to be mp3 or wav. If you put more files it looks for the first wav or mp3
+     */
     public EventHandler<DragEvent> getData = new EventHandler<DragEvent>() {
         @Override
         public void handle(DragEvent event) {
@@ -65,13 +72,18 @@ public class PadController {
                     if (dragboard.hasFiles()) {
 
                         List<File> list = dragboard.getFiles();
-                        String path = list.get(0).toPath().toString();
+
+                        for (int f = 0; f < list.size(); f++){
+                            String path = list.get(f).toPath().toString();
 
 
-                        if ( path.endsWith(".mp3") ||path.endsWith(".wav")) {
-                            pad[i] = new Pad(path);
-                            System.out.println(path);
+                            if ( path.endsWith(".mp3") ||path.endsWith(".wav")) {
+                                pad[i] = new Pad(path);
+                                System.out.println(path);
+                                return;
+                            }
                         }
+
                     }
                 }
             }
