@@ -86,7 +86,6 @@ public class PadView extends Pane {
         padController = new PadController(pads);
 
         for (Button pad:pads) {
-            pad.setOnAction(padController.play);
             pad.addEventHandler(MouseEvent.MOUSE_RELEASED,padController.rightclick);
             pad.setOnDragOver(padController.acceptdrag);
             pad.setOnDragDropped(padController.getData);

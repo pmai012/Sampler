@@ -26,41 +26,25 @@ public class PadController {
     }
 
 
-    public EventHandler<ActionEvent> play = new EventHandler<ActionEvent>() {
-
+    public EventHandler<MouseEvent> rightclick = new EventHandler<MouseEvent>() {
         @Override
-        public void handle(ActionEvent event) {
-
-
+        public void handle(MouseEvent event) {
 
             for (int i = 0; i < ANZAHL; i++) {
-                if (event.getSource().equals(button[i])) {
+
+                //LEFT CLICK
+                if (event.getButton() == MouseButton.PRIMARY) {
                     System.out.println(i);
-                    //  pad[i].playSound();
-
-
-                    return;
                 }
 
 
+                //RIGHT CLICK
+                if (event.getButton() == MouseButton.SECONDARY) {
+                    System.out.println("rechtsclick");
+                }
             }
         }
-
-
     };
-
-
-public EventHandler<MouseEvent> rightclick = new EventHandler<MouseEvent>() {
-    @Override
-    public void handle(MouseEvent event) {
-       if (event.getButton() == MouseButton.SECONDARY){
-           System.out.println("rechtsclick");
-       }
-    }
-};
-
-
-
 
 
     /**
@@ -89,11 +73,11 @@ public EventHandler<MouseEvent> rightclick = new EventHandler<MouseEvent>() {
 
                         List<File> list = dragboard.getFiles();
 
-                        for (int f = 0; f < list.size(); f++){
+                        for (int f = 0; f < list.size(); f++) {
                             String path = list.get(f).toPath().toString();
 
 
-                            if ( path.endsWith(".mp3") ||path.endsWith(".wav")) {
+                            if (path.endsWith(".mp3") || path.endsWith(".wav")) {
                                 pad[i] = new Pad(path);
                                 System.out.println(path);
                                 return;
