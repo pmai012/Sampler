@@ -59,6 +59,8 @@ public class MainFrame extends Application {
         root.getStyleClass().addAll("mainFrame");
         configBox.getStyleClass().addAll("configBox");
 
+//        padView.Buttoninit();
+
         primaryStage.show();
     }
 }

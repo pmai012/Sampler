@@ -1,5 +1,6 @@
 package Model;
 
+import Controller.PadController;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
@@ -29,10 +30,12 @@ public class Pad {
     Minim minim;
 
 
+
     public Pad(String pathtoSound) {
         minim = new SimpleMinim(true);
         audioOut = minim.getLineOut();
         filePlayer = new FilePlayer(minim.loadFileStream(pathtoSound, 1024, true));
+
     }
     public void playSound(){
         filePlayer.play();

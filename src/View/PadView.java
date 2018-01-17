@@ -1,5 +1,7 @@
 package View;
 
+import Controller.PadController;
+import Model.Pad;
 import javafx.geometry.Orientation;
 import javafx.scene.control.Button;
 import javafx.scene.layout.*;
@@ -12,7 +14,7 @@ public class PadView extends Pane {
 
     final int WIDTH = 600;
     final int HEIGHT = 600;
-
+    private PadController padController;
     private BorderPane rootPV;
     private FlowPane padBox;
 
@@ -21,6 +23,7 @@ public class PadView extends Pane {
 
 
     public PadView(){
+
         rootPV = new BorderPane();
         padBox = new FlowPane(Orientation.HORIZONTAL);
         padBox.setHgap(10);
@@ -46,6 +49,8 @@ public class PadView extends Pane {
         pad15 = new Button();
         pad16 = new Button();
 
+
+
         rootPV.setCenter(padBox);
         padBox.getChildren().addAll(pad1, pad2, pad3, pad4, pad5, pad6, pad7, pad8,
                 pad9, pad10, pad11,pad12, pad13, pad14, pad15, pad16);
@@ -70,8 +75,27 @@ public class PadView extends Pane {
         pad15.getStyleClass().addAll("pad");
         pad16.getStyleClass().addAll("pad");
 
-
+        padController = new PadController(new Button[]{pad1,pad2, pad3,pad4,pad5,pad6, pad7,pad8,pad9,pad10,pad11,pad12,pad13,pad14,pad15,pad16});
+        pad1.setOnAction(padController.play);
+        pad2.setOnAction(padController.play);
+        pad3.setOnAction(padController.play);
+        pad4.setOnAction(padController.play);
+        pad5.setOnAction(padController.play);
+        pad6.setOnAction(padController.play);
+        pad7.setOnAction(padController.play);
+        pad8.setOnAction(padController.play);
+        pad9.setOnAction(padController.play);
+        pad10.setOnAction(padController.play);
+        pad11.setOnAction(padController.play);
+        pad12.setOnAction(padController.play);
+        pad13.setOnAction(padController.play);
+        pad14.setOnAction(padController.play);
+        pad15.setOnAction(padController.play);
+        pad16.setOnAction(padController.play);
 
 
     }
+
+
+
 }
