@@ -50,34 +50,30 @@ public class Pad {
     }
 
 
-
-
-
-
-
-
     public Pad(String pathtoSound) {
         minim = new SimpleMinim(true);
         audioOut = minim.getLineOut();
         filePlayer = new FilePlayer(minim.loadFileStream(pathtoSound, 1024, true));
 
     }
-    public void playSound(){
+
+    public void playSound() {
         filePlayer.play(startpoint);
         filePlayer.patch(audioOut);
     }
-    public void playSound(UGen effect){
+
+    public void playSound(UGen effect) {
         filePlayer.play(startpoint);
         filePlayer.patch(effect).patch(audioOut);
     }
 
-    public void stop(){
-       filePlayer.pause();
-    }
-    public AudioOutput getOutput(){
-        return audioOut;
+    public void stop() {
+        filePlayer.pause();
     }
 
+    public AudioOutput getOutput() {
+        return audioOut;
+    }
 
 
     public void setStartpoint(int time) {
@@ -91,20 +87,32 @@ public class Pad {
 
 
 
-    public Thread time = new Thread() {
+    public void threadstarten() {
+        Thread time = new Thread() {
             @Override
-        public void run() {
+            public void run() {
                 long start = System.currentTimeMillis();
                 while (threadrun) {
+
                     try {
                         Thread.sleep(100);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                     presstime = System.currentTimeMillis() - start;
+                    System.out.println(presstime);
 
+                }
+                try {
+                    this.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
 
-    };
+        };
+        time.start();
+    }
+
+
 }
