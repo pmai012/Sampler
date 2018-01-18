@@ -11,6 +11,10 @@
     -fx-background-color: #101010;
 }
 
+.menuBar .label {
+    -fx-text-fill: white;
+}
+
 .menuTitle .label {
     -fx-text-fill: white;
 }
