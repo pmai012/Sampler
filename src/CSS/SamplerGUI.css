@@ -16,7 +16,7 @@
 }
 
 .padBox {
-    -fx-padding: 200 10 10 150;
+    -fx-padding: 150 50 200 100;
     -fx-background-color: #292929;
 
 }
@@ -24,12 +24,57 @@
 .pad {
     -fx-background-color: transparent;
     -fx-background-radius: 20px;
-    -fx-graphic: url("../Picture/Pad.png");
+    -fx-graphic: url("../Picture/PadW.png");
 }
 
-.pad:pressed {
-    -fx-graphic: url("../Picture/PadOnPress.png");
+.padR {
+
 }
+
+.padRUsed {
+    -fx-graphic: url("../Picture/PadRUsed.png");
+}
+
+.padR:pressed {
+    -fx-graphic: url("../Picture/PadROnPress.png");
+}
+
+.padB {
+
+}
+
+.padBUsed {
+    -fx-graphic: url("../Picture/PadBUsed.png");
+}
+
+.padB:pressed {
+    -fx-graphic: url("../Picture/PadBOnPress.png");
+}
+
+.padG {
+
+}
+
+.padGUsed {
+    -fx-graphic: url("../Picture/PadGUsed.png");
+}
+
+.padG:pressed {
+    -fx-graphic: url("../Picture/PadGOnPress.png");
+}
+
+.padP {
+
+}
+
+.padPUsed {
+    -fx-graphic: url("../Picture/PadPUsed.png");
+}
+
+.padP:pressed {
+    -fx-graphic: url("../Picture/PadPOnPress.png");
+}
+
 
 .recordButton {
     -fx-background-color: transparent;

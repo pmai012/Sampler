@@ -16,7 +16,7 @@ public class PadView extends Pane {
     private final int HEIGHT = 600;
     private PadController padController;
     private BorderPane rootPV;
-    private FlowPane padBox;
+    private TilePane padBox;
 
     private Button[] pads;
     private Button pad1, pad2, pad3, pad4, pad5, pad6, pad7, pad8,
@@ -26,12 +26,13 @@ public class PadView extends Pane {
     protected PadView(){
 
         rootPV = new BorderPane();
-        padBox = new FlowPane(Orientation.HORIZONTAL);
+        padBox = new TilePane(Orientation.HORIZONTAL);
         padBox.setHgap(10);
         padBox.setVgap(10);
         padBox.setMaxHeight(HEIGHT);
         padBox.setMaxWidth(WIDTH);
-
+       // padBox.prefWidthProperty().bind(this.widthProperty());
+       // padBox.prefHeightProperty().bind(this.heightProperty());
         pad1 = new Button();
         pad2 = new Button();
         pad3 = new Button();
@@ -61,8 +62,23 @@ public class PadView extends Pane {
         this.getChildren().add(padBox);
 
         padBox.getStyleClass().addAll("padBox");
+
         for (Button pad: pads) {
             pad.getStyleClass().add("pad");
+        }
+
+
+        for(int i = 0; i < pads.length; i++) {
+
+            if (i < 4) {
+                pads[i].getStyleClass().add("padG");
+            }else if (i < 8) {
+                pads[i].getStyleClass().add("padB");
+            }else if (i < 12) {
+                pads[i].getStyleClass().add("padP");
+            } else if (i < 16) {
+                pads[i].getStyleClass().add("padR");
+            }
         }
         /*
         pad1.getStyleClass().addAll("pad");
