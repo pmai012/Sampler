@@ -25,13 +25,20 @@ public class PadController {
 
         for (int i = 0; i < ANZAHL; i++) {
             button[i] = pads[i];
+
         }
     }
 
     public void addObserver(Observer observer){
 
             for (Pad i:pad){
-            i.addObserver(observer);
+                if(i == null){
+
+                }
+                else{
+                    i.addObserver(observer);
+                }
+
             }
 
 
