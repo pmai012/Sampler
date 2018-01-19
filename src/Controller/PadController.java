@@ -7,6 +7,7 @@ import javafx.scene.input.*;
 
 import java.io.File;
 import java.util.List;
+import java.util.Observer;
 
 /**
  * Created by User on 21.12.2017.
@@ -26,7 +27,14 @@ public class PadController {
         }
     }
 
+    public void addObserver(Observer observer){
 
+            for (Pad i:pad){
+            i.addObserver(observer);
+            }
+
+
+    }
 
 
     public EventHandler<MouseEvent> pressed = new EventHandler<MouseEvent>() {
@@ -58,6 +66,10 @@ public class PadController {
 
             for (int i = 0; i < ANZAHL; i++) {
                 if (event.getSource().equals(button[i])) {
+
+                    if (pad[i] == null){
+                        return;
+                    }
                     pad[i].setThreadrun(false);
 
                     //LINKSKLICK

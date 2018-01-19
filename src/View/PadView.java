@@ -6,11 +6,14 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 
+import java.util.Observable;
+import java.util.Observer;
+
 
 /**
  * Created by User on 21.12.2017.
  */
-public class PadView extends Pane {
+public class PadView extends Pane implements Observer {
 
     private final int WIDTH = 600;
     private final int HEIGHT = 600;
@@ -100,6 +103,8 @@ public class PadView extends Pane {
         */
 
         padController = new PadController(pads);
+        padController.addObserver(this);
+
 
         for (Button pad:pads) {
             pad.addEventHandler(MouseEvent.MOUSE_RELEASED,padController.rightclick);
@@ -134,5 +139,8 @@ public class PadView extends Pane {
     }
 
 
+    @Override
+    public void update(Observable o, Object arg) {
 
+    }
 }

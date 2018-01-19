@@ -16,11 +16,12 @@ import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
 
 
 import java.io.IOException;
+import java.util.Observable;
 
 /**
  * Created by User on 21.12.2017.
  */
-public class Pad {
+public class Pad extends Observable{
 
 
     private Mp3File file;
@@ -32,6 +33,16 @@ public class Pad {
     private AudioOutput audioOut;
     FilePlayer filePlayer;
     Minim minim;
+
+
+
+    public boolean isnull(){
+        if (filePlayer == null){
+            return true;
+        }
+
+        return false;
+    }
 
     public long getPresstime() {
         return presstime;
@@ -54,7 +65,8 @@ public class Pad {
         minim = new SimpleMinim(true);
         audioOut = minim.getLineOut();
         filePlayer = new FilePlayer(minim.loadFileStream(pathtoSound, 1024, true));
-
+        setChanged();
+        notifyObservers();
     }
 
     public void playSound() {
@@ -67,8 +79,11 @@ public class Pad {
         filePlayer.patch(effect).patch(audioOut);
     }
 
-    public void stop() {
+    public void stop()
+    {
+
         filePlayer.pause();
+
     }
 
     public AudioOutput getOutput() {
