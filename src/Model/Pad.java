@@ -66,7 +66,7 @@ public class Pad extends Observable{
         audioOut = minim.getLineOut();
         filePlayer = new FilePlayer(minim.loadFileStream(pathtoSound, 1024, true));
         setChanged();
-        notifyObservers();
+        notifyObservers("pad");
     }
 
     public void playSound() {

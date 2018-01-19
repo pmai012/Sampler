@@ -29,6 +29,11 @@ public class MainFrame extends Application {
         soundView = new SoundView();
 
     }
+
+    public void init() {
+
+    }
+
     public void stop() {
         System.exit(1);
     }

@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Pad;
+import View.PadView;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.input.*;
@@ -15,6 +16,9 @@ import java.util.Observer;
  */
 public class PadController {
     private final int ANZAHL = 16;
+
+
+
     Pad pad[] = new Pad[ANZAHL];
     Button button[] = new Button[ANZAHL];
 
@@ -27,6 +31,10 @@ public class PadController {
             button[i] = pads[i];
 
         }
+    }
+
+    public Pad[] getPad() {
+        return pad;
     }
 
     public void addObserver(Observer observer){
