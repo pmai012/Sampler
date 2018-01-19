@@ -18,15 +18,13 @@ public class PadController {
     private final int ANZAHL = 16;
 
 
-
     Pad pad[] = new Pad[ANZAHL];
     Button button[] = new Button[ANZAHL];
+    private Observer observer;
 
-
-
-    public PadController(Button[] pads) {
+    public PadController(Button[] pads, Observer observer) {
         pad = new Pad[ANZAHL];
-
+    this.observer = observer;
         for (int i = 0; i < ANZAHL; i++) {
             button[i] = pads[i];
 
@@ -37,30 +35,17 @@ public class PadController {
         return pad;
     }
 
-    public void addObserver(Observer observer){
-
-            for (Pad i:pad){
-                if(i == null){
-
-                }
-                else{
-                    i.addObserver(observer);
-                }
-
-            }
 
 
-    }
-
-    public int[] whoisnull(){
+    public int[] whoisnotnull() {
         ArrayList<Integer> list = new ArrayList<Integer>();
-        for (int i = 0; i < pad.length; i++){
-           if (!pad[i].isnull()){
-             list.add(i);
-           }
+        for (int i = 0; i < pad.length; i++) {
+            if (!pad[i].isnull()) {
+                list.add(i);
+            }
         }
-        Object[] ausgabe= (list.toArray());
-return  list.stream().mapToInt(i->i).toArray();
+        Object[] ausgabe = (list.toArray());
+        return list.stream().mapToInt(i -> i).toArray();
     }
 
 
@@ -74,8 +59,9 @@ return  list.stream().mapToInt(i->i).toArray();
                     if (pad[i] != null) {
                         pad[i].setThreadrun(true);
 
-                            pad[i].threadstarten();
-                            pad[i].playSound();
+                        pad[i].threadstarten();
+                        pad[i].playSound();
+
 
 
                     }
@@ -85,8 +71,6 @@ return  list.stream().mapToInt(i->i).toArray();
     };
 
 
-
-
     public EventHandler<MouseEvent> rightclick = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent event) {
@@ -94,7 +78,7 @@ return  list.stream().mapToInt(i->i).toArray();
             for (int i = 0; i < ANZAHL; i++) {
                 if (event.getSource().equals(button[i])) {
 
-                    if (pad[i] == null){
+                    if (pad[i] == null) {
                         return;
                     }
                     pad[i].setThreadrun(false);
@@ -106,7 +90,7 @@ return  list.stream().mapToInt(i->i).toArray();
                             System.out.println(pad[i].getPresstime());
                             if (pad[i].getPresstime() > 400) {
 
-                              pad[i].stop();
+                                pad[i].stop();
                             }
 
 
@@ -159,7 +143,8 @@ return  list.stream().mapToInt(i->i).toArray();
 
 
                             if (path.endsWith(".mp3") || path.endsWith(".wav")) {
-                                pad[i] = new Pad(path);
+                                pad[i] = new Pad(path, observer);
+
                                 System.out.println(path);
                                 return;
                             }

@@ -17,6 +17,7 @@ import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
 
 import java.io.IOException;
 import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Created by User on 21.12.2017.
@@ -61,10 +62,12 @@ public class Pad extends Observable{
     }
 
 
-    public Pad(String pathtoSound) {
+    public Pad(String pathtoSound, Observer observer) {
         minim = new SimpleMinim(true);
         audioOut = minim.getLineOut();
         filePlayer = new FilePlayer(minim.loadFileStream(pathtoSound, 1024, true));
+      //  addObserver(observer);                                                                        //funktioniert an sich, jedoch kommt kein Ton mehr
+        System.out.println("Observer: " + countObservers());
         setChanged();
         notifyObservers("pad");
     }
@@ -115,7 +118,7 @@ public class Pad extends Observable{
                         e.printStackTrace();
                     }
                     presstime = System.currentTimeMillis() - start;
-                    System.out.println(presstime);
+
 
                 }
                 try {
