@@ -148,12 +148,11 @@ public class PadView extends Pane implements Observer {
 
         if(command.equals("pad") ){
 
-            for (int i = 0; i < padController.getPad().length; i++) {
+            for (int i = 0; i < padController.whoisnotnull().length; i++) {
                 System.out.println(i);
-             /*   if(padController.getPad()[i].isnull()){
-                    return;
-                }
-                else */{
+
+                {
+
                     if(i < 4){
                         pads[i].getStyleClass().add("padGUsed");
                     } else if (i < 8) {

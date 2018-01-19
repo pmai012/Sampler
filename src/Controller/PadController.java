@@ -43,13 +43,17 @@ public class PadController {
 
 
     public int[] whoisnotnull() {
+
         ArrayList<Integer> list = new ArrayList<Integer>();
         for (int i = 0; i < pad.length; i++) {
-            if (!pad[i].isnull()) {
-                list.add(i);
-            }
+            list.add(i);
+        /*   if (pad[i].isNull()) {
+
+            }*/
         }
         Object[] ausgabe = (list.toArray());
+
+
         return list.stream().mapToInt(i -> i).toArray();
     }
 

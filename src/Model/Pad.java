@@ -30,20 +30,14 @@ public class Pad extends Observable{
     private long endpoint;
     private long presstime = -5;
     private boolean threadrun = false;
-
+    private boolean aNull = true;
     private AudioOutput audioOut;
     FilePlayer filePlayer;
     Minim minim;
 
 
 
-    public boolean isnull(){
-        if (filePlayer == null){
-            return true;
-        }
 
-        return false;
-    }
 
     public long getPresstime() {
         return presstime;
@@ -67,6 +61,7 @@ public class Pad extends Observable{
         audioOut = minim.getLineOut();
         filePlayer = new FilePlayer(minim.loadFileStream(pathtoSound, 1024, true));
         this.addObserver(observer);                                                                        //funktioniert an sich, jedoch kommt kein Ton mehr
+        aNull = false;
         System.out.println("Observer: " + countObservers());
         setChanged();
         notifyObservers("pad");
@@ -133,4 +128,7 @@ public class Pad extends Observable{
     }
 
 
+    public boolean isNull() {
+        return aNull;
+    }
 }
