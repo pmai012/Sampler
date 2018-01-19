@@ -108,9 +108,8 @@ public class PadView extends Pane implements Observer {
 
 
         for (Button pad:pads) {
-            pad.addEventHandler(MouseEvent.MOUSE_RELEASED,padController.rightclick);
-
             pad.addEventHandler(MouseEvent.MOUSE_PRESSED,padController.pressed);
+            pad.addEventHandler(MouseEvent.MOUSE_RELEASED,padController.rightclick);
 
 
             pad.setOnDragOver(padController.acceptdrag);
@@ -143,13 +142,13 @@ public class PadView extends Pane implements Observer {
     @Override
     public void update(Observable o, Object arg) {
 
-        System.out.println("update");
+        System.out.println("update " );
         String command = (String) arg;
 
         if(command.equals("pad") ){
-            padController.buttonupdate(pads);
+
             for (int i = 0; i < padController.whoisnotnull().length; i++) {
-                System.out.println(i);
+
 
                 {
 

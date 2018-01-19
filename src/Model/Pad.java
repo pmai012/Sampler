@@ -129,7 +129,7 @@ public class Pad extends Observable{
 
 
     public boolean isNull() {
-        if (audioOut == null){
+        if (filePlayer == null){
             return true;
         }else{
             return false;

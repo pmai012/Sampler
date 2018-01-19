@@ -25,16 +25,16 @@ public class PadController {
     public PadController(Button[] pads, Observer observer) {
         pad = new Pad[ANZAHL];
     this.observer = observer;
-    buttonupdate(pads);
-    }
 
-    public void buttonupdate(Button[] pads){
         for (int i = 0; i < ANZAHL; i++) {
             button[i] = pads[i];
 
         }
-        System.out.println("Buttons geupdated");
+
+
     }
+
+
 
     public Pad[] getPad() {
         return pad;
@@ -44,19 +44,30 @@ public class PadController {
 
     public int[] whoisnotnull() {
 
-        ArrayList<Integer> list = new ArrayList<Integer>();
+       boolean[] isnotnull = new boolean[ANZAHL];
         for (int i = 0; i < pad.length; i++) {
 
 
-          if (pad[i] != null && !pad[i].isNull()) {
-              list.add(i);
+          if (pad[i] != null ) { //&& !pad[i].isNull()
+              isnotnull[i] = true;
               System.out.println(i);
             }
         }
-        Object[] ausgabe = (list.toArray());
-
-
-        return list.stream().mapToInt(i -> i).toArray();
+        int trues = 0;
+        for (int i = 0; i < isnotnull.length; i++) {
+            if (isnotnull[i] == true){
+                trues++;
+            }
+        }
+        int[] ausgabe = new int[trues];
+        int pos = 0;
+        for (int i = 0; i < isnotnull.length; i++) {
+            if (isnotnull[i] == true){
+                ausgabe[pos] = i;
+                pos++;
+            }
+        }
+        return ausgabe;
     }
 
 
