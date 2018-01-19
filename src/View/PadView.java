@@ -146,23 +146,23 @@ public class PadView extends Pane implements Observer {
         String command = (String) arg;
 
         if(command.equals("pad") ){
+int[] notnull = padController.whoisnotnull();
+            for (int i = 0; i < notnull.length; i++) {
 
-            for (int i = 0; i < padController.whoisnotnull().length; i++) {
 
 
-                {
 
                     if(i < 4){
-                        pads[i].getStyleClass().add("padGUsed");
+                        pads[notnull[i]].getStyleClass().add("padGUsed");
                     } else if (i < 8) {
-                        pads[i].getStyleClass().add("padBUsed");
+                        pads[notnull[i]].getStyleClass().add("padBUsed");
                     } else if (i < 12) {
-                        pads[i].getStyleClass().add("padPUsed");
+                        pads[notnull[i]].getStyleClass().add("padPUsed");
                     } else if (i < 16) {
-                        pads[i].getStyleClass().add("padRUsed");
+                        pads[notnull[i]].getStyleClass().add("padRUsed");
                     }
 
-                }
+
 
             }
         }
