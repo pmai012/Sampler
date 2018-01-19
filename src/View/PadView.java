@@ -147,7 +147,7 @@ public class PadView extends Pane implements Observer {
         String command = (String) arg;
 
         if(command.equals("pad") ){
-
+            padController.buttonupdate(pads);
             for (int i = 0; i < padController.whoisnotnull().length; i++) {
                 System.out.println(i);
 
@@ -167,6 +167,6 @@ public class PadView extends Pane implements Observer {
 
             }
         }
-            padController.buttonupdate(pads);
+
     }
 }

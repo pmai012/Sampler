@@ -46,10 +46,12 @@ public class PadController {
 
         ArrayList<Integer> list = new ArrayList<Integer>();
         for (int i = 0; i < pad.length; i++) {
-            list.add(i);
-        /*   if (pad[i].isNull()) {
 
-            }*/
+
+          if (pad[i] != null && !pad[i].isNull()) {
+              list.add(i);
+              System.out.println(i);
+            }
         }
         Object[] ausgabe = (list.toArray());
 
