@@ -87,7 +87,7 @@ public class PadController {
                     if (event.getButton() == MouseButton.PRIMARY) {
                         System.out.println(i + " linksclick");
                         if (pad[i] != null) {
-                            System.out.println(pad[i].getPresstime());
+
                             if (pad[i].getPresstime() > 400) {
 
                                 pad[i].stop();
