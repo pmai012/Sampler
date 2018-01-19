@@ -25,10 +25,15 @@ public class PadController {
     public PadController(Button[] pads, Observer observer) {
         pad = new Pad[ANZAHL];
     this.observer = observer;
+    buttonupdate(pads);
+    }
+
+    public void buttonupdate(Button[] pads){
         for (int i = 0; i < ANZAHL; i++) {
             button[i] = pads[i];
 
         }
+        System.out.println("Buttons geupdated");
     }
 
     public Pad[] getPad() {

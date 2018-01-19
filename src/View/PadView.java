@@ -146,14 +146,14 @@ public class PadView extends Pane implements Observer {
         System.out.println("update");
         String command = (String) arg;
 
-      /*  if(command.equals("pad") ){
+        if(command.equals("pad") ){
 
             for (int i = 0; i < padController.getPad().length; i++) {
-
-                if(!padController.getPad()[i].isnull()){
+                System.out.println(i);
+             /*   if(padController.getPad()[i].isnull()){
                     return;
                 }
-                else{
+                else */{
                     if(i < 4){
                         pads[i].getStyleClass().add("padGUsed");
                     } else if (i < 8) {
@@ -167,7 +167,7 @@ public class PadView extends Pane implements Observer {
                 }
 
             }
-        } */
-
+        }
+            padController.buttonupdate(pads);
     }
 }
