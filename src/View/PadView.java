@@ -146,7 +146,7 @@ public class PadView extends Pane implements Observer {
         String command = (String) arg;
 
         if(command.equals("pad") ){
-int[] notnull = padController.whoisnotnull();
+            int[] notnull = padController.whoisnotnull();
             for (int i = 0; i < notnull.length; i++) {
 
 

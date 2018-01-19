@@ -60,8 +60,7 @@ public class Pad extends Observable{
         minim = new SimpleMinim(true);
         audioOut = minim.getLineOut();
         filePlayer = new FilePlayer(minim.loadFileStream(pathtoSound, 1024, true));
-        this.addObserver(observer);                                                                        //funktioniert an sich, jedoch kommt kein Ton mehr
-
+        this.addObserver(observer);
         System.out.println("Observer: " + countObservers());
         setChanged();
         notifyObservers("pad");
