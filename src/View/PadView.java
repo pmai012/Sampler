@@ -152,13 +152,13 @@ int[] notnull = padController.whoisnotnull();
 
 
 
-                    if(i < 4){
+                    if(notnull[i] < 4){
                         pads[notnull[i]].getStyleClass().add("padGUsed");
-                    } else if (i < 8) {
+                    } else if (notnull[i] < 8) {
                         pads[notnull[i]].getStyleClass().add("padBUsed");
-                    } else if (i < 12) {
+                    } else if (notnull[i] < 12) {
                         pads[notnull[i]].getStyleClass().add("padPUsed");
-                    } else if (i < 16) {
+                    } else if (notnull[i] < 16) {
                         pads[notnull[i]].getStyleClass().add("padRUsed");
                     }
 
