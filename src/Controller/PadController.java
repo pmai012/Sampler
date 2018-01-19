@@ -6,6 +6,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.*;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observer;
 
@@ -34,6 +35,17 @@ public class PadController {
             }
 
 
+    }
+
+    public int[] whoisnull(){
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        for (int i = 0; i < pad.length; i++){
+           if (!pad[i].isnull()){
+             list.add(i);
+           }
+        }
+        Object[] ausgabe= (list.toArray());
+return  list.stream().mapToInt(i->i).toArray();
     }
 
 
