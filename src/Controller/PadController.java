@@ -79,10 +79,18 @@ public class PadController {
                 if (event.getSource().equals(button[i])) {
 
                     if (pad[i] != null) {
-                        pad[i].setThreadrun(true);
 
-                        pad[i].threadstarten();
-                        pad[i].playSound();
+                            if (pad[i].isPlaying()){
+                                pad[i].stop();
+                                return;
+                            }
+
+
+
+                            pad[i].setThreadrun(true);
+
+                            pad[i].threadstarten();
+                            pad[i].playSound();
 
 
 
@@ -110,7 +118,7 @@ public class PadController {
                         System.out.println(i + " linksclick");
                         if (pad[i] != null) {
 
-                            if (pad[i].getPresstime() > 400) {
+                            if (pad[i].getPresstime() > 500) {
 
                                 pad[i].stop();
                             }

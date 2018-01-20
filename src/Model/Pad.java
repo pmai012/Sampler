@@ -30,10 +30,12 @@ public class Pad extends Observable{
     private long endpoint;
     private long presstime = -5;
     private boolean threadrun = false;
-    private boolean aNull = true;
+    private String path ;
     private AudioOutput audioOut;
     FilePlayer filePlayer;
     Minim minim;
+    private Observer observer;
+    private int starter = 0;
 
 
 
@@ -57,29 +59,38 @@ public class Pad extends Observable{
 
 
     public Pad(String pathtoSound, Observer observer) {
+        this.observer = observer;
+        path = pathtoSound;
         minim = new SimpleMinim(true);
         audioOut = minim.getLineOut();
         filePlayer = new FilePlayer(minim.loadFileStream(pathtoSound, 1024, true));
         this.addObserver(observer);
         System.out.println("Observer: " + countObservers());
-      //  setChanged();
-     //   notifyObservers("pad");
+
     }
 
     public void playSound() {
-        filePlayer.play(startpoint);
-        filePlayer.patch(audioOut);
+
+       if (starter < 1) {
+           filePlayer.play(startpoint);
+           filePlayer.patch(audioOut);
+           starter++;
+       }
     }
 
+
     public void playSound(UGen effect) {
+
+
         filePlayer.play(startpoint);
         filePlayer.patch(effect).patch(audioOut);
     }
 
     public void stop()
     {
-
         filePlayer.pause();
+        starter = 0;
+        filePlayer = new FilePlayer(minim.loadFileStream(path, 1024, true));
 
     }
 
@@ -97,6 +108,14 @@ public class Pad extends Observable{
     public void setStartpoint(int time) {
 
         startpoint = time;
+    }
+
+    public boolean isPlaying(){
+
+        if (starter >= 1){
+            return true;
+        }
+        return false;
     }
 
     public void setEndpoint(long time) {
