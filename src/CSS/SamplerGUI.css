@@ -8,10 +8,26 @@
 }
 
 .menuBar {
-    -fx-background-color: #101010;
+    -fx-background-color: #202020;
 }
 
 .menuBar .label {
+    -fx-text-fill: white;
+}
+
+.menuItem {
+    -fx-background-color: #202020;
+}
+
+.menuItem:focused {
+    -fx-background-color: #404040;
+}
+
+.menuItem:focused .label {
+    -fx-text-fill: white;
+}
+
+.menuItem .label{
     -fx-text-fill: white;
 }
 

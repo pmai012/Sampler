@@ -15,7 +15,8 @@ public class SettingView extends Pane {
     private Menu menuEdit;
     private Menu menuView;
     private Menu menuHelp;
-    private MenuItem item;
+    private MenuItem itemOpen;
+    private MenuItem itemSave;
 
 
     public SettingView(){
@@ -24,15 +25,17 @@ public class SettingView extends Pane {
         menuEdit = new Menu("Edit");
         menuView = new Menu("View");
         menuHelp = new Menu("Help");
-        item = new MenuItem("test");
+        itemOpen = new MenuItem("Öffnen");
+        itemSave = new MenuItem("Speichern unter");
 
-        menuFile.getItems().add(item);
+        menuFile.getItems().addAll(itemOpen, itemSave);
         samplermenu.getMenus().addAll(menuFile, menuEdit, menuView, menuHelp);
         samplermenu.prefWidthProperty().bind(this.widthProperty());
         this.getChildren().add(samplermenu);
         samplermenu.getStyleClass().add("menuBar");
-        menuFile.getStyleClass().addAll("menuTitle","label");
-        item.getStyleClass().add("menuBar");
+        menuFile.getStyleClass().add("menuTitle");
+        itemOpen.getStyleClass().add("menuItem");
+        itemSave.getStyleClass().add("menuItem");
 
     }
 }
