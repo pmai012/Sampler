@@ -62,8 +62,8 @@ public class Pad extends Observable{
         filePlayer = new FilePlayer(minim.loadFileStream(pathtoSound, 1024, true));
         this.addObserver(observer);
         System.out.println("Observer: " + countObservers());
-        setChanged();
-        notifyObservers("pad");
+      //  setChanged();
+     //   notifyObservers("pad");
     }
 
     public void playSound() {
@@ -80,6 +80,12 @@ public class Pad extends Observable{
     {
 
         filePlayer.pause();
+
+    }
+
+    public void sendupdate(){
+        setChanged();
+        notifyObservers("pad");
 
     }
 

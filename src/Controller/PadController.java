@@ -166,6 +166,7 @@ public class PadController {
 
                             if (path.endsWith(".mp3") || path.endsWith(".wav")) {
                                 pad[i] = new Pad(path, observer);
+                                pad[i].sendupdate();
 
                                 System.out.println(path);
                                 return;
@@ -177,5 +178,7 @@ public class PadController {
             }
         }
     };
+
+
 
 }
