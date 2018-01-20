@@ -1,5 +1,6 @@
 package View;
 
+import Controller.SettingController;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -20,6 +21,7 @@ public class SettingView extends Pane {
     private MenuItem itemSave;
     private MenuItem itemLocation;
 
+    private SettingController settingController;
 
     public SettingView(){
         samplermenu = new MenuBar();
@@ -35,11 +37,17 @@ public class SettingView extends Pane {
         samplermenu.getMenus().addAll(menuFile, menuEdit, menuView, menuHelp);
         samplermenu.prefWidthProperty().bind(this.widthProperty());
         this.getChildren().add(samplermenu);
+
+
+
         samplermenu.getStyleClass().add("menuBar");
         menuFile.getStyleClass().addAll("context-menu");
         itemOpen.getStyleClass().add("menuItem");
         itemSave.getStyleClass().add("menuItem");
         itemLocation.getStyleClass().add("menuItem");
+
+        settingController =new SettingController();
+        itemLocation.setOnAction(settingController.openSaveLocation);
 
     }
 }
