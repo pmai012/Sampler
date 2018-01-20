@@ -7,20 +7,53 @@
     -fx-background-color: #292929;
 }
 
+.menu {
+
+}
+
+.menu:hover {
+    -fx-background-color: #606060;
+}
+
+.menu:showing {
+    -fx-background-color: #606060;
+}
+
 .menuBar {
     -fx-background-color: #202020;
+    -fx-padding: 0 0 0 0;
+}
+.menuBar:highlighted {
+    -fx-background-color: #606060;
 }
 
 .menuBar .label {
     -fx-text-fill: white;
 }
 
-.menuItem {
-    -fx-background-color: #202020;
+.menuBar > .container > .menu-button {
+
 }
 
+.context-menu {
+    -fx-skin: "com.sun.javafx.scene.control.skin.ContextMenuSkin";
+    -fx-background-color: black;
+    -fx-padding: 0 0 0 0;
+
+}
+
+
+
+.menuItem {
+    -fx-background-color: #202020;
+
+}
+
+.menuItem .context-menu {
+    -fx-background-color: red;
+}
 .menuItem:focused {
-    -fx-background-color: #404040;
+    -fx-background-color: #606060;
 }
 
 .menuItem:focused .label {
@@ -31,9 +64,7 @@
     -fx-text-fill: white;
 }
 
-.menuTitle .label {
-    -fx-text-fill: white;
-}
+
 
 .padBox {
     -fx-padding: 150 50 200 100;
