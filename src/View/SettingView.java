@@ -6,6 +6,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.Pane;
 import com.sun.javafx.scene.control.skin.ContextMenuSkin;
+import javafx.stage.Stage;
 
 /**
  * Created by User on 21.12.2017.
@@ -23,7 +24,7 @@ public class SettingView extends Pane {
 
     private SettingController settingController;
 
-    public SettingView(){
+    public SettingView(Stage stage){
         samplermenu = new MenuBar();
         menuFile = new Menu("Datei");
         menuEdit = new Menu("Bearbeiten");
@@ -46,7 +47,7 @@ public class SettingView extends Pane {
         itemSave.getStyleClass().add("menuItem");
         itemLocation.getStyleClass().add("menuItem");
 
-        settingController =new SettingController();
+        settingController =new SettingController(stage);
         itemLocation.setOnAction(settingController.openSaveLocation);
 
     }

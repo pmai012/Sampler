@@ -40,7 +40,7 @@ public class MainFrame extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        settingView = new SettingView();
+        settingView = new SettingView(primaryStage);
         //configBox.setMaxHeight(800);
         //configBox.setMaxWidth(600);
         configBox.getChildren().add(recordView);
