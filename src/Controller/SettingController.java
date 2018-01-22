@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Pad;
 import View.MainFrame;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -17,11 +18,13 @@ public class SettingController {
     String savelocation;
     File file;
     String saveFilelocation;
+    Pad[] pads;
 
 
-    public SettingController(Stage stage){
+    public SettingController(Stage stage, Pad[] pads){
         this.stage = stage;
-    }
+        this.pads = pads;
+}
 
     public String getSavelocation() {
         return savelocation;
@@ -33,7 +36,7 @@ public class SettingController {
         @Override
         public void handle(ActionEvent event) {
             SaveOpenDialog directionDialog = new SaveOpenDialog();
-            savelocation = directionDialog.DirectionDialog(stage,"Geben Sie den Speicherort an");
+            savelocation = directionDialog.DirectionDialog(stage);
 
         }
     };
@@ -42,7 +45,8 @@ public class SettingController {
         @Override
         public void handle(ActionEvent event) {
             SaveOpenDialog saveDialog = new SaveOpenDialog();
-            saveFilelocation = saveDialog.Savedialog(stage,"Wo möchten sie die Datei speichern?");
+            saveFilelocation = saveDialog.Savedialog(stage,"Wo möchten sie die Datei speichern?" );
+            saveDialog.save(pads,saveFilelocation);
 
         }
     };
@@ -52,6 +56,8 @@ public class SettingController {
         public void handle(ActionEvent event) {
             SaveOpenDialog openDialog = new SaveOpenDialog();
             file = openDialog.OpenDialog(stage);
+
+        pads = openDialog.read(file.getAbsolutePath());
 
         }
     };

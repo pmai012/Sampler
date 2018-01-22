@@ -16,16 +16,17 @@ import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
 
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Observable;
 import java.util.Observer;
 
 /**
  * Created by User on 21.12.2017.
  */
-public class Pad extends Observable{
+public class Pad extends Observable {
 
 
-    private Mp3File file;
+
     private int startpoint = 0;
     private long endpoint;
     private long presstime = -5;
@@ -36,7 +37,6 @@ public class Pad extends Observable{
     Minim minim;
     private Observer observer;
     private int starter = 0;
-
 
 
 
@@ -59,6 +59,7 @@ public class Pad extends Observable{
 
 
     public Pad(String pathtoSound, Observer observer) {
+
         this.observer = observer;
         path = pathtoSound;
         minim = new SimpleMinim(true);

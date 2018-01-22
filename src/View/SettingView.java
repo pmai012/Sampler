@@ -1,6 +1,7 @@
 package View;
 
 import Controller.SettingController;
+import Model.Pad;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
@@ -21,10 +22,12 @@ public class SettingView extends Pane {
     private MenuItem itemOpen;
     private MenuItem itemSave;
     private MenuItem itemLocation;
+    private Pad[] pads;
 
     private SettingController settingController;
 
-    public SettingView(Stage stage){
+    public SettingView(Stage stage, Pad[] pads){
+        this.pads = pads;
         samplermenu = new MenuBar();
         menuFile = new Menu("Datei");
         menuEdit = new Menu("Bearbeiten");
@@ -47,7 +50,7 @@ public class SettingView extends Pane {
         itemSave.getStyleClass().add("menuItem");
         itemLocation.getStyleClass().add("menuItem");
 
-        settingController =new SettingController(stage);
+        settingController =new SettingController(stage,pads);
         itemLocation.setOnAction(settingController.openSaveLocation);
         itemSave.setOnAction(settingController.save);
         itemOpen.setOnAction(settingController.open);
