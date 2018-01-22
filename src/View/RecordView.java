@@ -1,6 +1,8 @@
 package View;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -17,15 +19,19 @@ public class RecordView extends Pane {
 
 
     public RecordView(){
-        recordButtons = new HBox(20);
+        rootRV = new VBox(20);
+        Label time = new Label("--:--/--:--");
+        recordButtons = new HBox(50);
         record = new Button();
         stop = new Button();
 
+        rootRV.setAlignment(Pos.BASELINE_CENTER);
         recordButtons.getChildren().addAll(record, stop);
-        this.getChildren().add(recordButtons);
-
+        this.getChildren().add(rootRV);
+        rootRV.getChildren().addAll(time, recordButtons);
         record.getStyleClass().add("recordButton");
         stop.getStyleClass().add("stopButton");
+        time.getStyleClass().add("title");
 
     }
 }

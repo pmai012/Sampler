@@ -18,6 +18,7 @@ public class SettingController {
     String savelocation;
     File file;
     String saveFilelocation;
+    String saveSourcelocation;
     Pad[] pads;
 
 
@@ -58,6 +59,21 @@ public class SettingController {
             file = openDialog.OpenDialog(stage);
 
         pads = openDialog.read(file.getAbsolutePath());
+
+        }
+    };
+
+    public EventHandler<ActionEvent> openSourceLocation = new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent event) {
+            SaveOpenDialog directionSourcedialog = new SaveOpenDialog();
+            saveSourcelocation = directionSourcedialog.DirectionDialog(stage);
+        }
+    };
+
+    public  EventHandler<ActionEvent> openManual = new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent event) {
 
         }
     };
