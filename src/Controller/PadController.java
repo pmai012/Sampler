@@ -2,6 +2,8 @@ package Controller;
 
 import Model.Pad;
 import View.PadView;
+import ddf.minim.AudioOutput;
+import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.input.*;
@@ -16,14 +18,15 @@ import java.util.Observer;
  */
 public class PadController {
     private final int ANZAHL = 16;
-
-
-    Pad pad[] = new Pad[ANZAHL];
-    Button button[] = new Button[ANZAHL];
+    private SimpleMinim minim = new SimpleMinim(true);
+    AudioOutput globalOut;
+    private Pad pad[] = new Pad[ANZAHL];
+    private Button button[] = new Button[ANZAHL];
     private Observer observer;
 
     public PadController(Button[] pads, Observer observer) {
         pad = new Pad[ANZAHL];
+        globalOut = minim.getLineOut();
     this.observer = observer;
 
         for (int i = 0; i < ANZAHL; i++) {
@@ -173,7 +176,7 @@ public class PadController {
 
 
                             if (path.endsWith(".mp3") || path.endsWith(".wav")) {
-                                pad[i] = new Pad(path, observer);
+                                pad[i] = new Pad(path, observer, globalOut);
                                 pad[i].sendupdate();
 
                                 System.out.println(path);
@@ -186,7 +189,10 @@ public class PadController {
             }
         }
     };
-
+    public AudioOutput getGlobalOut()
+    {
+        return this.globalOut;
+    }
 
 
 }

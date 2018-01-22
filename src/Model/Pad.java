@@ -58,12 +58,11 @@ public class Pad extends Observable {
     }
 
 
-    public Pad(String pathtoSound, Observer observer) {
-
+    public Pad(String pathtoSound, Observer observer, AudioOutput globalOut) {
         this.observer = observer;
         path = pathtoSound;
         minim = new SimpleMinim(true);
-        audioOut = minim.getLineOut();
+        audioOut = globalOut;
         filePlayer = new FilePlayer(minim.loadFileStream(pathtoSound, 1024, true));
         this.addObserver(observer);
         System.out.println("Observer: " + countObservers());
