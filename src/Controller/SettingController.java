@@ -6,16 +6,18 @@ import javafx.event.EventHandler;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
+
 /**
  * Created by User on 21.12.2017.
  */
 public class SettingController {
 
-Stage stage = null;
-
-
-
+    Stage stage = null;
     String savelocation;
+    File file;
+    String saveFilelocation;
+
 
     public SettingController(Stage stage){
         this.stage = stage;
@@ -32,6 +34,24 @@ Stage stage = null;
         public void handle(ActionEvent event) {
             SaveOpenDialog directionDialog = new SaveOpenDialog();
             savelocation = directionDialog.DirectionDialog(stage,"Geben Sie den Speicherort an");
+
+        }
+    };
+
+    public EventHandler<ActionEvent> save = new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent event) {
+            SaveOpenDialog saveDialog = new SaveOpenDialog();
+            saveFilelocation = saveDialog.Savedialog(stage,"Wo möchten sie die Datei speichern?");
+
+        }
+    };
+
+    public EventHandler<ActionEvent> open = new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent event) {
+            SaveOpenDialog openDialog = new SaveOpenDialog();
+            file = openDialog.OpenDialog(stage);
 
         }
     };

@@ -49,6 +49,8 @@ public class SettingView extends Pane {
 
         settingController =new SettingController(stage);
         itemLocation.setOnAction(settingController.openSaveLocation);
+        itemSave.setOnAction(settingController.save);
+        itemOpen.setOnAction(settingController.open);
 
     }
 }
