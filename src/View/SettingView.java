@@ -19,9 +19,14 @@ public class SettingView extends Pane {
     private Menu menuEdit;
     private Menu menuView;
     private Menu menuHelp;
+    private Menu itemNew;
+    private MenuItem itemNewNew;
+    private MenuItem itemNewPreset;
     private MenuItem itemOpen;
     private MenuItem itemSave;
     private MenuItem itemLocation;
+    private MenuItem itemSourceLocation;
+    private MenuItem itemManual;
     private Pad[] pads;
 
     private SettingController settingController;
@@ -33,12 +38,19 @@ public class SettingView extends Pane {
         menuEdit = new Menu("Bearbeiten");
         menuView = new Menu("Ansicht");
         menuHelp = new Menu("Hilfe");
-        itemOpen = new MenuItem("Öffnen");
+        itemNew = new Menu(" Neues Projekt");
+        itemNewNew = new MenuItem("Neu...");
+        itemNewPreset = new MenuItem("Default Vorlage");
+        itemOpen = new MenuItem("Projekt Öffnen");
         itemSave = new MenuItem("Projekt speichern unter");
         itemLocation = new MenuItem(("Speicherordner festlegen"));
+        itemSourceLocation = new MenuItem("Quellordner festlegen");
+        itemManual = new MenuItem("Anleitung");
 
-        menuFile.getItems().addAll(itemOpen, itemSave, itemLocation);
-        samplermenu.getMenus().addAll(menuFile, menuEdit, menuView, menuHelp);
+        itemNew.getItems().addAll(itemNewNew, itemNewPreset);
+        menuFile.getItems().addAll(itemNew, itemOpen, itemSave, itemLocation, itemSourceLocation);
+        menuHelp.getItems().add(itemManual);
+        samplermenu.getMenus().addAll(menuFile, menuHelp);
         samplermenu.prefWidthProperty().bind(this.widthProperty());
         this.getChildren().add(samplermenu);
 
@@ -46,11 +58,16 @@ public class SettingView extends Pane {
 
         samplermenu.getStyleClass().add("menuBar");
         menuFile.getStyleClass().addAll("context-menu");
+        itemNew.getStyleClass().addAll("context-menu", "menuItem");
+        itemNewNew.getStyleClass().add("menuItem");
+        itemNewPreset.getStyleClass().add("menuItem");
         itemOpen.getStyleClass().add("menuItem");
         itemSave.getStyleClass().add("menuItem");
         itemLocation.getStyleClass().add("menuItem");
+        itemSourceLocation.getStyleClass().add("menuItem");
+        itemManual.getStyleClass().add("menuItem");
 
-        settingController =new SettingController(stage,pads);
+        settingController = new SettingController(stage,pads);
         itemLocation.setOnAction(settingController.openSaveLocation);
         itemSave.setOnAction(settingController.save);
         itemOpen.setOnAction(settingController.open);
