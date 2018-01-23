@@ -17,13 +17,14 @@ import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
 /**
  * Created by User on 21.12.2017.
  */
-public class Pad extends Observable {
+public class Pad extends Observable implements Serializable{
 
 
 
@@ -37,9 +38,23 @@ public class Pad extends Observable {
     Minim minim;
     private Observer observer;
     private int starter = 0;
+    private List<UGen> effekte;
 
+public String getPath(){
+    return path;
+}
 
+public List<UGen> getEffekte(){
+    return effekte;
+}
 
+    public int getStartpoint(){
+        return startpoint;
+    }
+
+    public long getEndpoint(){
+        return endpoint;
+    }
 
     public long getPresstime() {
         return presstime;

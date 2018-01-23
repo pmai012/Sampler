@@ -58,7 +58,7 @@ public class SettingController {
             SaveOpenDialog openDialog = new SaveOpenDialog();
             file = openDialog.OpenDialog(stage);
 
-        pads = openDialog.read(file.getAbsolutePath());
+        pads = openDialog.read(file.getAbsolutePath(), null,null); //Muss noch bearbeitet werden!!!!
 
         }
     };

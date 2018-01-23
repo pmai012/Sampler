@@ -1,13 +1,14 @@
 package Controller;
 
 import Model.Pad;
-import ddf.minim.UGen;
+import ddf.minim.AudioOutput;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Observer;
 
 /**
  * Created by User on 22.01.2018.
@@ -70,10 +71,11 @@ public class SaveOpenDialog {
     public void save(Pad[] input, String path) {
 
 
-        ArrayList<Pad> savelist = new ArrayList<Pad>();
+
+        ArrayList<Padsaveclass> savelist = new ArrayList<Padsaveclass>();
 
        for (Pad i : input) {
-                savelist.add(i);
+                savelist.add(new Padsaveclass(i));
             }
         OutputStream pads = null;
 
@@ -97,9 +99,9 @@ public class SaveOpenDialog {
     }
 
 
-    public Pad[] read(String path) {
+    public Pad[] read(String path, Observer observer, AudioOutput audioOutput) {
 
-        ArrayList<Pad> pad = new ArrayList<Pad>();
+        ArrayList<Padsaveclass> pad = new ArrayList<Padsaveclass>();
         InputStream inputStream = null;
 
 
@@ -107,7 +109,7 @@ public class SaveOpenDialog {
             inputStream = new FileInputStream(path);
             ObjectInputStream stream = new ObjectInputStream(inputStream);
 
-           pad = (ArrayList<Pad>)  stream.readObject();
+           pad = (ArrayList<Padsaveclass>)  stream.readObject();
 
         } catch (IOException e) {
             System.err.println(e);
@@ -119,8 +121,14 @@ public class SaveOpenDialog {
             } catch (Exception e) {
             }
         }
-        System.out.println();
-       Object[] ausgabe = pad.toArray();
-        return (Pad[]) ausgabe;
+        System.out.println("Pads wurden geladen");
+
+
+       Pad[] ausgabe = new Pad[pad.size()];
+
+       for (int i = 0; i< pad.size(); i++){
+           ausgabe[i] = pad.get(i).loadPad(observer,audioOutput);
+       }
+        return ausgabe;
     }
 }
