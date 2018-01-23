@@ -17,6 +17,9 @@ import java.util.Observer;
  * Created by User on 23.01.2018.
  */
 public class Padsaveclass implements Serializable {
+    /**
+     * Nur Serializierbare Objekte!!!!
+     */
     private int startpoint = 0;
     private long endpoint;
     private String path ;
