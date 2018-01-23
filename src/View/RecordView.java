@@ -5,6 +5,7 @@ import Controller.RecordController;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -37,7 +38,8 @@ public class RecordView extends Pane {
         record.getStyleClass().add("recordButton");
         stop.getStyleClass().add("stopButton");
         time.getStyleClass().add("title");
-        recordController = new RecordController(record,stop, padController);
+        recordController = new RecordController(padController);
 
+        record.addEventHandler(MouseEvent.MOUSE_CLICKED, recordController.recordClicked);
     }
 }

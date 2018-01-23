@@ -1,22 +1,44 @@
 package Controller;
 
 
-import javafx.scene.control.Button;
+import Model.Record;
+import ddf.minim.AudioOutput;
+import javafx.event.EventHandler;
+import javafx.scene.input.MouseEvent;
 
 /**
  * Created by User on 21.12.2017.
  */
 public class RecordController {
-    private Button record, stop;
-    private PadController padController;
+    private AudioOutput recordInput;
+    Record record;
 
 
-
-
-    public RecordController(Button record, Button stop, PadController ref)
+    public RecordController(PadController ref)
     {
-        padController = ref;
-        this.record = record;
-        this.stop = stop;
+        record = new Record(ref.getGlobalOut());
     }
+    public EventHandler<MouseEvent> recordClicked = new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent event) {
+            if (record.isRecording()){
+                System.out.println("STOP");
+                record.stopRecording();
+            }
+            else
+            {
+                System.out.println("START");
+                record.startRecording();
+            }
+        }
+    };
+    public EventHandler<MouseEvent> stopClicked = new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent event) {
+            if (record.isRecording()){
+                System.out.println("STOP");
+                record.stopRecording();
+            }
+        }
+    };
 }
