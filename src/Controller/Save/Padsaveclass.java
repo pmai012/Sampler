@@ -1,5 +1,6 @@
-package Controller;
+package Controller.Save;
 
+import Controller.Controller;
 import Model.Pad;
 import ddf.minim.AudioOutput;
 import ddf.minim.Minim;

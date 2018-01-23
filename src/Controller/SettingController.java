@@ -1,10 +1,9 @@
 package Controller;
 
+import Controller.Save.SaveOpenDialog;
 import Model.Pad;
-import View.MainFrame;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
