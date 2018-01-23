@@ -1,4 +1,5 @@
 package Model;
+import Controller.PadController;
 import ddf.minim.AudioOutput;
 import ddf.minim.AudioRecorder;
 import ddf.minim.Minim;
@@ -13,6 +14,7 @@ public class Record {
     private AudioRecorder record;
     private Minim minim;
     private String recordPath;
+
 
     public Record(AudioOutput soundToRecord){
         minim = new SimpleMinim(true);

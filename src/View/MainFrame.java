@@ -25,7 +25,7 @@ public class MainFrame extends Application {
         root = new BorderPane();
         configBox = new VBox(40);
         padView = new PadView();
-        recordView = new RecordView();
+        recordView = new RecordView(padView.getPadController());
         soundView = new SoundView();
 
     }

@@ -1,5 +1,7 @@
 package View;
 
+import Controller.PadController;
+import Controller.RecordController;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -16,9 +18,12 @@ public class RecordView extends Pane {
     private HBox recordButtons;
     private Button record;
     private Button stop;
+    private RecordController recordController;
 
 
-    public RecordView(){
+
+    public RecordView(PadController padController){
+
         rootRV = new VBox(20);
         Label time = new Label("--:--/--:--");
         recordButtons = new HBox(50);
@@ -32,6 +37,7 @@ public class RecordView extends Pane {
         record.getStyleClass().add("recordButton");
         stop.getStyleClass().add("stopButton");
         time.getStyleClass().add("title");
+        recordController = new RecordController(record,stop, padController);
 
     }
 }

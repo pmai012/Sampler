@@ -31,6 +31,11 @@ public class PadView extends Pane implements Observer {
         return padController.getPad();
     }
 
+
+
+    public PadController getPadController(){
+        return padController;
+    }
     protected PadView(){
 
         rootPV = new BorderPane();

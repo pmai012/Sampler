@@ -119,8 +119,8 @@ public class SaveOpenDialog {
             } catch (Exception e) {
             }
         }
-System.out.println();
-       Pad[] ausgabe = (Pad[]) pad.toArray();
-        return ausgabe;
+        System.out.println();
+       Object[] ausgabe = pad.toArray();
+        return (Pad[]) ausgabe;
     }
 }
