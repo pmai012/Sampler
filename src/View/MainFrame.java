@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 public class MainFrame extends Application {
 
     final int WIDTH = 1280;
-    final int HEIGHT = 720;
+    final int HEIGHT = 690;
 
     private BorderPane root;
     private PadView padView;
@@ -23,7 +23,7 @@ public class MainFrame extends Application {
 
     public MainFrame(){
         root = new BorderPane();
-        configBox = new VBox(40);
+        configBox = new VBox(20);
         padView = new PadView();
         recordView = new RecordView(padView.getPadController());
         soundView = new SoundView();
@@ -62,8 +62,8 @@ public class MainFrame extends Application {
         primaryStage.setScene(scene);
         primaryStage.setTitle("Sampler");
         primaryStage.getIcons().add(new Image("Picture/LogoSampler.png"));
-        primaryStage.setMinHeight(640);
-        primaryStage.setMinWidth(1200);
+        primaryStage.setMinHeight(690);
+        primaryStage.setMinWidth(960);
 
         root.getStyleClass().addAll("mainFrame");
         configBox.getStyleClass().addAll("configBox");
