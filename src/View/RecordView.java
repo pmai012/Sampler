@@ -27,7 +27,7 @@ public class RecordView extends Pane {
 
         rootRV = new VBox(20);
         Label time = new Label("--:--/--:--");
-        recordButtons = new HBox(50);
+        recordButtons = new HBox(30);
         record = new Button();
         stop = new Button();
 
@@ -35,9 +35,10 @@ public class RecordView extends Pane {
         recordButtons.getChildren().addAll(record, stop);
         this.getChildren().add(rootRV);
         rootRV.getChildren().addAll(time, recordButtons);
+        recordButtons.getStyleClass().add("recordButtons");
         record.getStyleClass().add("recordButton");
         stop.getStyleClass().add("stopButton");
-        time.getStyleClass().add("title");
+        time.getStyleClass().addAll("title","time");
         recordController = new RecordController(padController);
 
         record.addEventHandler(MouseEvent.MOUSE_CLICKED, recordController.recordClicked);

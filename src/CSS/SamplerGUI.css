@@ -126,11 +126,18 @@
     -fx-graphic: url("../Picture/PadPOnPress.png");
 }
 
+.radioButton {
+    -fx-padding: 0 0 0 40;
+}
 
 .recordButton {
     -fx-background-color: transparent;
     -fx-background-radius: 20px;
     -fx-graphic: url("../Picture/Record.png");
+}
+
+.recordButtons {
+    -fx-padding: 0 0 0 30;
 }
 
 .stopButton {
@@ -141,4 +148,13 @@
 
 .title {
     -fx-text-fill: #f9f9f9;
+    -fx-font-size: 14px;
+}
+
+.text {
+}
+
+.time {
+    -fx-padding: 0 0 0 30;
+    -fx-font-size: 24px;
 }

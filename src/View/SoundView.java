@@ -36,8 +36,8 @@ public class SoundView extends Pane {
         soundpane.getChildren().add(audioFX);
         soundpane.getChildren().addAll(fxOn,fxOff);
 
-        audioFX.getStyleClass().add("title");
-        fxOff.getStyleClass().add("title");
-        fxOn.getStyleClass().add("title");
+        audioFX.getStyleClass().addAll("title", "radioButton");
+        fxOff.getStyleClass().addAll("title", "radioButton");
+        fxOn.getStyleClass().addAll("title", "radioButton");
     }
 }
