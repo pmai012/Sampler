@@ -9,6 +9,8 @@ import javafx.scene.layout.Pane;
 import com.sun.javafx.scene.control.skin.ContextMenuSkin;
 import javafx.stage.Stage;
 
+import java.util.Observer;
+
 /**
  * Created by User on 21.12.2017.
  */
@@ -28,10 +30,12 @@ public class SettingView extends Pane {
     private MenuItem itemSourceLocation;
     private MenuItem itemManual;
     private Pad[] pads;
+    private Observer refOb;
 
     private SettingController settingController;
 
-    public SettingView(Stage stage, Pad[] pads){
+    public SettingView(Stage stage, Pad[] pads, Observer observer){
+        refOb = observer;
         this.pads = pads;
         samplermenu = new MenuBar();
         menuFile = new Menu("Datei");
@@ -67,12 +71,16 @@ public class SettingView extends Pane {
         itemSourceLocation.getStyleClass().add("menuItem");
         itemManual.getStyleClass().add("menuItem");
 
-        settingController = new SettingController(stage,pads);
+        settingController = new SettingController(stage,pads, refOb);
         itemSave.setOnAction(settingController.save);
         itemOpen.setOnAction(settingController.open);
         itemLocation.setOnAction(settingController.openSaveLocation);
         itemSourceLocation.setOnAction(settingController.openSourceLocation);
         itemManual.setOnAction(settingController.openManual);
+        settingController.addObserver(refOb);
+    }
 
+    public SettingController getSettingController(){
+        return  settingController;
     }
 }

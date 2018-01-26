@@ -14,13 +14,14 @@ import java.util.Observer;
 /**
  * Created by User on 21.12.2017.
  */
-public class PadView extends Pane implements Observer {
+public class PadView extends Pane  {
 
     private final int WIDTH = 600;
     private final int HEIGHT = 600;
     private PadController padController;
     private BorderPane rootPV;
     private TilePane padBox;
+    Observer observer;
 
     private Button[] pads;
     private Button pad1, pad2, pad3, pad4, pad5, pad6, pad7, pad8,
@@ -36,8 +37,8 @@ public class PadView extends Pane implements Observer {
     public PadController getPadController(){
         return padController;
     }
-    protected PadView(){
-
+    public PadView(Observer obs){
+        observer = obs;
         rootPV = new BorderPane();
         padBox = new TilePane(Orientation.HORIZONTAL);
         padBox.setHgap(10);
@@ -112,7 +113,7 @@ public class PadView extends Pane implements Observer {
         pad16.getStyleClass().addAll("pad");
         */
 
-        padController = new PadController(pads, this);
+        padController = new PadController(pads, observer);
 
 
 
@@ -148,11 +149,14 @@ public class PadView extends Pane implements Observer {
     }
 
 
-    @Override
-    public void update(Observable o, Object arg) {
+
+
+
+    public void update(Object arg) {
 
         System.out.println("update " );
         String command = (String) arg;
+
 
         if(command.equals("pad") ){
             int[] notnull = padController.whoisnotnull();

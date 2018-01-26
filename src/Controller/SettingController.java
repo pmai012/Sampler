@@ -7,11 +7,13 @@ import javafx.event.EventHandler;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * Created by User on 21.12.2017.
  */
-public class SettingController {
+public class SettingController extends Observable{
 
     Stage stage = null;
     String savelocation;
@@ -19,9 +21,18 @@ public class SettingController {
     String saveFilelocation;
     String saveSourcelocation;
     Pad[] pads;
+    Observer observer;
 
 
-    public SettingController(Stage stage, Pad[] pads){
+
+    public SettingController(Stage stage, Pad[] pads, Observer observer){
+
+        this.observer = observer;
+
+        if (observer == null){
+            System.out.println("null Observer");
+        }
+
         this.stage = stage;
         this.pads = pads;
 }
@@ -57,10 +68,18 @@ public class SettingController {
             SaveOpenDialog openDialog = new SaveOpenDialog();
             file = openDialog.OpenDialog(stage);
 
-        pads = openDialog.read(file.getAbsolutePath(), null,null); //Muss noch bearbeitet werden!!!!
-
+        pads = openDialog.read(file.getAbsolutePath(), observer,null); //Muss noch bearbeitet werden!!!!
+            setChanged();
+            notifyObservers("padsladen");
         }
+
+
     };
+
+    public Pad[] getpads(){
+        return pads;
+    }
+
 
     public EventHandler<ActionEvent> openSourceLocation = new EventHandler<ActionEvent>() {
         @Override

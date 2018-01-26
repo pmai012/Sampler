@@ -9,7 +9,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class MainFrame extends Application {
+import java.util.Observable;
+import java.util.Observer;
+
+public class MainFrame extends Application implements Observer {
 
     final int WIDTH = 1280;
     final int HEIGHT = 720;
@@ -24,7 +27,7 @@ public class MainFrame extends Application {
     public MainFrame(){
         root = new BorderPane();
         configBox = new VBox(40);
-        padView = new PadView();
+        padView = new PadView(this);
         recordView = new RecordView(padView.getPadController());
         soundView = new SoundView();
 
@@ -40,7 +43,7 @@ public class MainFrame extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        settingView = new SettingView(primaryStage, padView.getPads());
+        settingView = new SettingView(primaryStage, padView.getPads(), this);
         //configBox.setMaxHeight(800);
         //configBox.setMaxWidth(600);
         configBox.getChildren().add(recordView);
@@ -71,5 +74,15 @@ public class MainFrame extends Application {
 //        padView.Buttoninit();
 
         primaryStage.show();
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+
+        if(arg.equals("padsladen") ){
+        padView.getPadController().setPad(settingView.getSettingController().getpads());
+        arg ="pad";
+        }
+        padView.update(arg);
     }
 }

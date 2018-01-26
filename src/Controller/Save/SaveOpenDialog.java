@@ -2,6 +2,8 @@ package Controller.Save;
 
 import Model.Pad;
 import ddf.minim.AudioOutput;
+import ddf.minim.Minim;
+import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -127,8 +129,15 @@ public class SaveOpenDialog {
        Pad[] ausgabe = new Pad[pad.size()];
 
        for (int i = 0; i< pad.size(); i++){
-           ausgabe[i] = pad.get(i).loadPad(observer,audioOutput);
+           Minim minim = new SimpleMinim(true);
+           AudioOutput out = minim.getLineOut();
+           ausgabe[i] = pad.get(i).loadPad(observer,out);
        }
         return ausgabe;
     }
+
+
+
+
+
 }

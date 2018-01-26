@@ -30,5 +30,8 @@ public class Record {
 
     public void startRecording() {record.beginRecord();}
 
-    public void stopRecording() {record.endRecord();}
+    public void stopRecording() {
+        record.endRecord();
+        record.save();
+    }
 }

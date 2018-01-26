@@ -1,22 +1,19 @@
 package Controller.Save;
 
-import Controller.Controller;
+/**
+ * Created by User on 25.01.2018.
+ */
+
 import Model.Pad;
 import ddf.minim.AudioOutput;
-import ddf.minim.Minim;
 import ddf.minim.UGen;
-import ddf.minim.spi.AudioOut;
-import ddf.minim.ugens.FilePlayer;
 
 import java.io.Serializable;
 import java.util.List;
 import java.util.Observer;
 
 
-/**
- * Created by User on 23.01.2018.
- */
-public class Padsaveclass implements Serializable {
+class Padsaveclass implements Serializable {
     /**
      * Nur Serializierbare Objekte!!!!
      */
@@ -24,6 +21,7 @@ public class Padsaveclass implements Serializable {
     private long endpoint;
     private String path ;
     private List<UGen> effekte;
+
 
 
     public Padsaveclass(Pad save){
@@ -35,13 +33,20 @@ public class Padsaveclass implements Serializable {
         }
     }
 
-    public Pad loadPad(Observer observer, AudioOutput globalOut){
+  public String getPath(){
+        return path;
+  }
+
+
+    public Pad loadPad(Observer observer, AudioOutput out){
         if (path != null) {
-            Pad ausgabe = new Pad(path, observer, globalOut);
+
+
+            Pad ausgabe = new Pad(path, observer,out);
             ausgabe.setStartpoint(startpoint);
             ausgabe.setEndpoint(endpoint);
 
-        return ausgabe;
+            return ausgabe;
         } else{
             return null;
         }

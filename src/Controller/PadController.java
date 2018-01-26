@@ -73,6 +73,9 @@ public class PadController {
         return ausgabe;
     }
 
+    public void setPad(Pad[] pad){
+        this.pad = pad;
+    }
 
     public EventHandler<MouseEvent> pressed = new EventHandler<MouseEvent>() {
         @Override
