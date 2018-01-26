@@ -16,7 +16,7 @@ import java.util.Observer;
  * Created by User on 22.01.2018.
  */
 public class SaveOpenDialog {
-
+private FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Pascal-Julian-Deniz-File (*.pjd)", "*.pjd");
 
     /**
      * Gibt ein Dialog zum Speichern von Dateien aus.
@@ -28,10 +28,19 @@ public class SaveOpenDialog {
     public String Savedialog(Stage stage, String title) { //
 
         FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(extFilter);
         fileChooser.setTitle(title);
+
+        File defaultDirectory = new File(  System.getProperty("user.home").concat("//Desktop"));
+        fileChooser.setInitialDirectory(defaultDirectory);
         File file = fileChooser.showSaveDialog(stage);
 
-        return file.getAbsolutePath();
+        if (file != null){
+            return file.getAbsolutePath();
+        }else{
+           return "none";
+        }
+
     }
 
 
@@ -60,6 +69,10 @@ public class SaveOpenDialog {
      */
     public File OpenDialog(Stage stage) {
         FileChooser fileChooser = new FileChooser();
+        File defaultDirectory = new File(  System.getProperty("user.home").concat("//Desktop"));
+        fileChooser.setInitialDirectory(defaultDirectory);
+       fileChooser.getExtensionFilters().add(extFilter);
+        fileChooser.setInitialFileName("");
         return fileChooser.showOpenDialog(stage);
     }
 
