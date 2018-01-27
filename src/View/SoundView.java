@@ -21,6 +21,7 @@ public class SoundView extends Pane {
 
 
         soundlist = new ListView();
+        //soundlist.setItems(null);
         fxOn = new RadioButton("An");
         fxOff = new RadioButton("Aus");
         fxOff.setSelected(true);

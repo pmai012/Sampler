@@ -16,7 +16,7 @@ import java.util.Observer;
 public class MainFrame extends Application implements Observer {
 
     final int WIDTH = 1280;
-    final int HEIGHT = 720;
+    final int HEIGHT = 690;
 
     private BorderPane root;
     private PadView padView;
@@ -67,8 +67,8 @@ public class MainFrame extends Application implements Observer {
         primaryStage.setScene(scene);
         primaryStage.setTitle("Sampler");
         primaryStage.getIcons().add(new Image("Picture/LogoSampler.png"));
-        primaryStage.setMinHeight(640);
-        primaryStage.setMinWidth(1200);
+        primaryStage.setMinHeight(690);
+        primaryStage.setMinWidth(960);
 
         root.getStyleClass().addAll("mainFrame");
         configBox.getStyleClass().addAll("configBox");
