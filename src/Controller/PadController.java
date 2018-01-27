@@ -84,27 +84,46 @@ public class PadController {
             for (int i = 0; i < ANZAHL; i++) {
                 if (event.getSource().equals(button[i])) {
 
-                    if (pad[i] != null) {
-
-                            if (pad[i].isPlaying()){
-                                pad[i].stop();
-                                return;
-                            }
-
-
-
-                            pad[i].setThreadrun(true);
-
-                            pad[i].threadstarten();
-                            pad[i].playSound();
-
-
-
-                    }
+                   startpressing(pad[i]);
                 }
             }
         }
     };
+
+
+    public void startpressing(Pad pad){
+
+
+
+
+                if (pad != null) {
+
+                    if (pad.isPlaying()){
+                        pad.stop();
+                        return;
+                    }
+
+
+
+                    pad.setThreadrun(true);
+
+                    pad.threadstarten();
+                    pad.playSound();
+
+
+
+                }
+
+    }
+
+
+
+    public void padclick(Pad pad){
+        if (pad == null) {
+            return;
+        }
+        pad.setThreadrun(false);
+    }
 
 
     public EventHandler<MouseEvent> rightclick = new EventHandler<MouseEvent>() {
@@ -114,10 +133,8 @@ public class PadController {
             for (int i = 0; i < ANZAHL; i++) {
                 if (event.getSource().equals(button[i])) {
 
-                    if (pad[i] == null) {
-                        return;
-                    }
-                    pad[i].setThreadrun(false);
+                    padclick(pad[i]);
+
 
                     //LINKSKLICK
                     if (event.getButton() == MouseButton.PRIMARY) {
