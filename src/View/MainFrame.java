@@ -74,7 +74,7 @@ public class MainFrame extends Application implements Observer {
         configBox.getStyleClass().addAll("configBox");
 
 
-        Keyinput keyinput = new Keyinput(padView.getPadController());
+        Keyinput keyinput = new Keyinput(padView.getPadController(), settingView.getSettingController(), recordView.getRecordController());
         root.setOnKeyPressed(keyinput);
 
 

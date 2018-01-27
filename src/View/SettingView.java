@@ -6,7 +6,6 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.Pane;
-import com.sun.javafx.scene.control.skin.ContextMenuSkin;
 import javafx.stage.Stage;
 
 import java.util.Observer;
@@ -73,7 +72,7 @@ public class SettingView extends Pane {
 
         settingController = new SettingController(stage,pads, refOb);
         itemSave.setOnAction(settingController.save);
-        itemOpen.setOnAction(settingController.open);
+        itemOpen.setOnAction(settingController.openEvent);
         itemLocation.setOnAction(settingController.openSaveLocation);
         itemSourceLocation.setOnAction(settingController.openSourceLocation);
         itemManual.setOnAction(settingController.openManual);

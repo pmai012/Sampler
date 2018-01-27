@@ -43,4 +43,8 @@ public class RecordView extends Pane {
 
         record.addEventHandler(MouseEvent.MOUSE_CLICKED, recordController.recordClicked);
     }
+
+    public RecordController getRecordController() {
+        return recordController;
+    }
 }

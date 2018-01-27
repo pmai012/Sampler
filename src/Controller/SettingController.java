@@ -13,7 +13,7 @@ import java.util.Observer;
 /**
  * Created by User on 21.12.2017.
  */
-public class SettingController extends Observable{
+public class SettingController extends Observable {
 
     Stage stage = null;
     String savelocation;
@@ -24,23 +24,21 @@ public class SettingController extends Observable{
     Observer observer;
 
 
-
-    public SettingController(Stage stage, Pad[] pads, Observer observer){
+    public SettingController(Stage stage, Pad[] pads, Observer observer) {
 
         this.observer = observer;
 
-        if (observer == null){
+        if (observer == null) {
             System.out.println("null Observer");
         }
 
         this.stage = stage;
         this.pads = pads;
-}
+    }
 
     public String getSavelocation() {
         return savelocation;
     }
-
 
 
     public EventHandler<ActionEvent> openSaveLocation = new EventHandler<ActionEvent>() {
@@ -55,28 +53,35 @@ public class SettingController extends Observable{
     public EventHandler<ActionEvent> save = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
-            SaveOpenDialog saveDialog = new SaveOpenDialog();
-            saveFilelocation = saveDialog.Savedialog(stage,"Wo möchten sie die Datei speichern?" );
-            saveDialog.save(pads,saveFilelocation);
-
+            save();
         }
     };
-
-    public EventHandler<ActionEvent> open = new EventHandler<ActionEvent>() {
+    public EventHandler<ActionEvent> openEvent = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
+            open();
+        }
+    };
+        public void save() {
+            SaveOpenDialog saveDialog = new SaveOpenDialog();
+            saveFilelocation = saveDialog.Savedialog(stage, "Wo möchten sie die Datei speichern?");
+            saveDialog.save(pads, saveFilelocation);
+        }
+
+
+        public void open() {
+
             SaveOpenDialog openDialog = new SaveOpenDialog();
             file = openDialog.OpenDialog(stage);
 
-        pads = openDialog.read(file.getAbsolutePath(), observer,null); //Muss noch bearbeitet werden!!!!
+            pads = openDialog.read(file.getAbsolutePath(), observer, null); //Muss noch bearbeitet werden!!!!
             setChanged();
             notifyObservers("padsladen");
         }
 
 
-    };
 
-    public Pad[] getpads(){
+    public Pad[] getpads() {
         return pads;
     }
 
@@ -89,7 +94,7 @@ public class SettingController extends Observable{
         }
     };
 
-    public  EventHandler<ActionEvent> openManual = new EventHandler<ActionEvent>() {
+    public EventHandler<ActionEvent> openManual = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
 

@@ -21,17 +21,22 @@ public class RecordController {
     public EventHandler<MouseEvent> recordClicked = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent event) {
-            if (record.isRecording()){
-                System.out.println("STOP");
-                record.stopRecording();
-            }
-            else
-            {
-                System.out.println("START");
-                record.startRecording();
-            }
+            makerecord();
         }
     };
+
+
+    public void makerecord(){
+        if (record.isRecording()){
+            System.out.println("STOP");
+            record.stopRecording();
+        }
+        else
+        {
+            System.out.println("START");
+            record.startRecording();
+        }
+    }
     public EventHandler<MouseEvent> stopClicked = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent event) {
