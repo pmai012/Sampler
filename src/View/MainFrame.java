@@ -2,6 +2,7 @@ package View;/**
  * Created by User on 21.12.2017.
  */
 
+import Controller.Keyinput;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -30,6 +31,7 @@ public class MainFrame extends Application implements Observer {
         padView = new PadView(this);
         recordView = new RecordView(padView.getPadController());
         soundView = new SoundView();
+
 
     }
 
@@ -71,7 +73,10 @@ public class MainFrame extends Application implements Observer {
         root.getStyleClass().addAll("mainFrame");
         configBox.getStyleClass().addAll("configBox");
 
-//        padView.Buttoninit();
+
+        Keyinput keyinput = new Keyinput(padView.getPadController());
+        root.setOnKeyPressed(keyinput);
+
 
         primaryStage.show();
     }
