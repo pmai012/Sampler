@@ -67,7 +67,7 @@ public class MainFrame extends Application implements Observer {
         primaryStage.setScene(scene);
         primaryStage.setTitle("Sampler");
         primaryStage.getIcons().add(new Image("Picture/LogoSampler.png"));
-        primaryStage.setMinHeight(690);
+        primaryStage.setMinHeight(720);
         primaryStage.setMinWidth(960);
 
         root.getStyleClass().addAll("mainFrame");
