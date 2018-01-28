@@ -136,8 +136,20 @@
     -fx-graphic: url("../Picture/Record.png");
 }
 
+.recordButton:hover {
+    -fx-background-color: transparent;
+    -fx-background-radius: 20px;
+    -fx-graphic: url("../Picture/RecordHover.png");
+}
+
+.recordButtonUsed {
+    -fx-background-color: transparent;
+    -fx-background-radius: 20px;
+    -fx-graphic: url("../Picture/RecordOnUse.png");
+}
+
 .recordButtons {
-    -fx-padding: 0 0 0 20;
+    -fx-padding: 0 0 0 30;
 }
 
 .recordInfos {
@@ -145,9 +157,15 @@
 }
 
 .stopButton {
-     -fx-background-color: transparent;
+    -fx-background-color: transparent;
     -fx-background-radius: 20px;
     -fx-graphic: url("../Picture/Stop.png");
+}
+
+.stopButton:hover {
+    -fx-background-color: transparent;
+    -fx-background-radius: 20px;
+    -fx-graphic: url("../Picture/StopHover.png");
 }
 
 .title {

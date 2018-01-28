@@ -54,4 +54,12 @@ public class RecordView extends Pane {
     public RecordController getRecordController() {
         return recordController;
     }
+
+    public void update(Object arg) {
+        String command = (String) arg;
+
+        if(command.equals("record")){
+            record.getStyleClass().setAll("recordButtonUsed");
+        }
+    }
 }

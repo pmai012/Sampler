@@ -154,16 +154,13 @@ public class PadView extends Pane  {
 
     public void update(Object arg) {
 
-        System.out.println("update " );
+        System.out.println("update ");
         String command = (String) arg;
 
 
         if(command.equals("pad") ){
             int[] notnull = padController.whoisnotnull();
             for (int i = 0; i < notnull.length; i++) {
-
-
-
 
                     if(notnull[i] < 4){
                         pads[notnull[i]].getStyleClass().add("padGUsed");
@@ -174,8 +171,6 @@ public class PadView extends Pane  {
                     } else if (notnull[i] < 16) {
                         pads[notnull[i]].getStyleClass().add("padRUsed");
                     }
-
-
 
             }
         }

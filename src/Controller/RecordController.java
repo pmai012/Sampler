@@ -1,15 +1,13 @@
 package Controller;
 
-
 import Model.Record;
 import ddf.minim.AudioOutput;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
+import java.util.Observable;
 
-/**
- * Created by User on 21.12.2017.
- */
-public class RecordController {
+
+public class RecordController extends Observable{
     private AudioOutput recordInput;
     Record record;
 
@@ -18,10 +16,14 @@ public class RecordController {
     {
         record = new Record(ref.getGlobalOut());
     }
+
     public EventHandler<MouseEvent> recordClicked = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent event) {
             makerecord();
+            setChanged();
+            notifyObservers("record");
+
         }
     };
 

@@ -5,11 +5,13 @@ import ddf.minim.AudioRecorder;
 import ddf.minim.Minim;
 import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
 
+import java.util.Observable;
+
 
 /**
  * Created by User on 21.12.2017.
  */
-public class Record {
+public class Record extends Observable{
 
     private AudioRecorder record;
     private Minim minim;
@@ -41,6 +43,12 @@ public class Record {
         }else {
             return recordPath;
         }
+
+    }
+
+    public void sendupdate(){
+        setChanged();
+        notifyObservers("record");
 
     }
 }
