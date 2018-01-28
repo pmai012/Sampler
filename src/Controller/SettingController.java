@@ -112,15 +112,15 @@ public class SettingController extends Observable {
         @Override
         public void handle(ActionEvent event) {
             try{
-                File file = new File("../Anleitung.csv");
+                File file = new File("../Anleitung.txt");
                 FileWriter fw = new FileWriter(file);
                 BufferedWriter bw = new BufferedWriter(fw);
                 if(file.length() == 0) {
-                    bw.write("Sampler");
+                    bw.write("Sampler\n\n");
                     bw.newLine();
                     bw.write("ANLEITUNG:");
                     bw.newLine();
-                    bw.write("Der Sampler stellt ihnen 16 Pads zur Verfügung, die Sie per Tastendruck " +
+                    bw.write("\nDer Sampler stellt ihnen 16 Pads zur Verfügung, die Sie per Tastendruck " +
                             "\nabspielen können. Ziehen Sie ganz einfach ihre Sounddateien auf die Pads um " +
                             "\ndiese zu füllen. Nun können Sie ihre Eingabefolge aufnehmen indem Sie die Recordtaste" +
                             "\nbetätigen, ihre Folge drücken und dann auf die Stoptaste drücken. ");
