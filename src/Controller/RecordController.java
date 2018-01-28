@@ -25,6 +25,13 @@ public class RecordController {
         }
     };
 
+    public void setpath(String path){
+        record.setRecordPath(path);
+    }
+
+    public String getPath(){
+        return record.getRecordPath();
+    }
 
     public void makerecord(){
         if (record.isRecording()){
@@ -43,6 +50,9 @@ public class RecordController {
             if (record.isRecording()){
                 System.out.println("STOP");
                 record.stopRecording();
+
+
+
             }
         }
     };

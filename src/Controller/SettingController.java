@@ -15,17 +15,19 @@ import java.util.Observer;
  */
 public class SettingController extends Observable {
 
-    Stage stage = null;
-    String savelocation;
-    File file;
-    String saveFilelocation;
-    String saveSourcelocation;
-    Pad[] pads;
-    Observer observer;
+    private Stage stage = null;
+    private String savelocation;
+    private  File file;
+    private RecordController recordController;
+    private String saveFilelocation;
+    private String saveSourcelocation;
+    private  Pad[] pads;
+    private Observer observer;
 
 
-    public SettingController(Stage stage, Pad[] pads, Observer observer) {
+    public SettingController(Stage stage, Pad[] pads, Observer observer, RecordController recordController) {
 
+        this.recordController = recordController;
         this.observer = observer;
 
         if (observer == null) {
@@ -41,12 +43,10 @@ public class SettingController extends Observable {
     }
 
 
-    public EventHandler<ActionEvent> openSaveLocation = new EventHandler<ActionEvent>() {
+    public EventHandler<ActionEvent> openSaveLocationEvent = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
-            SaveOpenDialog directionDialog = new SaveOpenDialog();
-            savelocation = directionDialog.DirectionDialog(stage);
-
+            openSaveLocation();
         }
     };
 
@@ -62,23 +62,31 @@ public class SettingController extends Observable {
             open();
         }
     };
-        public void save() {
-            SaveOpenDialog saveDialog = new SaveOpenDialog();
-            saveFilelocation = saveDialog.Savedialog(stage, "Wo möchten sie die Datei speichern?");
-            saveDialog.save(pads, saveFilelocation);
-        }
 
 
-        public void open() {
+    public void openSaveLocation() {
+        SaveOpenDialog directionDialog = new SaveOpenDialog();
+        savelocation = directionDialog.DirectionDialog(stage);
+        recordController.setpath(savelocation);
+    }
 
-            SaveOpenDialog openDialog = new SaveOpenDialog();
-            file = openDialog.OpenDialog(stage);
+    public void save() {
+        SaveOpenDialog saveDialog = new SaveOpenDialog();
+        saveFilelocation = saveDialog.Savedialog(stage, "Wo möchten sie die Datei speichern?");
+        saveDialog.save(pads, saveFilelocation, recordController.getPath());
+    }
 
-            pads = openDialog.read(file.getAbsolutePath(), observer, null); //Muss noch bearbeitet werden!!!!
-            setChanged();
-            notifyObservers("padsladen");
-        }
 
+    public void open() {
+
+        SaveOpenDialog openDialog = new SaveOpenDialog();
+        file = openDialog.OpenDialog(stage);
+
+        pads = openDialog.read(file.getAbsolutePath(), observer, null); //Muss noch bearbeitet werden!!!!
+        setChanged();
+        notifyObservers("padsladen");
+        recordController.setpath(openDialog.getRecordpathfrompadsave());
+    }
 
 
     public Pad[] getpads() {

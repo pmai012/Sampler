@@ -34,4 +34,13 @@ public class Record {
         record.endRecord();
         record.save();
     }
+
+    public String getRecordPath(){
+        if (recordPath.toString().isEmpty()){
+            return defaultPath;
+        }else {
+            return recordPath;
+        }
+
+    }
 }

@@ -4,6 +4,7 @@ package Controller.Save;
  * Created by User on 25.01.2018.
  */
 
+import Controller.RecordController;
 import Model.Pad;
 import ddf.minim.AudioOutput;
 import ddf.minim.UGen;
@@ -21,15 +22,17 @@ class Padsaveclass implements Serializable {
     private long endpoint;
     private String path ;
     private List<UGen> effekte;
+    private String savepath;
 
 
 
-    public Padsaveclass(Pad save){
+    public Padsaveclass(Pad save, String recordpath){
         if (save != null) {
             startpoint = save.getStartpoint();
             endpoint = save.getEndpoint();
             path = save.getPath();
             effekte = save.getEffekte();
+            savepath = recordpath;
         }
     }
 
@@ -37,6 +40,9 @@ class Padsaveclass implements Serializable {
         return path;
   }
 
+    public String getSavepath(){
+        return savepath;
+    }
 
     public Pad loadPad(Observer observer, AudioOutput out){
         if (path != null) {

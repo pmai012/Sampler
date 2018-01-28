@@ -1,5 +1,6 @@
 package View;
 
+import Controller.RecordController;
 import Controller.SettingController;
 import Model.Pad;
 import javafx.scene.control.Menu;
@@ -33,7 +34,7 @@ public class SettingView extends Pane {
 
     private SettingController settingController;
 
-    public SettingView(Stage stage, Pad[] pads, Observer observer){
+    public SettingView(Stage stage, Pad[] pads, Observer observer, RecordController recordController){
         refOb = observer;
         this.pads = pads;
         samplermenu = new MenuBar();
@@ -70,10 +71,10 @@ public class SettingView extends Pane {
         itemSourceLocation.getStyleClass().add("menuItem");
         itemManual.getStyleClass().add("menuItem");
 
-        settingController = new SettingController(stage,pads, refOb);
+        settingController = new SettingController(stage,pads, refOb,recordController);
         itemSave.setOnAction(settingController.save);
         itemOpen.setOnAction(settingController.openEvent);
-        itemLocation.setOnAction(settingController.openSaveLocation);
+        itemLocation.setOnAction(settingController.openSaveLocationEvent);
         itemSourceLocation.setOnAction(settingController.openSourceLocation);
         itemManual.setOnAction(settingController.openManual);
         settingController.addObserver(refOb);

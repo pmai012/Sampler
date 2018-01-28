@@ -45,7 +45,7 @@ public class MainFrame extends Application implements Observer {
 
     @Override
     public void start(Stage primaryStage) {
-        settingView = new SettingView(primaryStage, padView.getPads(), this);
+        settingView = new SettingView(primaryStage, padView.getPads(), this, recordView.getRecordController());
         //configBox.setMaxHeight(800);
         //configBox.setMaxWidth(600);
         configBox.getChildren().add(recordView);
@@ -86,7 +86,7 @@ public class MainFrame extends Application implements Observer {
 
         if(arg.equals("padsladen") ){
         padView.getPadController().setPad(settingView.getSettingController().getpads());
-        arg ="pad";
+         arg ="pad";
         }
         padView.update(arg);
     }

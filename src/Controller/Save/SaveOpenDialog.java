@@ -17,7 +17,7 @@ import java.util.Observer;
  */
 public class SaveOpenDialog {
 private FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Pascal-Julian-Deniz-File (*.pjd)", "*.pjd");
-
+private String recordpathfrompadsave;
     /**
      * Gibt ein Dialog zum Speichern von Dateien aus.
      *
@@ -43,6 +43,13 @@ private FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
 
     }
 
+    public String getRecordpathfrompadsave() {
+        if (recordpathfrompadsave == null){
+            return "";
+        }else {
+            return recordpathfrompadsave;
+        }
+    }
 
     /**
      * Gibt ein Dialog für die Auswahl eines Ordners an
@@ -83,14 +90,14 @@ private FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
      * @param input PadArray
      * @param path  Speicherpfad
      */
-    public void save(Pad[] input, String path) {
+    public void save(Pad[] input, String path, String recordpath) {
 
 
 
         ArrayList<Padsaveclass> savelist = new ArrayList<Padsaveclass>();
 
        for (Pad i : input) {
-                savelist.add(new Padsaveclass(i));
+                savelist.add(new Padsaveclass(i,recordpath));
             }
         OutputStream pads = null;
 
@@ -138,8 +145,8 @@ private FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
         }
         System.out.println("Pads wurden geladen");
 
-
-       Pad[] ausgabe = new Pad[pad.size()];
+        recordpathfrompadsave = pad.get(0).getSavepath();
+        Pad[] ausgabe = new Pad[pad.size()];
 
        for (int i = 0; i< pad.size(); i++){
            Minim minim = new SimpleMinim(true);
