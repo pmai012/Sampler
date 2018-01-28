@@ -1,5 +1,8 @@
 package View;
 
+import Controller.SoundController;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
@@ -7,21 +10,31 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
-/**
- * Created by User on 21.12.2017.
- */
+import java.io.File;
+import java.util.ArrayList;
+
+
 public class SoundView extends Pane {
 
+
+
+    private SoundController soundController;
     private VBox soundpane;
-    private ListView soundlist;
+    private ObservableList<String> soundObList;
+    private ListView soundlistview;
     private Label audioFX;
     private RadioButton fxOn, fxOff;
 
     public SoundView(){
 
+        soundController = new SoundController("../Sound");
+        soundlistview = new ListView();
+        soundObList = FXCollections.observableArrayList();
 
-        soundlist = new ListView();
-        //soundlist.setItems(null);
+        for (String name: soundController.getDirList()) {
+            soundObList.add(name);
+        }
+        soundlistview.setItems(soundObList);
         fxOn = new RadioButton("An");
         fxOff = new RadioButton("Aus");
         fxOff.setSelected(true);
@@ -33,12 +46,18 @@ public class SoundView extends Pane {
         soundpane = new VBox(10);
         this.getChildren().add(soundpane);
 
-        soundpane.getChildren().addAll(soundlist);
+        soundpane.getChildren().add(soundlistview);
         soundpane.getChildren().add(audioFX);
         soundpane.getChildren().addAll(fxOn,fxOff);
 
         audioFX.getStyleClass().addAll("title", "radioButton");
         fxOff.getStyleClass().addAll("title", "radioButton");
         fxOn.getStyleClass().addAll("title", "radioButton");
+
     }
+
+    public SoundController getSoundController() {
+        return soundController;
+    }
+
 }
