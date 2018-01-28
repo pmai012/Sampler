@@ -1,23 +1,6 @@
 Folgende Probleme haben wir noch (bei Beheben bitte löschen!
 
-CONTROLLER:
-Alle Klasse müssen gemacht
 
 
-
-
-VIEW:
-
-verschiedene padfarben
-
-
-MODEL:
-
-
-SAMPLE
-
-
-Was gemacht wurde:
-
-Shortcuts
-Speichern geht
+Shortcuts müssen noch in Runtime initalisiert werden
+Kurzes drücken funktioniert nicht

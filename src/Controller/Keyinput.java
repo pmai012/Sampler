@@ -7,17 +7,26 @@ import javafx.scene.input.KeyEvent;
 /**
  *
  */
-public class Keyinput implements  EventHandler<KeyEvent>{
+public class Keyinput implements EventHandler<KeyEvent> {
 
     PadController padController;
     SettingController settingController;
     RecordController recordController;
+    KeyCode[] padshortcut;
 
 
-    public Keyinput(PadController padController, SettingController settingController, RecordController recordController){
+    public void setShortCut(KeyCode input, int number) {
+        padshortcut[number] = input;
+    }
+
+    public Keyinput(PadController padController, SettingController settingController, RecordController recordController) {
+        padshortcut = new KeyCode[16];
         this.padController = padController;
         this.settingController = settingController;
         this.recordController = recordController;
+
+        //BEispiel
+        padshortcut[0] = KeyCode.Z;
     }
 
     //Tasteneingaben
@@ -35,9 +44,18 @@ public class Keyinput implements  EventHandler<KeyEvent>{
         }
 
         if (event.getCode() == KeyCode.R && event.isControlDown()) {
-                recordController.makerecord();
+            recordController.makerecord();
         }
 
+        for (int i = 0; i < 16; i++) {
+            if (padshortcut[i] != null && event.getCode() == padshortcut[i]) {
 
+
+                padController.startpressing(i);
+
+
+            }
+
+        }
     }
 }

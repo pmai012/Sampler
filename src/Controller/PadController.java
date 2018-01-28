@@ -84,31 +84,31 @@ public class PadController {
             for (int i = 0; i < ANZAHL; i++) {
                 if (event.getSource().equals(button[i])) {
 
-                   startpressing(pad[i]);
+                   startpressing(i);
                 }
             }
         }
     };
 
 
-    public void startpressing(Pad pad){
+    public void startpressing(int number){
 
 
 
 
-                if (pad != null) {
+                if (pad[number] != null) {
 
-                    if (pad.isPlaying()){
-                        pad.stop();
+                    if (pad[number].isPlaying()){
+                        pad[number].stop();
                         return;
                     }
 
 
 
-                    pad.setThreadrun(true);
+                    pad[number].setThreadrun(true);
 
-                    pad.threadstarten();
-                    pad.playSound();
+                    pad[number].threadstarten();
+                    pad[number].playSound();
 
 
 
@@ -118,11 +118,11 @@ public class PadController {
 
 
 
-    public void padclick(Pad pad){
-        if (pad == null) {
+    public void padclick(int number){
+        if (pad[number] == null) {
             return;
         }
-        pad.setThreadrun(false);
+        pad[number].setThreadrun(false);
     }
 
 
@@ -133,7 +133,7 @@ public class PadController {
             for (int i = 0; i < ANZAHL; i++) {
                 if (event.getSource().equals(button[i])) {
 
-                    padclick(pad[i]);
+                    padclick(i);
 
 
                     //LINKSKLICK

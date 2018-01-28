@@ -85,6 +85,9 @@ public class SettingController extends Observable {
         pads = openDialog.read(file.getAbsolutePath(), observer, null); //Muss noch bearbeitet werden!!!!
         setChanged();
         notifyObservers("padsladen");
+        if (openDialog.getRecordpathfrompadsave() == null){
+            recordController.setpath(System.getProperty("user.home").concat("//Music") + "/myrecording.wav");
+        }else
         recordController.setpath(openDialog.getRecordpathfrompadsave());
     }
 
