@@ -4,3 +4,5 @@ Folgende Probleme haben wir noch (bei Beheben bitte löschen!
 
 Shortcuts müssen noch in Runtime initalisiert werden
 Kurzes drücken funktioniert nicht
+
+DragDrop event für die listview zum rüberziehen auf die pads
