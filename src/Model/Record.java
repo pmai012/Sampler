@@ -38,7 +38,7 @@ public class Record extends Observable{
     }
 
     public String getRecordPath(){
-        if (recordPath.toString().isEmpty()){
+        if (recordPath == null){
             return defaultPath;
         }else {
             return recordPath;

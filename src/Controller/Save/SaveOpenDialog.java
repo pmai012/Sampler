@@ -68,6 +68,11 @@ private String recordpathfrompadsave;
     }
 
 
+    public void reset(){
+
+    }
+
+
     /**
      * Öffnet einen Opendialog
      *
