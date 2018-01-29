@@ -1,5 +1,6 @@
 package View;
 
+import Controller.EffectController;
 import Controller.PadController;
 import Controller.SoundController;
 import Model.Effects.BitCrushEffect;
@@ -38,7 +39,7 @@ public class EffectView extends Stage{
     private HBox sliderBox;
     private Pane activeView;
     private Button submitButton;
-    private SoundController soundController;
+    private EffectController effectController;
 
     private ToggleGroup allEffects = new ToggleGroup();
     private ToggleButton delayEffect = new ToggleButton("Delay");
@@ -57,7 +58,7 @@ public class EffectView extends Stage{
         root = new BorderPane();
         submitButton = new Button("Anwenden");
         submitButton.getStyleClass().add("submitButton");
-        soundController = new SoundController(ref, this);
+        effectController = new EffectController(ref, this);
 
         sliderBox = new HBox();
         sliderBox.setMaxHeight(300);
@@ -118,7 +119,7 @@ public class EffectView extends Stage{
                 }
             }
         });
-    submitButton.addEventHandler(MouseEvent.MOUSE_CLICKED, soundController.submit);
+    submitButton.addEventHandler(MouseEvent.MOUSE_CLICKED, effectController.submit);
     }
     private void showDelaySettings()
     {
