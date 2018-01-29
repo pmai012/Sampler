@@ -17,6 +17,7 @@ import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -46,6 +47,16 @@ public String getPath(){
 
 public List<UGen> getEffekte(){
     return effekte;
+}
+
+public void addEffect(UGen effect){
+    if (effekte == null) {
+        effekte = new ArrayList<UGen>();
+        effekte.add(effect);
+    }
+    else{
+        effekte.add(effect);
+    }
 }
 
     public int getStartpoint(){
@@ -86,19 +97,27 @@ public List<UGen> getEffekte(){
 
     public void playSound() {
 
-       if (starter < 1) {
-           filePlayer.play(startpoint);
-           filePlayer.patch(audioOut);
-           starter++;
-       }
+        if (this.hasEffects()) {
+            playSound(effekte.get(0));
+        }
+        else {
+            if (starter < 1) {
+                filePlayer.play(startpoint);
+                filePlayer.patch(audioOut);
+                starter++;
+            }
+        }
     }
 
 
     public void playSound(UGen effect) {
 
+        if (starter < 1) {
+            filePlayer.play(startpoint);
+            filePlayer.patch(effect).patch(audioOut);
+            starter++;
+        }
 
-        filePlayer.play(startpoint);
-        filePlayer.patch(effect).patch(audioOut);
     }
 
     public void stop()
@@ -137,7 +156,13 @@ public List<UGen> getEffekte(){
         endpoint = time;
     }
 
-
+    private boolean hasEffects(){
+        if (this.effekte!=null)
+        {
+           return !this.effekte.isEmpty();
+        }
+        return false;
+    }
 
     public void threadstarten() {
         Thread time = new Thread() {

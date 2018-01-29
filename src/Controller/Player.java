@@ -23,7 +23,6 @@ public class Player  {
         minim = new SimpleMinim(true);
         player = minim.loadMP3File(path);
         output = minim.getLineOut();
-
     }
 
 

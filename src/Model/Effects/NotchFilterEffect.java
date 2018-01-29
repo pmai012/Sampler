@@ -1,6 +1,7 @@
 package Model.Effects;
 
 import Model.Pad;
+import ddf.minim.UGen;
 import ddf.minim.effects.NotchFilter;
 
 /**
@@ -10,9 +11,14 @@ public class NotchFilterEffect extends Effect{
 
     private NotchFilter notchFilter;
 
-    public NotchFilterEffect(float bandwidth, float cutoff, float sampleRate)
+    public NotchFilterEffect( float cutoff,float bandwidth, float sampleRate)
     {
         notchFilter = new NotchFilter(cutoff, bandwidth, sampleRate);
+    }
+
+    @Override
+    public UGen getEffect() {
+        return notchFilter;
     }
 
     @Override

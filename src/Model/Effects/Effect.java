@@ -10,6 +10,6 @@ import ddf.minim.UGen;
  */
 public abstract class Effect {
 
-
+    abstract UGen getEffect();
     abstract void patchToOutput(Pad actualPad);
 }

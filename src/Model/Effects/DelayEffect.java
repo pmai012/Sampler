@@ -13,6 +13,11 @@ public class DelayEffect extends Effect {
     }
 
     @Override
+    public UGen getEffect() {
+        return delay;
+    }
+
+    @Override
     void patchToOutput(Pad actualPad) {
         actualPad.playSound(delay);
     }

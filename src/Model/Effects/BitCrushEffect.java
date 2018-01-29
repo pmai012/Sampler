@@ -1,6 +1,7 @@
 package Model.Effects;
 
 import Model.Pad;
+import ddf.minim.UGen;
 import ddf.minim.ugens.BitCrush;
 
 /**
@@ -12,6 +13,11 @@ public class BitCrushEffect extends Effect {
     public BitCrushEffect(float bitRes, float bitRate)
     {
         this.bitcrush = new BitCrush(bitRes, bitRate);
+    }
+
+    @Override
+    public UGen getEffect() {
+        return bitcrush;
     }
 
     @Override

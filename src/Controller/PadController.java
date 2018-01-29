@@ -1,9 +1,12 @@
 package Controller;
 
+import Model.Effects.Effect;
 import Model.Pad;
+import View.EffectView;
 import View.PadView;
 import ddf.minim.AudioOutput;
 import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.input.*;
@@ -23,11 +26,15 @@ public class PadController {
     private Pad pad[] = new Pad[ANZAHL];
     private Button button[] = new Button[ANZAHL];
     private Observer observer;
+    private PadView view;
+    private EffectView effectView;
+    private int padIndex;
 
-    public PadController(Button[] pads, Observer observer) {
+    public PadController(Button[] pads, Observer observer, PadView view) {
         pad = new Pad[ANZAHL];
+        this.view = view;
         globalOut = minim.getLineOut();
-    this.observer = observer;
+        this.observer = observer;
 
         for (int i = 0; i < ANZAHL; i++) {
             button[i] = pads[i];
@@ -37,12 +44,18 @@ public class PadController {
 
     }
 
-
-
+    /**
+     * Gibt Pad an der Position des übergebenen Index - 1 zurück.
+     * - 1, weil der Index für die Padbeschriftung von 1 - 16 gewählt wurde.
+     * @param index
+     * @return
+     */
+    public Pad getPadAtIndex(int index){
+        return pad[index - 1];
+    }
     public Pad[] getPad() {
         return pad;
     }
-
 
 
     public int[] whoisnotnull() {
@@ -135,7 +148,6 @@ public class PadController {
 
                     padclick(i);
 
-
                     //LINKSKLICK
                     if (event.getButton() == MouseButton.PRIMARY) {
                         System.out.println(i + " linksclick");
@@ -151,16 +163,21 @@ public class PadController {
 
                         return;
                     }
-
-
                     //RECHTSCLICK
                     if (event.getButton() == MouseButton.SECONDARY) {
                         System.out.println(i + " rechtsclick");
+                        padIndex = i + 1;
                         return;
                     }
 
                 }
             }
+        }
+    };
+    public EventHandler<ActionEvent> contextMenu_addEffectClicked = new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent event) {
+            effectView = new EffectView(view.getPadController());
         }
     };
 
@@ -215,4 +232,6 @@ public class PadController {
     }
 
 
+    public int getClickedPadIndex()
+    {return this.padIndex;}
 }

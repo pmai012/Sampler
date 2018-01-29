@@ -1,9 +1,12 @@
 package View;
 
 import Controller.PadController;
+import Controller.SoundController;
 import Model.Pad;
 import javafx.geometry.Orientation;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContextMenu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 
@@ -19,10 +22,13 @@ public class PadView extends Pane  {
     private final int WIDTH = 600;
     private final int HEIGHT = 600;
     private PadController padController;
+    private SoundController soundController;
     private BorderPane rootPV;
     private TilePane padBox;
     Observer observer;
-
+    private ContextMenu contextMenu;
+    private MenuItem addEffect;
+    private MenuItem deleteEffect;
     private Button[] pads;
     private Button pad1, pad2, pad3, pad4, pad5, pad6, pad7, pad8,
             pad9, pad10, pad11, pad12, pad13, pad14, pad15, pad16;
@@ -32,14 +38,16 @@ public class PadView extends Pane  {
         return padController.getPad();
     }
 
-
-
     public PadController getPadController(){
         return padController;
     }
     public PadView(Observer obs){
         observer = obs;
         rootPV = new BorderPane();
+        contextMenu = new ContextMenu();
+        addEffect = new MenuItem("Effekt hinzufügen");
+        deleteEffect = new MenuItem("Effekt löschen");
+        contextMenu.getItems().addAll(addEffect,deleteEffect);
         padBox = new TilePane(Orientation.HORIZONTAL);
         padBox.setHgap(10);
         padBox.setVgap(10);
@@ -70,6 +78,7 @@ public class PadView extends Pane  {
 
         for (Button pad: pads) {
             padBox.getChildren().add(pad);
+            pad.setContextMenu(contextMenu);
         }
         //padBox.getChildren().addAll(pad1, pad2, pad3, pad4, pad5, pad6, pad7, pad8,
          //       pad9, pad10, pad11,pad12, pad13, pad14, pad15, pad16);
@@ -112,8 +121,7 @@ public class PadView extends Pane  {
         pad15.getStyleClass().addAll("pad");
         pad16.getStyleClass().addAll("pad");
         */
-
-        padController = new PadController(pads, observer);
+        padController = new PadController(pads, observer, this);
 
 
 
@@ -121,12 +129,10 @@ public class PadView extends Pane  {
             pad.addEventHandler(MouseEvent.MOUSE_PRESSED,padController.pressed);
             pad.addEventHandler(MouseEvent.MOUSE_RELEASED,padController.rightclick);
 
-
             pad.setOnDragOver(padController.acceptdrag);
             pad.setOnDragDropped(padController.getData);
-
-
         }
+        addEffect.setOnAction(padController.contextMenu_addEffectClicked);
         /*
         pad1.setOnAction(padController.play);
         pad2.setOnAction(padController.play);
@@ -147,7 +153,6 @@ public class PadView extends Pane  {
         */
 
     }
-
 
 
 

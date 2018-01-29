@@ -1,6 +1,7 @@
 package Model.Effects;
 
 import Model.Pad;
+import ddf.minim.UGen;
 import ddf.minim.ugens.Flanger;
 
 /**
@@ -13,6 +14,12 @@ public class FlangerEffect extends Effect{
     {
         flanger = new Flanger(delay,rate,depth,feedback,wet,dry);
     }
+
+    @Override
+    public UGen getEffect() {
+        return flanger;
+    }
+
     @Override
     void patchToOutput(Pad actualPad) {
             actualPad.playSound(flanger);
