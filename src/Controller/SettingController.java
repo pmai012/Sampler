@@ -67,6 +67,13 @@ public class SettingController extends Observable {
     };
 
 
+    public EventHandler<ActionEvent> cleanEvent = new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent event) {
+            clean();
+        }
+    };
+
     public void openSaveLocation() {
         SaveOpenDialog directionDialog = new SaveOpenDialog();
         savelocation = directionDialog.DirectionDialog(stage);
@@ -99,6 +106,17 @@ public class SettingController extends Observable {
         return pads;
     }
 
+
+
+
+    public void clean(){
+
+        for (int i = 0; i < 16; i++){
+            pads[i] = null;
+        }
+        notifyObservers("padsnew");
+
+    }
 
     public EventHandler<ActionEvent> openSourceLocation = new EventHandler<ActionEvent>() {
         @Override

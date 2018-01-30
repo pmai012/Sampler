@@ -182,4 +182,8 @@ public class PadView extends Pane  {
         }
 
     }
+
+    public void cleanVisual(int i) {
+        pads[i].getStyleClass().setAll("pad");
+    }
 }

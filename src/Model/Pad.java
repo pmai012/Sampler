@@ -83,6 +83,20 @@ public void addEffect(UGen effect){
         this.threadrun = threadrun;
     }
 
+    public void clear(){
+         startpoint = 0;
+          endpoint = Long.MAX_VALUE;
+          presstime = -5;
+          threadrun = false;
+          path = null;
+          audioOut = null;
+         filePlayer = null;
+          starter = 0;
+          if (effekte.size() != 0){
+              effekte.clear();
+          }
+
+    }
 
     public Pad(String pathtoSound, Observer observer, AudioOutput globalOut) {
         this.observer = observer;

@@ -30,7 +30,7 @@ public class MainFrame extends Application implements Observer {
         configBox = new VBox(40);
         padView = new PadView(this);
         recordView = new RecordView(padView.getPadController(),this);
-        soundView = new SoundView();
+        soundView = new SoundView(padView.getPadController());
 
 
     }
@@ -83,6 +83,12 @@ public class MainFrame extends Application implements Observer {
 
     @Override
     public void update(Observable o, Object arg) {
+
+        if(arg.equals("padsnew") ){
+            for (int i = 0; i < 16; i++){
+                padView.cleanVisual(1);
+            }
+        }
 
         if(arg.equals("padsladen") ){
         padView.getPadController().setPad(settingView.getSettingController().getpads());

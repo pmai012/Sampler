@@ -1,5 +1,6 @@
 package View;
 
+import Controller.PadController;
 import Controller.SoundController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,7 +26,7 @@ public class SoundView extends Pane {
     private Label audioFX;
     private RadioButton fxOn, fxOff;
 
-    public SoundView(){
+    public SoundView(PadController padController){
 
         soundController = new SoundController("../Sound");
         soundlistview = new ListView();
@@ -53,6 +54,9 @@ public class SoundView extends Pane {
         audioFX.getStyleClass().addAll("title", "radioButton");
         fxOff.getStyleClass().addAll("title", "radioButton");
         fxOn.getStyleClass().addAll("title", "radioButton");
+
+        fxOff.setOnAction(padController.metronomaus);
+        fxOn.setOnAction(padController.metronoman);
 
     }
 

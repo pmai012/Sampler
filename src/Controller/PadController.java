@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.BeatsperMinute;
 import Model.Effects.Effect;
 import Model.Pad;
 import View.EffectView;
@@ -29,12 +30,15 @@ public class PadController {
     private PadView view;
     private EffectView effectView;
     private int padIndex;
+    private BeatsperMinute beat;
+
 
     public PadController(Button[] pads, Observer observer, PadView view) {
         pad = new Pad[ANZAHL];
         this.view = view;
         globalOut = minim.getLineOut();
         this.observer = observer;
+        beat = new BeatsperMinute(100, globalOut);
 
         for (int i = 0; i < ANZAHL; i++) {
             button[i] = pads[i];
@@ -44,15 +48,32 @@ public class PadController {
 
     }
 
+
+
+
+    public void startbeat() {
+        beat.play();
+    }
+
+    public void stopbeat(){
+        beat.stop();
+    }
+
+    public void setbeat(int beatsperminute){
+        beat.setBpm(beatsperminute);
+    }
+
     /**
      * Gibt Pad an der Position des übergebenen Index - 1 zurück.
      * - 1, weil der Index für die Padbeschriftung von 1 - 16 gewählt wurde.
+     *
      * @param index
      * @return
      */
-    public Pad getPadAtIndex(int index){
+    public Pad getPadAtIndex(int index) {
         return pad[index - 1];
     }
+
     public Pad[] getPad() {
         return pad;
     }
@@ -60,25 +81,25 @@ public class PadController {
 
     public int[] whoisnotnull() {
 
-       boolean[] isnotnull = new boolean[ANZAHL];
+        boolean[] isnotnull = new boolean[ANZAHL];
         for (int i = 0; i < pad.length; i++) {
 
 
-          if (pad[i] != null ) { //&& !pad[i].isNull()
-              isnotnull[i] = true;
-              System.out.println(i);
+            if (pad[i] != null) { //&& !pad[i].isNull()
+                isnotnull[i] = true;
+                System.out.println(i);
             }
         }
         int trues = 0;
         for (int i = 0; i < isnotnull.length; i++) {
-            if (isnotnull[i] == true){
+            if (isnotnull[i] == true) {
                 trues++;
             }
         }
         int[] ausgabe = new int[trues];
         int pos = 0;
         for (int i = 0; i < isnotnull.length; i++) {
-            if (isnotnull[i] == true){
+            if (isnotnull[i] == true) {
                 ausgabe[pos] = i;
                 pos++;
             }
@@ -86,9 +107,28 @@ public class PadController {
         return ausgabe;
     }
 
-    public void setPad(Pad[] pad){
+    public void setPad(Pad[] pad) {
         this.pad = pad;
     }
+
+
+    public EventHandler<ActionEvent> metronoman = new EventHandler<ActionEvent>() {
+
+        @Override
+        public void handle(ActionEvent event) {
+            startbeat();
+        }
+
+    };
+
+    public EventHandler<ActionEvent> metronomaus = new EventHandler<ActionEvent>() {
+
+        @Override
+        public void handle(ActionEvent event) {
+            stopbeat();
+        }
+
+    };
 
     public EventHandler<MouseEvent> pressed = new EventHandler<MouseEvent>() {
         @Override
@@ -97,41 +137,36 @@ public class PadController {
             for (int i = 0; i < ANZAHL; i++) {
                 if (event.getSource().equals(button[i])) {
 
-                   startpressing(i);
+                    startpressing(i);
                 }
             }
         }
     };
 
 
-    public void startpressing(int number){
+    public void startpressing(int number) {
 
 
+        if (pad[number] != null) {
+
+            if (pad[number].isPlaying()) {
+                pad[number].stop();
+                return;
+            }
 
 
-                if (pad[number] != null) {
+            pad[number].setThreadrun(true);
 
-                    if (pad[number].isPlaying()){
-                        pad[number].stop();
-                        return;
-                    }
+            pad[number].threadstarten();
+            pad[number].playSound();
 
 
-
-                    pad[number].setThreadrun(true);
-
-                    pad[number].threadstarten();
-                    pad[number].playSound();
-
-
-
-                }
+        }
 
     }
 
 
-
-    public void padclick(int number){
+    public void padclick(int number) {
         if (pad[number] == null) {
             return;
         }
@@ -226,12 +261,13 @@ public class PadController {
             }
         }
     };
-    public AudioOutput getGlobalOut()
-    {
+
+    public AudioOutput getGlobalOut() {
         return this.globalOut;
     }
 
 
-    public int getClickedPadIndex()
-    {return this.padIndex;}
+    public int getClickedPadIndex() {
+        return this.padIndex;
+    }
 }
