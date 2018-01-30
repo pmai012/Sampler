@@ -10,6 +10,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
+import java.util.Observer;
+
 /**
  * Created by User on 21.12.2017.
  */
@@ -21,11 +23,12 @@ public class RecordView extends Pane {
     private Button record;
     private Button stop;
     private RecordController recordController;
+    private Observer observer;
 
 
 
-    public RecordView(PadController padController){
-
+    public RecordView(PadController padController, Observer obs){
+        observer = obs;
         rootRV = new VBox(20);
         Label time = new Label("--:--/--:--");
         Label bpm = new Label("100 BPM");
@@ -46,7 +49,7 @@ public class RecordView extends Pane {
         time.getStyleClass().addAll("title","time");
         bpm.getStyleClass().addAll("title","time");
 
-        recordController = new RecordController(padController);
+        recordController = new RecordController(padController, observer);
 
         record.addEventHandler(MouseEvent.MOUSE_CLICKED, recordController.recordClicked);
     }
@@ -55,11 +58,18 @@ public class RecordView extends Pane {
         return recordController;
     }
 
+
     public void update(Object arg) {
         String command = (String) arg;
-
+        System.out.println("recorder");
         if(command.equals("record")){
             record.getStyleClass().setAll("recordButtonUsed");
+            recordButtons.getStyleClass().setAll("recordButtons");
+        }
+        if(command.equals("notrecord")){
+            record.getStyleClass().setAll("recordButton");
+            recordButtons.getStyleClass().setAll("recordButtons");
+
         }
     }
 }

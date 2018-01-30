@@ -85,9 +85,10 @@ public class EffectView extends Stage{
         stage.initStyle(StageStyle.UTILITY);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
-        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
-        stage.setX(stage.getX() + stage.getWidth() / 2d);
-        stage.setY(stage.getY() + stage.getHeight() / 2d);
+        System.out.println(stage.getX());
+        System.out.println(stage.getWidth());
+        //stage.setX(this.getX() + this.getWidth() / 2d);
+        //stage.setY(this.getY() + this.getHeight() / 2d);
         stage.setX(870);
         stage.setY(163);
 

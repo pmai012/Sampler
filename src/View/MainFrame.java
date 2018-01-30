@@ -29,7 +29,7 @@ public class MainFrame extends Application implements Observer {
         root = new BorderPane();
         configBox = new VBox(40);
         padView = new PadView(this);
-        recordView = new RecordView(padView.getPadController());
+        recordView = new RecordView(padView.getPadController(),this);
         soundView = new SoundView();
 
 
@@ -89,5 +89,6 @@ public class MainFrame extends Application implements Observer {
          arg ="pad";
         }
         padView.update(arg);
+        recordView.update(arg);
     }
 }

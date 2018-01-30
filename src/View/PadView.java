@@ -25,7 +25,7 @@ public class PadView extends Pane  {
     private SoundController soundController;
     private BorderPane rootPV;
     private TilePane padBox;
-    Observer observer;
+    private Observer observer;
     private ContextMenu contextMenu;
     private MenuItem addEffect;
     private MenuItem deleteEffect;

@@ -5,25 +5,25 @@ import ddf.minim.AudioOutput;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import java.util.Observable;
+import java.util.Observer;
 
 
 public class RecordController extends Observable{
     private AudioOutput recordInput;
-    Record record;
+    private Record record;
+    private Observer observer;
 
-
-    public RecordController(PadController ref)
+    public RecordController(PadController ref, Observer observer)
     {
-        record = new Record(ref.getGlobalOut());
+        this.record = new Record(ref.getGlobalOut(),observer);
+        this.observer = observer;
     }
 
     public EventHandler<MouseEvent> recordClicked = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent event) {
             makerecord();
-            setChanged();
-            notifyObservers("record");
-
+            record.sendupdate();
         }
     };
 
@@ -45,6 +45,7 @@ public class RecordController extends Observable{
         {
             System.out.println("START");
             record.startRecording();
+
         }
     }
     public EventHandler<MouseEvent> stopClicked = new EventHandler<MouseEvent>() {

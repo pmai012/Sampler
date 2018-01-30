@@ -6,6 +6,7 @@ import ddf.minim.Minim;
 import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
 
 import java.util.Observable;
+import java.util.Observer;
 
 
 /**
@@ -17,11 +18,14 @@ public class Record extends Observable{
     private Minim minim;
     private String defaultPath = System.getProperty("user.home").concat("//Music") + "/myrecording.wav";
     private String recordPath;
+    private Observer observer;
 
 
-    public Record(AudioOutput soundToRecord){
-        minim = new SimpleMinim(true);
-        record = minim.createRecorder(soundToRecord, defaultPath);
+    public Record(AudioOutput soundToRecord, Observer observer){
+        this.minim = new SimpleMinim(true);
+        this.record = minim.createRecorder(soundToRecord, defaultPath);
+        this.observer = observer;
+        this.addObserver(this.observer);
     }
 
     public void setRecordPath(String path){
@@ -47,8 +51,15 @@ public class Record extends Observable{
     }
 
     public void sendupdate(){
-        setChanged();
-        notifyObservers("record");
+        if(isRecording()){
+            setChanged();
+            notifyObservers("record");
+        }
+        else{
+            setChanged();
+            notifyObservers("notrecord");
+        }
+
 
     }
 }

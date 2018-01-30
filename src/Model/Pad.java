@@ -35,8 +35,8 @@ public class Pad extends Observable implements Serializable{
     private boolean threadrun = false;
     private String path ;
     private AudioOutput audioOut;
-    FilePlayer filePlayer;
-    Minim minim;
+    private FilePlayer filePlayer;
+    private Minim minim;
     private Observer observer;
     private int starter = 0;
     private List<UGen> effekte;
@@ -90,7 +90,7 @@ public void addEffect(UGen effect){
         minim = new SimpleMinim(true);
         audioOut = globalOut;
         filePlayer = new FilePlayer(minim.loadFileStream(pathtoSound, 1024, true));
-        this.addObserver(observer);
+        this.addObserver(this.observer);
         System.out.println("Observer: " + countObservers());
 
     }
