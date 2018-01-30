@@ -2,7 +2,15 @@ Folgende Probleme haben wir noch (bei Beheben bitte löschen!
 
 
 
-Shortcuts müssen noch in Runtime initalisiert werden
-Kurzes drücken funktioniert nicht
+-Shortcuts müssen noch in Runtime initalisiert werden
+ Kurzes drücken funktioniert nicht
 
-DragDrop event für die listview zum rüberziehen auf die pads
+
+-Beim starten des Programms soll ein ordner im musikordner
+ des benutzers erstellt werden (falls noch nicht vorhanden),
+ in diesen werden die soundfiles aus dem sound ordner kopiert
+ und dieser ordner wird in der listview von der soundview angezeigt
+
+
+-DragDrop event für die listview zum rüberziehen auf die pads
+
