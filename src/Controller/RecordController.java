@@ -39,6 +39,7 @@ public class RecordController extends Observable{
         if (record.isRecording()){
             System.out.println("STOP");
             record.stopRecording();
+
         }
         else
         {

@@ -2,14 +2,10 @@ package View;
 
 import Controller.EffectController;
 import Controller.PadController;
-import Controller.SoundController;
-import Model.Effects.BitCrushEffect;
-import Model.Effects.NotchFilterEffect;
-import Model.Pad;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Toggle;
@@ -19,8 +15,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.scene.input.MouseEvent;
@@ -35,7 +31,8 @@ public class EffectView extends Stage{
     private Stage stage;
     private BorderPane root;
     private Scene scene;
-    private HBox hbox = new HBox();
+    private HBox effectsBox = new HBox();
+    private HBox submitBox = new HBox();
     private HBox sliderBox;
     private Pane activeView;
     private Button submitButton;
@@ -73,32 +70,42 @@ public class EffectView extends Stage{
         flangerEffect.getStyleClass().add("toggle-button");
         bitCrushEffect.getStyleClass().add("toggle-button");
         notchFilter.getStyleClass().add("toggle-button");
-        hbox.getChildren().addAll(delayEffect, flangerEffect, bitCrushEffect, notchFilter);
-
-        root.getChildren().add(hbox);
+        effectsBox.getChildren().addAll(delayEffect, flangerEffect, bitCrushEffect, notchFilter);
+        effectsBox.getStyleClass().add("effectsBox");
+        root.getChildren().add(effectsBox);
+        submitBox.getChildren().add(submitButton);
         scene = new Scene(root, WIDTH, HEIGHT);
         scene.getStylesheets().add("CSS/SamplerGUI.css");
         stage.setTitle("Pad " + ref.getClickedPadIndex() + " - Effekt hinzufügen");
         stage.getIcons().add(new Image("Picture/LogoSampler.png"));
+        stage.setMinWidth(435);
+        stage.setMinHeight(500);
+        stage.setMaxWidth(435);
+        stage.setMaxHeight(720);
         stage.initStyle(StageStyle.UTILITY);
         stage.initModality(Modality.APPLICATION_MODAL);
         stage.setScene(scene);
+        Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+        stage.setX(stage.getX() + stage.getWidth() / 2d);
+        stage.setY(stage.getY() + stage.getHeight() / 2d);
         stage.setX(870);
         stage.setY(163);
+
         stage.show();
 
         allEffects.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             public void changed(ObservableValue<? extends Toggle> ov,
                                 Toggle toggle, Toggle new_toggle) {
                 if (new_toggle == null) {
-                    if (root.getChildren().contains(submitButton)) {
-                        root.getChildren().removeAll(submitButton);
+                    if (root.getChildren().contains(submitBox)) {
+                        root.getChildren().removeAll(submitBox);
                     }
                     sliderBox.getChildren().clear();
                 }
                 else{
                     new_toggle.setSelected(true);
-                    root.setBottom(submitButton);
+                    root.setBottom(submitBox);
+                    submitBox.getStyleClass().add("submitBox");
                     sliderBox.getChildren().clear();
                     if (new_toggle.equals(delayEffect)){
 

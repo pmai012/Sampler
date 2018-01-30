@@ -85,6 +85,7 @@ public class PadView extends Pane  {
         this.getChildren().add(padBox);
 
         padBox.getStyleClass().addAll("padBox");
+        contextMenu.getStyleClass().addAll("menuItem","context-menu");
 
         for (Button pad: pads) {
             pad.getStyleClass().add("pad");

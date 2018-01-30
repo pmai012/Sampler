@@ -41,7 +41,7 @@ public class SoundView extends Pane {
 
         ToggleGroup activeGroup =new ToggleGroup();
         activeGroup.getToggles().addAll(fxOn,fxOff);
-        audioFX = new Label("Audio-FX");
+        audioFX = new Label("Metronom");
 
         soundpane = new VBox(10);
         this.getChildren().add(soundpane);
