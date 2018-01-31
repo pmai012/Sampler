@@ -1,5 +1,6 @@
 package Controller;
 
+import Model.Pad;
 import javafx.event.EventHandler;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCode;
@@ -13,27 +14,31 @@ public class Keyinput implements EventHandler<KeyEvent> {
     PadController padController;
     SettingController settingController;
     RecordController recordController;
-    KeyCode[] padshortcut;
+
 
 
     public void setShortCut(KeyCode input, int number) {
         padshortcut[number] = input;
     }
 
+    public Keyinput(){
+
+    }
+
     public Keyinput(PadController padController, SettingController settingController, RecordController recordController) {
-        padshortcut = new KeyCode[16];
+
         this.padController = padController;
         this.settingController = settingController;
         this.recordController = recordController;
 
         //BEispiel
-        padshortcut[0] = KeyCode.Z;
+
     }
 
     //Tasteneingaben
     @Override
     public void handle(KeyEvent event) {
-
+        Pad[] pads = padController.getPad();
 
         if (event.getCode() == KeyCode.S && event.isControlDown()) {
             settingController.save();
@@ -49,8 +54,7 @@ public class Keyinput implements EventHandler<KeyEvent> {
         }
 
         for (int i = 0; i < 16; i++) {
-            if (padshortcut[i] != null && event.getCode() == padshortcut[i]) {
-
+            if (event.getCode() == pads[i].getShortcut()) {
 
                 padController.startpressing(i);
 
@@ -58,5 +62,44 @@ public class Keyinput implements EventHandler<KeyEvent> {
             }
 
         }
+    }
+
+    public KeyCode getdefaultkeyCode(int padnumber) {
+        switch (padnumber){
+            case 0:
+                return KeyCode.DIGIT1;
+            case 1:
+                return KeyCode.DIGIT2;
+            case 2:
+                return KeyCode.DIGIT3;
+            case 3:
+                return KeyCode.DIGIT4;
+            case 4:
+                return KeyCode.Q;
+            case 5:
+                return KeyCode.W;
+            case 6:
+                return KeyCode.E;
+            case 7:
+                return KeyCode.R;
+            case 8:
+                return KeyCode.A;
+            case 9:
+                return KeyCode.S;
+            case 10:
+                return KeyCode.D;
+            case 11:
+                return KeyCode.F;
+            case 12:
+                return KeyCode.Y;
+            case 13:
+                return KeyCode.X;
+            case 14:
+                return KeyCode.C;
+            case 15:
+                return KeyCode.V;
+
+        }
+        return null;
     }
 }

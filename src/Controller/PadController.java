@@ -147,25 +147,6 @@ public class PadController {
         }
     };
 
-/*
-     public EventHandler<MouseEvent> scrollstartsbeatsperminute = new EventHandler<MouseEvent>() {
-
-
-         @Override
-         public void handle(MouseEvent event) {
-             TextInputDialog input = new TextInputDialog(Integer.toString(beat.getBpm()));
-             input.setTitle("Beats per Minute");
-             input.setHeaderText("Wie viel BPM?");
-             input.setContentText("Beats per Minute:");
-
-
-
-
-             }
-
-     };
-
-     */
 
 
 
@@ -197,6 +178,13 @@ public class PadController {
             pad[number].playSound();
 
 
+        }
+
+    }
+
+    public void cleanpads(){
+        for (int i = 0; i < 16; i++){
+            pad[i] = null;
         }
 
     }
@@ -286,6 +274,9 @@ public class PadController {
                             if (path.endsWith(".mp3") || path.endsWith(".wav")) {
                                 pad[i] = new Pad(path, observer, globalOut);
                                 pad[i].sendupdate();
+
+                                Keyinput keyinput = new Keyinput();
+                                pad[i].setShortcut(keyinput.getdefaultkeyCode(i));
 
                                 System.out.println(path);
                                 return;

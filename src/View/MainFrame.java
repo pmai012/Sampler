@@ -84,9 +84,9 @@ public class MainFrame extends Application implements Observer {
     public void update(Observable o, Object arg) {
 
         if(arg.equals("padsnew") ){
-            for (int i = 0; i < 16; i++){
-                padView.cleanVisual(i);
-            }
+
+            padView.cleanVisual();
+
         }
 
         if(arg.equals("padsladen") ){

@@ -13,6 +13,7 @@ import ddf.minim.ugens.Delay;
 import ddf.minim.ugens.FilePlayer;
 import de.hsrm.mi.eibo.simpleplayer.SimpleAudioPlayer;
 import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
+import javafx.scene.input.KeyCode;
 
 
 import java.io.IOException;
@@ -25,15 +26,15 @@ import java.util.Observer;
 /**
  * Created by User on 21.12.2017.
  */
-public class Pad extends Observable implements Serializable{
+public class Pad extends Observable implements Serializable {
 
 
-
+    private KeyCode shortcut;
     private int startpoint = 0;
     private long endpoint;
     private long presstime = -5;
     private boolean threadrun = false;
-    private String path ;
+    private String path;
     private AudioOutput audioOut;
     private FilePlayer filePlayer;
     private Minim minim;
@@ -41,29 +42,36 @@ public class Pad extends Observable implements Serializable{
     private int starter = 0;
     private List<UGen> effekte;
 
-public String getPath(){
-    return path;
-}
-
-public List<UGen> getEffekte(){
-    return effekte;
-}
-
-public void addEffect(UGen effect){
-    if (effekte == null) {
-        effekte = new ArrayList<UGen>();
-        effekte.add(effect);
+    public String getPath() {
+        return path;
     }
-    else{
-        effekte.add(effect);
-    }
-}
 
-    public int getStartpoint(){
+    public List<UGen> getEffekte() {
+        return effekte;
+    }
+
+    public void addEffect(UGen effect) {
+        if (effekte == null) {
+            effekte = new ArrayList<UGen>();
+            effekte.add(effect);
+        } else {
+            effekte.add(effect);
+        }
+    }
+
+    public KeyCode getShortcut() {
+        return shortcut;
+    }
+
+    public void setShortcut(KeyCode keyCode){
+        this.shortcut = keyCode;
+    }
+
+    public int getStartpoint() {
         return startpoint;
     }
 
-    public long getEndpoint(){
+    public long getEndpoint() {
         return endpoint;
     }
 
@@ -83,18 +91,18 @@ public void addEffect(UGen effect){
         this.threadrun = threadrun;
     }
 
-    public void clear(){
-         startpoint = 0;
-          endpoint = Long.MAX_VALUE;
-          presstime = -5;
-          threadrun = false;
-          path = null;
-          audioOut = null;
-         filePlayer = null;
-          starter = 0;
-          if (effekte.size() != 0){
-              effekte.clear();
-          }
+    public void clear() {
+        startpoint = 0;
+        endpoint = Long.MAX_VALUE;
+        presstime = -5;
+        threadrun = false;
+        path = null;
+        audioOut = null;
+        filePlayer = null;
+        starter = 0;
+        if (effekte.size() != 0) {
+            effekte.clear();
+        }
 
     }
 
@@ -113,8 +121,7 @@ public void addEffect(UGen effect){
 
         if (this.hasEffects()) {
             playSound(effekte.get(0));
-        }
-        else {
+        } else {
             if (starter < 1) {
                 filePlayer.play(startpoint);
                 filePlayer.patch(audioOut);
@@ -134,15 +141,14 @@ public void addEffect(UGen effect){
 
     }
 
-    public void stop()
-    {
+    public void stop() {
         filePlayer.pause();
         starter = 0;
         filePlayer = new FilePlayer(minim.loadFileStream(path, 1024, true));
 
     }
 
-    public void sendupdate(){
+    public void sendupdate() {
         setChanged();
         notifyObservers("pad");
 
@@ -158,9 +164,9 @@ public void addEffect(UGen effect){
         startpoint = time;
     }
 
-    public boolean isPlaying(){
+    public boolean isPlaying() {
 
-        if (starter >= 1){
+        if (starter >= 1) {
             return true;
         }
         return false;
@@ -170,10 +176,9 @@ public void addEffect(UGen effect){
         endpoint = time;
     }
 
-    private boolean hasEffects(){
-        if (this.effekte!=null)
-        {
-           return !this.effekte.isEmpty();
+    private boolean hasEffects() {
+        if (this.effekte != null) {
+            return !this.effekte.isEmpty();
         }
         return false;
     }
@@ -207,9 +212,9 @@ public void addEffect(UGen effect){
 
 
     public boolean isNull() {
-        if (filePlayer == null){
+        if (filePlayer == null) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }

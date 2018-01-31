@@ -8,6 +8,7 @@ import Controller.RecordController;
 import Model.Pad;
 import ddf.minim.AudioOutput;
 import ddf.minim.UGen;
+import javafx.scene.input.KeyCode;
 
 import java.io.Serializable;
 import java.util.List;
@@ -23,6 +24,7 @@ class Padsaveclass implements Serializable {
     private String path ;
     private List<UGen> effekte;
     private String savepath;
+    private KeyCode keyCode;
 
 
 
@@ -33,6 +35,7 @@ class Padsaveclass implements Serializable {
             path = save.getPath();
             effekte = save.getEffekte();
             savepath = recordpath;
+            this.keyCode = save.getShortcut();
         }
     }
 
@@ -51,7 +54,7 @@ class Padsaveclass implements Serializable {
             Pad ausgabe = new Pad(path, observer,out);
             ausgabe.setStartpoint(startpoint);
             ausgabe.setEndpoint(endpoint);
-
+            ausgabe.setShortcut(keyCode);
             return ausgabe;
         } else{
             return null;

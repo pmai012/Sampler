@@ -1,6 +1,10 @@
 package Model;
 
 import ddf.minim.AudioOutput;
+import ddf.minim.Minim;
+import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
+
+import javax.sound.midi.MidiDevice;
 
 
 /**
@@ -14,16 +18,11 @@ public class BeatsperMinute {
     boolean playing = false;
 
 
-
-
     public BeatsperMinute(int Bpm, AudioOutput global) {
         super();
-        output = global;
-        setBpm(Bpm) ;//100;
-
-
-
-
+        Minim minim = new SimpleMinim(true);
+        output = minim.getLineOut();
+        setBpm(Bpm);//100;
     }
 
 
@@ -43,7 +42,7 @@ public class BeatsperMinute {
                         e.printStackTrace();
                     }
                     output.setTempo(bpm);
-                    output.playNote(200000.0f );
+                    output.playNote(200000.0f);
                 }
             }
         };
@@ -51,9 +50,11 @@ public class BeatsperMinute {
         return output;
     }
 
-    public int getBpm(){
-      return bpm;
-    };
+    public int getBpm() {
+        return bpm;
+    }
+
+    ;
 
     public void setBpm(int bpm) {
         this.bpm = bpm; //default bei 100
