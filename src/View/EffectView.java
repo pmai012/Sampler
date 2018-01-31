@@ -2,6 +2,8 @@ package View;
 
 import Controller.EffectController;
 import Controller.PadController;
+import Model.Effects.DelayEffect;
+import Model.Effects.Effect;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
@@ -37,6 +39,8 @@ public class EffectView extends Stage{
     private Pane activeView;
     private Button submitButton;
     private EffectController effectController;
+    private PadController padController;
+    private Effect currentEffect;
 
     private ToggleGroup allEffects = new ToggleGroup();
     private ToggleButton delayEffect = new ToggleButton("Delay");
@@ -49,85 +53,144 @@ public class EffectView extends Stage{
     private BitCrushEffectView bitCrushEffectView;
     private NotchFilterEffectView notchFilterEffectView;
 
+    public EffectView(PadController ref, Effect effect) {
+
+        this.padController = ref;
+        this.currentEffect = effect;
+        init();
+    }
+
     public EffectView(PadController ref) {
-        activeView = new Pane();
-        stage = this;
-        root = new BorderPane();
-        submitButton = new Button("Anwenden");
-        submitButton.getStyleClass().add("submitButton");
-        effectController = new EffectController(ref, this);
 
-        sliderBox = new HBox();
-        sliderBox.setMaxHeight(300);
-        sliderBox.setMaxWidth(300);
-        sliderBox.setAlignment(Pos.CENTER);
-        root.setCenter(sliderBox);
-        delayEffect.setToggleGroup(allEffects);
-        flangerEffect.setToggleGroup(allEffects);
-        bitCrushEffect.setToggleGroup(allEffects);
-        notchFilter.setToggleGroup(allEffects);
-        delayEffect.getStyleClass().add("toggle-button");
-        flangerEffect.getStyleClass().add("toggle-button");
-        bitCrushEffect.getStyleClass().add("toggle-button");
-        notchFilter.getStyleClass().add("toggle-button");
-        effectsBox.getChildren().addAll(delayEffect, flangerEffect, bitCrushEffect, notchFilter);
-        effectsBox.getStyleClass().add("effectsBox");
-        root.getChildren().add(effectsBox);
-        submitBox.getChildren().add(submitButton);
-        scene = new Scene(root, WIDTH, HEIGHT);
-        scene.getStylesheets().add("CSS/SamplerGUI.css");
-        stage.setTitle("Pad " + ref.getClickedPadIndex() + " - Effekt hinzufügen");
-        stage.getIcons().add(new Image("Picture/LogoSampler.png"));
-        stage.setMinWidth(435);
-        stage.setMinHeight(500);
-        stage.setMaxWidth(435);
-        stage.setMaxHeight(720);
-        stage.initStyle(StageStyle.UTILITY);
-        stage.initModality(Modality.APPLICATION_MODAL);
-        stage.setScene(scene);
-        System.out.println(stage.getX());
-        System.out.println(stage.getWidth());
-        //stage.setX(this.getX() + this.getWidth() / 2d);
-        //stage.setY(this.getY() + this.getHeight() / 2d);
-        stage.setX(870);
-        stage.setY(163);
+        this.padController = ref;
+        init();
+    }
+        private void init () {
+            activeView = new Pane();
+            stage = this;
+            root = new BorderPane();
+            submitButton = new Button("Anwenden");
+            submitButton.getStyleClass().add("submitButton");
+            effectController = new EffectController(padController, this);
 
-        stage.show();
+            sliderBox = new HBox();
+            sliderBox.setMaxHeight(300);
+            sliderBox.setMaxWidth(300);
+            sliderBox.setAlignment(Pos.CENTER);
+            root.setCenter(sliderBox);
+            delayEffect.setToggleGroup(allEffects);
+            flangerEffect.setToggleGroup(allEffects);
+            bitCrushEffect.setToggleGroup(allEffects);
+            notchFilter.setToggleGroup(allEffects);
+            delayEffect.getStyleClass().add("toggle-button");
+            flangerEffect.getStyleClass().add("toggle-button");
+            bitCrushEffect.getStyleClass().add("toggle-button");
+            notchFilter.getStyleClass().add("toggle-button");
+            effectsBox.getChildren().addAll(delayEffect, flangerEffect, bitCrushEffect, notchFilter);
+            effectsBox.getStyleClass().add("effectsBox");
+            root.getChildren().add(effectsBox);
+            submitBox.getChildren().add(submitButton);
+            scene = new Scene(root, WIDTH, HEIGHT);
+            scene.getStylesheets().add("CSS/SamplerGUI.css");
+            stage.setTitle("Pad " + padController.getClickedPadIndex() + " - Effekt hinzufügen");
+            stage.getIcons().add(new Image("Picture/LogoSampler.png"));
+            stage.setMinWidth(435);
+            stage.setMinHeight(500);
+            stage.setMaxWidth(435);
+            stage.setMaxHeight(720);
+            stage.initStyle(StageStyle.UTILITY);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setScene(scene);
+            System.out.println(stage.getX());
+            System.out.println(stage.getWidth());
+            //stage.setX(this.getX() + this.getWidth() / 2d);
+            //stage.setY(this.getY() + this.getHeight() / 2d);
+            stage.setX(870);
+            stage.setY(163);
 
-        allEffects.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
-            public void changed(ObservableValue<? extends Toggle> ov,
-                                Toggle toggle, Toggle new_toggle) {
-                if (new_toggle == null) {
-                    if (root.getChildren().contains(submitBox)) {
-                        root.getChildren().removeAll(submitBox);
-                    }
-                    sliderBox.getChildren().clear();
-                }
-                else{
-                    new_toggle.setSelected(true);
-                    root.setBottom(submitBox);
-                    submitBox.getStyleClass().add("submitBox");
-                    sliderBox.getChildren().clear();
-                    if (new_toggle.equals(delayEffect)){
+            if (currentEffect != null) {
+                double[] values = currentEffect.returnValues();
+                root.setBottom(submitBox);
+                switch (currentEffect.getName()){
+                    case "Delay":
+                        if (delayEffectView == null)
+                        {
+                            delayEffectView = new DelayEffectView(values[0], values[1]);
+                        }
 
-                        showDelaySettings();
-                    }
-                    if (new_toggle.equals(flangerEffect)){
+                        activeView = delayEffectView;
+                        delayEffect.setSelected(true);
+                        sliderBox.getChildren().add(delayEffectView);
+                        break;
+                    case "Flanger":
+                        if (flangerEffectView == null)
+                        {
+                            flangerEffectView = new FlangerEffectView(values[0], values[1],values[2],values[3],values[4],values[5]);
+                        }
 
-                        showFlangerSettings();
-                    }
-                    if (new_toggle.equals(bitCrushEffect)){
 
-                        showBitCrushSettings();
-                    }
-                    if (new_toggle.equals(notchFilter)){
+                        activeView = flangerEffectView;
+                        flangerEffect.setSelected(true);
+                        sliderBox.getChildren().add(flangerEffectView);
+                        break;
+                    case "BitCrush":
+                        if (bitCrushEffectView == null){
+                            bitCrushEffectView = new BitCrushEffectView(values[0],values[1]);
+                        }
 
-                        showNotchFilterSettings();
-                    }
+
+                        activeView = bitCrushEffectView;
+                        bitCrushEffect.setSelected(true);
+                        sliderBox.getChildren().add(bitCrushEffectView);
+                        break;
+                    case "NotchFilter":
+                        if (notchFilterEffectView == null){
+                            notchFilterEffectView = new NotchFilterEffectView(values[0], values[1], values[2]);
+                        }
+
+
+                        activeView = notchFilterEffectView;
+                        notchFilter.setSelected(true);
+                        sliderBox.getChildren().add(notchFilterEffectView);
+                        break;
                 }
             }
-        });
-    submitButton.addEventHandler(MouseEvent.MOUSE_CLICKED, effectController.submit);
+
+            stage.show();
+
+            allEffects.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+                public void changed(ObservableValue<? extends Toggle> ov,
+                                    Toggle toggle, Toggle new_toggle) {
+                    if (new_toggle == null) {
+                        if (root.getChildren().contains(submitBox)) {
+                            root.getChildren().removeAll(submitBox);
+                        }
+                        sliderBox.getChildren().clear();
+                    } else {
+                        new_toggle.setSelected(true);
+                        root.setBottom(submitBox);
+                        submitBox.getStyleClass().add("submitBox");
+                        sliderBox.getChildren().clear();
+                        if (new_toggle.equals(delayEffect)) {
+
+                            showDelaySettings();
+                        }
+                        if (new_toggle.equals(flangerEffect)) {
+
+                            showFlangerSettings();
+                        }
+                        if (new_toggle.equals(bitCrushEffect)) {
+
+                            showBitCrushSettings();
+                        }
+                        if (new_toggle.equals(notchFilter)) {
+
+                            showNotchFilterSettings();
+                        }
+                    }
+                }
+            });
+        submitButton.addEventHandler(MouseEvent.MOUSE_CLICKED, effectController.submit);
     }
     private void showDelaySettings()
     {

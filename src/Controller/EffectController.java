@@ -32,23 +32,27 @@ public class EffectController {
                 case("Delay"):
                     DelayEffect delayEffect = new DelayEffect((float)view.returnDelayView().getDelayValue(), (float)view.returnDelayView().getDecayValue());
                     clickedPad = padController.getPadAtIndex(padController.getClickedPadIndex());
-                    clickedPad.addEffect(delayEffect.getEffect());
+                    clickedPad.deleteEffect();
+                    clickedPad.addEffect(delayEffect);
                     break;
                 case("Flanger"):
                     FlangerEffect flanger = new FlangerEffect((float)view.returnFlangerView().getDelayValue(),(float)view.returnFlangerView().getFlangerRate(), (float)view.returnFlangerView().getDepth(),
                             (float)view.returnFlangerView().getFeedback(),(float)view.returnFlangerView().getWetValue(),(float)view.returnFlangerView().getDryValue());
                     clickedPad = padController.getPadAtIndex(padController.getClickedPadIndex());
-                    clickedPad.addEffect(flanger.getEffect());
+                    clickedPad.deleteEffect();
+                    clickedPad.addEffect(flanger);
                     break;
                 case("BitCrush"):
                     BitCrushEffect bitcrusher = new BitCrushEffect((float)view.returnBitCrushView().getBitRes(),(float)view.returnBitCrushView().getBitRate());
                     clickedPad = padController.getPadAtIndex(padController.getClickedPadIndex());
-                    clickedPad.addEffect(bitcrusher.getEffect());
+                    clickedPad.deleteEffect();
+                    clickedPad.addEffect(bitcrusher);
                     break;
                 case("NotchFilter"):
                     NotchFilterEffect notchfilter = new NotchFilterEffect((float)view.returnNotchFilterView().getCutoff(),(float)view.returnNotchFilterView().getBandwidth(),(float)view.returnNotchFilterView().getSampleRate());
                     clickedPad = padController.getPadAtIndex(padController.getClickedPadIndex());
-                    clickedPad.addEffect(notchfilter.getEffect());
+                    clickedPad.deleteEffect();
+                    clickedPad.addEffect(notchfilter);
                     break;
             }
             view.close();

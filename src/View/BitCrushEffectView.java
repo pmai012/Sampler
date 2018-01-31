@@ -15,18 +15,33 @@ import javafx.scene.paint.Color;
 public class BitCrushEffectView extends Pane {
 
     private GridPane root;
-    private Slider bitRes = new Slider(0,16,0);
-    private Slider bitRate = new Slider(0,44100,44100);
+    private Slider bitRes;
+    private Slider bitRate;
 
     final Label lbl_BitRes = new Label("Bit Resolution:");
     final Label lbl_BitRate= new Label("Bit Rate:");
 
-    final Label lbl_BitResValue = new Label (Double.toString(bitRes.getValue()));
-    final Label lbl_BitRateValue = new Label (Double.toString(bitRate.getValue()));
+    private Label lbl_BitResValue;
+    private Label lbl_BitRateValue;
 
     //delay,rate,depth,feedback,wet,dry
+    public BitCrushEffectView(double bitres, double bitrate){
+        bitRes = new Slider(0,16, bitres);
+        bitRate = new Slider(0,44100, bitrate);
+        lbl_BitResValue = new Label (Double.toString(bitRes.getValue()));
+        lbl_BitRateValue = new Label (Double.toString(bitRate.getValue()));
+        init();
+    }
 
-    public BitCrushEffectView(){
+    public BitCrushEffectView() {
+
+        bitRes = new Slider(0,16,0);
+        bitRate = new Slider(0,44100,44100);
+        lbl_BitResValue = new Label (Double.toString(bitRes.getValue()));
+        lbl_BitRateValue = new Label (Double.toString(bitRate.getValue()));
+        init();
+    }
+    private void init(){
         setId("BitCrush");
         root = new GridPane();
         bitRes.setShowTickLabels(true);

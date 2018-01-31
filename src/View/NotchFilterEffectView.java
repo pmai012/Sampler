@@ -15,19 +15,38 @@ import javafx.scene.paint.Color;
 public class NotchFilterEffectView extends Pane {
     private GridPane root;
 
-    private Slider bandWidth = new Slider(0,44100,0);
-    private Slider cutoff = new Slider(0,44100,0);
-    private Slider sampleRate = new Slider(0,44100,0);
+    private Slider bandWidth;
+    private Slider cutoff;
+    private Slider sampleRate;
 
     final Label lbl_Bandwidth = new Label("Bandwidth [Hz]:");
     final Label lbl_Cutoff = new Label("Cutoff:");
     final Label lbl_SampleRate= new Label("Sample Rate:");
 
-    final Label lbl_BandwidthValue = new Label (Double.toString(bandWidth.getValue()));
-    final Label lbl_CutoffValue = new Label (Double.toString(cutoff.getValue()));
-    final Label lbl_SampleRateValue = new Label (Double.toString(sampleRate.getValue()));
+    private Label lbl_BandwidthValue;
+    private Label lbl_CutoffValue;
+    private Label lbl_SampleRateValue;
 
-    public NotchFilterEffectView(){
+    public NotchFilterEffectView(double bandwidthValue, double cutoffValue, double samplerateValue){
+        this.bandWidth = new Slider(0,44100, bandwidthValue);
+        this.cutoff = new Slider(0,44100, cutoffValue);
+        this.sampleRate = new Slider(0,44100,samplerateValue);
+        lbl_BandwidthValue = new Label (Double.toString(this.bandWidth.getValue()));
+        lbl_CutoffValue = new Label (Double.toString(this.cutoff.getValue()));
+        lbl_SampleRateValue = new Label (Double.toString(this.sampleRate.getValue()));
+        init();
+    }
+
+    public NotchFilterEffectView() {
+        bandWidth = new Slider(0,44100,0);
+        cutoff = new Slider(0,44100,0);
+        sampleRate = new Slider(0,44100,0);
+        lbl_BandwidthValue = new Label (Double.toString(this.bandWidth.getValue()));
+        lbl_CutoffValue = new Label (Double.toString(this.cutoff.getValue()));
+        lbl_SampleRateValue = new Label (Double.toString(this.sampleRate.getValue()));
+        init();
+    }
+    private void init(){
         setId("NotchFilter");
         root = new GridPane();
 

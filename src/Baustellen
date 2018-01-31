@@ -5,7 +5,7 @@ Folgende Probleme haben wir noch (bei Beheben bitte löschen!
 -Shortcuts müssen noch in Runtime initalisiert werden
  Kurzes drücken funktioniert nicht
 
-- Recorddatei wird beim starten erstellt, sollte im nachhinein erstellt werden
+ -recorddatei sollte nicht beim starten erstellt sondern beim aufnehmen
 
 -Beim starten des Programms soll ein ordner im musikordner
  des benutzers erstellt werden (falls noch nicht vorhanden),
