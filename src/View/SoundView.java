@@ -60,6 +60,8 @@ public class SoundView extends Pane {
 
     }
 
+
+
     public SoundController getSoundController() {
         return soundController;
     }

@@ -6,6 +6,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -24,14 +25,16 @@ public class RecordView extends Pane {
     private Button stop;
     private RecordController recordController;
     private Observer observer;
-
+    private Label bpm;
+    private PadController padController;
 
 
     public RecordView(PadController padController, Observer obs){
+        this.padController = padController;
         observer = obs;
         rootRV = new VBox(20);
         Label time = new Label("--:--/--:--");
-        Label bpm = new Label("100 BPM");
+        bpm = new Label("100 BPM");
         recordInfos = new HBox(10);
         recordButtons = new HBox(30);
         record = new Button();
@@ -48,6 +51,7 @@ public class RecordView extends Pane {
         stop.getStyleClass().add("stopButton");
         time.getStyleClass().addAll("title","time");
         bpm.getStyleClass().addAll("title","time");
+
 
         recordController = new RecordController(padController, observer);
 
@@ -69,7 +73,10 @@ public class RecordView extends Pane {
         if(command.equals("notrecord")){
             record.getStyleClass().setAll("recordButton");
             recordButtons.getStyleClass().setAll("recordButtons");
+        }
 
+        if (command.equals("bpm")){
+                bpm.setText(padController.beattoString());
         }
     }
 }
