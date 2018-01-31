@@ -12,8 +12,7 @@ public class SoundController {
     public SoundController(String dirPath){
         this.dirPath = dirPath;
         this.dirList = new ArrayList<String>();
-        loadSoundfiles("/Users/deniz/IdeaProjects/Sampler/src/Sound");
-        // muss noch allgemein geschrieben werden
+        loadSoundfiles(System.getProperty("user.home").concat("//Music").concat("//" + "SamplerSoundfiles"));
     }
 
     public ArrayList<String> getDirList() {

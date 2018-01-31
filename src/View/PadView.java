@@ -138,7 +138,7 @@ public class PadView extends Pane  {
     }
 
     public void cleanVisual(int i) {
-        pads[i].getStyleClass().add("pad");
+
 
         if (i < 4) {
             pads[i].getStyleClass().add("padG");
@@ -153,5 +153,7 @@ public class PadView extends Pane  {
             pads[i].getStyleClass().add("padR");
             pads[i].getStyleClass().remove("padRUsed");
         }
+
+        pads[i].getStyleClass().add("pad");
     }
 }
