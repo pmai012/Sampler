@@ -114,6 +114,7 @@ public class SettingController extends Observable {
         for (int i = 0; i < 16; i++){
             pads[i] = null;
         }
+        setChanged();
         notifyObservers("padsnew");
 
     }

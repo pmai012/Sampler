@@ -13,10 +13,6 @@ import javafx.scene.layout.*;
 import java.util.Observable;
 import java.util.Observer;
 
-
-/**
- * Created by User on 21.12.2017.
- */
 public class PadView extends Pane  {
 
     private final int WIDTH = 600;
@@ -33,14 +29,6 @@ public class PadView extends Pane  {
     private Button pad1, pad2, pad3, pad4, pad5, pad6, pad7, pad8,
             pad9, pad10, pad11, pad12, pad13, pad14, pad15, pad16;
 
-
-    public Pad[] getPads(){
-        return padController.getPad();
-    }
-
-    public PadController getPadController(){
-        return padController;
-    }
     public PadView(Observer obs){
         observer = obs;
         rootPV = new BorderPane();
@@ -73,24 +61,20 @@ public class PadView extends Pane  {
         pad16 = new Button();
         pads = new Button[]{pad1, pad2, pad3, pad4, pad5, pad6, pad7, pad8,
                 pad9, pad10, pad11,pad12, pad13, pad14, pad15, pad16};
-
         rootPV.setCenter(padBox);
 
         for (Button pad: pads) {
             padBox.getChildren().add(pad);
             pad.setContextMenu(contextMenu);
         }
-        //padBox.getChildren().addAll(pad1, pad2, pad3, pad4, pad5, pad6, pad7, pad8,
-         //       pad9, pad10, pad11,pad12, pad13, pad14, pad15, pad16);
-        this.getChildren().add(padBox);
 
+        this.getChildren().add(padBox);
         padBox.getStyleClass().addAll("padBox");
         contextMenu.getStyleClass().addAll("menuItem","context-menu");
 
         for (Button pad: pads) {
             pad.getStyleClass().add("pad");
         }
-
 
         for(int i = 0; i < pads.length; i++) {
 
@@ -104,59 +88,29 @@ public class PadView extends Pane  {
                 pads[i].getStyleClass().add("padR");
             }
         }
-        /*
-        pad1.getStyleClass().addAll("pad");
-        pad2.getStyleClass().addAll("pad");
-        pad3.getStyleClass().addAll("pad");
-        pad4.getStyleClass().addAll("pad");
-        pad5.getStyleClass().addAll("pad");
-        pad6.getStyleClass().addAll("pad");
-        pad7.getStyleClass().addAll("pad");
-        pad8.getStyleClass().addAll("pad");
-        pad9.getStyleClass().addAll("pad");
-        pad10.getStyleClass().addAll("pad");
-        pad11.getStyleClass().addAll("pad");
-        pad12.getStyleClass().addAll("pad");
-        pad13.getStyleClass().addAll("pad");
-        pad14.getStyleClass().addAll("pad");
-        pad15.getStyleClass().addAll("pad");
-        pad16.getStyleClass().addAll("pad");
-        */
+
         padController = new PadController(pads, observer, this);
-
-
 
         for (Button pad:pads) {
             pad.addEventHandler(MouseEvent.MOUSE_PRESSED,padController.pressed);
             pad.addEventHandler(MouseEvent.MOUSE_RELEASED,padController.rightclick);
-
             pad.setOnDragOver(padController.acceptdrag);
             pad.setOnDragDropped(padController.getData);
         }
         addEffect.setOnAction(padController.contextMenu_addEffectClicked);
-        /*
-        pad1.setOnAction(padController.play);
-        pad2.setOnAction(padController.play);
-        pad3.setOnAction(padController.play);
-        pad4.setOnAction(padController.play);
-        pad5.setOnAction(padController.play);
-        pad6.setOnAction(padController.play);
-        pad7.setOnAction(padController.play);
-        pad8.setOnAction(padController.play);
-        pad9.setOnAction(padController.play);
-        pad10.setOnAction(padController.play);
-        pad11.setOnAction(padController.play);
-        pad12.setOnAction(padController.play);
-        pad13.setOnAction(padController.play);
-        pad14.setOnAction(padController.play);
-        pad15.setOnAction(padController.play);
-        pad16.setOnAction(padController.play);
-        */
-
     }
 
+    public Pad[] getPads(){
+        return padController.getPad();
+    }
 
+    public PadController getPadController(){
+        return padController;
+    }
 
+    public TilePane getPadBox() {
+        return padBox;
+    }
 
     public void update(Object arg) {
 
@@ -184,6 +138,20 @@ public class PadView extends Pane  {
     }
 
     public void cleanVisual(int i) {
-        pads[i].getStyleClass().setAll("pad");
+        pads[i].getStyleClass().add("pad");
+
+        if (i < 4) {
+            pads[i].getStyleClass().add("padG");
+            pads[i].getStyleClass().remove("padGUsed");
+        }else if (i < 8) {
+            pads[i].getStyleClass().add("padB");
+            pads[i].getStyleClass().remove("padBUsed");
+        }else if (i < 12) {
+            pads[i].getStyleClass().add("padP");
+            pads[i].getStyleClass().remove("padPUsed");
+        } else if (i < 16) {
+            pads[i].getStyleClass().add("padR");
+            pads[i].getStyleClass().remove("padRUsed");
+        }
     }
 }

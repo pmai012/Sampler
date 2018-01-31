@@ -72,7 +72,7 @@ public class SettingView extends Pane {
         itemManual.getStyleClass().add("menuItem");
 
         settingController = new SettingController(stage,pads, refOb,recordController);
-        itemNew.setOnAction(settingController.cleanEvent);
+        itemNewNew.setOnAction(settingController.cleanEvent);
         itemSave.setOnAction(settingController.save);
         itemOpen.setOnAction(settingController.openEvent);
         itemLocation.setOnAction(settingController.openSaveLocationEvent);

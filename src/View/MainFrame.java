@@ -15,9 +15,8 @@ import java.util.Observer;
 
 public class MainFrame extends Application implements Observer {
 
-    final int WIDTH = 1280;
-    final int HEIGHT = 690;
-
+    private final int WIDTH = 1280;
+    private final int HEIGHT = 690;
     private BorderPane root;
     private PadView padView;
     private RecordView recordView;
@@ -31,8 +30,6 @@ public class MainFrame extends Application implements Observer {
         padView = new PadView(this);
         recordView = new RecordView(padView.getPadController(),this);
         soundView = new SoundView(padView.getPadController());
-
-
     }
 
     public void init() {
@@ -46,21 +43,14 @@ public class MainFrame extends Application implements Observer {
     @Override
     public void start(Stage primaryStage) {
         settingView = new SettingView(primaryStage, padView.getPads(), this, recordView.getRecordController());
-        //configBox.setMaxHeight(800);
-        //configBox.setMaxWidth(600);
-        configBox.getChildren().add(recordView);
+       configBox.getChildren().add(recordView);
         configBox.getChildren().add(soundView);
-        //configBox.getChildren().add(settingView);
-
-
         VBox test = new VBox(10);
-
-        //test.setStyle("-fx-background-color: " + "#610002");
-
         root.setTop(settingView);
         root.setRight(configBox);
         root.setLeft(padView);
-
+        //padView.prefWidthProperty().bind(root.widthProperty());
+        //padView.prefHeightProperty().bind(root.heightProperty());
 
         Scene scene = new Scene(root, WIDTH, HEIGHT);
         scene.getStylesheets().add("CSS/SamplerGUI.css");
@@ -73,10 +63,8 @@ public class MainFrame extends Application implements Observer {
         root.getStyleClass().addAll("mainFrame");
         configBox.getStyleClass().addAll("configBox");
 
-
         Keyinput keyinput = new Keyinput(padView.getPadController(), settingView.getSettingController(), recordView.getRecordController());
         root.setOnKeyPressed(keyinput);
-
 
         primaryStage.show();
     }
@@ -86,7 +74,7 @@ public class MainFrame extends Application implements Observer {
 
         if(arg.equals("padsnew") ){
             for (int i = 0; i < 16; i++){
-                padView.cleanVisual(1);
+                padView.cleanVisual(i);
             }
         }
 

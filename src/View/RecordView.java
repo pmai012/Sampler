@@ -63,12 +63,14 @@ public class RecordView extends Pane {
         String command = (String) arg;
         System.out.println("recorder");
         if(command.equals("record")){
-            record.getStyleClass().setAll("recordButtonUsed");
-            recordButtons.getStyleClass().setAll("recordButtons");
+            record.getStyleClass().add("recordButtonUsed");
+            record.getStyleClass().remove("recordButton");
+
         }
         if(command.equals("notrecord")){
-            record.getStyleClass().setAll("recordButton");
-            recordButtons.getStyleClass().setAll("recordButtons");
+            record.getStyleClass().add("recordButton");
+            record.getStyleClass().remove("recordButtonUsed");
+
 
         }
     }
