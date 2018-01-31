@@ -8,8 +8,15 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
 
+import javax.imageio.IIOException;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -25,11 +32,13 @@ public class MainFrame extends Application implements Observer {
     private VBox configBox;
 
     public MainFrame(){
+        createSounddir();
         root = new BorderPane();
         configBox = new VBox(40);
         padView = new PadView(this);
         recordView = new RecordView(padView.getPadController(),this);
         soundView = new SoundView(padView.getPadController());
+
     }
 
     public void init() {
@@ -59,6 +68,8 @@ public class MainFrame extends Application implements Observer {
         primaryStage.getIcons().add(new Image("Picture/LogoSampler.png"));
         primaryStage.setMinHeight(720);
         primaryStage.setMinWidth(960);
+        primaryStage.setMaxHeight(760);
+        primaryStage.setMaxWidth(1400);
 
         root.getStyleClass().addAll("mainFrame");
         configBox.getStyleClass().addAll("configBox");
@@ -84,5 +95,23 @@ public class MainFrame extends Application implements Observer {
         }
         padView.update(arg);
         recordView.update(arg);
+    }
+
+    public void createSounddir(){
+
+        String dirpath = "SamplerSoundfiles";
+        Path abspath = Paths.get(System.getProperty("user.home").concat("//Music").concat("//" + dirpath));
+        File sounddir = new File(System.getProperty("user.home").concat("//Music").concat("//"+dirpath));
+        System.out.println(sounddir.mkdir());
+        if(System.getProperty("user.home").concat("//Music").concat("//"+dirpath).isEmpty()){
+            try{
+                Files.copy(Paths.get("Sound/F7 Bass 1.wav"),
+                        (Paths.get(System.getProperty("user.home").concat("//Music").concat("//"+dirpath))));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+
     }
 }
