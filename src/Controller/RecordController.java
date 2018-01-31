@@ -3,6 +3,7 @@ package Controller;
 import Model.Record;
 import ddf.minim.AudioOutput;
 import javafx.event.EventHandler;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import java.util.Observable;
 import java.util.Observer;
@@ -60,4 +61,15 @@ public class RecordController extends Observable{
             }
         }
     };
+    public EventHandler<MouseEvent> changeBPM = new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent event) {
+            if(event.getButton() == MouseButton.PRIMARY){
+                if(event.getClickCount() == 2){
+
+                }
+            }
+        }
+    };
+
 }

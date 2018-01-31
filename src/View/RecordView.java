@@ -5,6 +5,7 @@ import Controller.RecordController;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -19,21 +20,27 @@ public class RecordView extends Pane {
     private HBox recordInfos;
     private Button record;
     private Button stop;
+    private Label time;
+    private Label bpm1;
+    private Label bpm2;
+    private TextField bpmTf;
     private RecordController recordController;
     private Observer observer;
 
     public RecordView(PadController padController, Observer obs){
         observer = obs;
         rootRV = new VBox(20);
-        Label time = new Label("--:--/--:--");
-        Label bpm = new Label("100 BPM");
-        recordInfos = new HBox(10);
+        time = new Label("--:--/--:--");
+        bpm1 = new Label("100");
+        bpm2 = new Label("BPM");
+        bpmTf = new TextField(bpm1.getText());
+        recordInfos = new HBox(5);
         recordButtons = new HBox(30);
         record = new Button();
         stop = new Button();
 
         rootRV.setAlignment(Pos.BASELINE_CENTER);
-        recordInfos.getChildren().addAll(time, bpm);
+        recordInfos.getChildren().addAll(time, bpm1,bpm2);
         recordButtons.getChildren().addAll(record, stop);
         this.getChildren().add(rootRV);
         rootRV.getChildren().addAll(recordInfos, recordButtons);
@@ -42,11 +49,13 @@ public class RecordView extends Pane {
         record.getStyleClass().add("recordButton");
         stop.getStyleClass().add("stopButton");
         time.getStyleClass().addAll("title","time");
-        bpm.getStyleClass().addAll("title","time");
+        bpm1.getStyleClass().addAll("title","time");
+        bpm2.getStyleClass().addAll("title","time","textP");
 
         recordController = new RecordController(padController, observer);
 
         record.addEventHandler(MouseEvent.MOUSE_CLICKED, recordController.recordClicked);
+        bpm1.addEventHandler(MouseEvent.MOUSE_CLICKED, recordController.changeBPM);
     }
 
     public RecordController getRecordController() {
