@@ -1,7 +1,7 @@
 package Controller;
 
 import javafx.event.EventHandler;
-import javafx.scene.control.TextInputDialog;
+import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 

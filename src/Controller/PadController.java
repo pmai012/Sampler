@@ -10,7 +10,7 @@ import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextInputDialog;
+//import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.*;
 
 import java.io.File;
@@ -149,7 +149,7 @@ public class PadController {
         }
     };
 
-
+/*
      public EventHandler<MouseEvent> scrollstartsbeatsperminute = new EventHandler<MouseEvent>() {
 
 
@@ -166,6 +166,8 @@ public class PadController {
              }
 
      };
+
+     */
 
 
 
