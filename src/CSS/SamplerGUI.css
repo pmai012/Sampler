@@ -156,7 +156,7 @@
 }
 
 .recordInfos {
-    -fx-padding: 10 20 0 0;
+    -fx-padding: 10 10 0 0;
 }
 
 .stopButton {
@@ -177,6 +177,10 @@
 }
 
 .text {
+}
+
+.textP {
+    -fx-padding: 0 0 0 0;
 }
 
 .time {

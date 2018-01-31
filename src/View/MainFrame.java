@@ -1,6 +1,4 @@
-package View;/**
- * Created by User on 21.12.2017.
- */
+package View;
 
 import Controller.Keyinput;
 import javafx.application.Application;
