@@ -1,11 +1,7 @@
 package Model;
 
 import ddf.minim.AudioOutput;
-import ddf.minim.AudioPlayer;
-import ddf.minim.Minim;
-import ddf.minim.ugens.Instrument;
-import ddf.minim.ugens.Oscil;
-import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
+
 
 /**
  * Created by User on 30.01.2018.
@@ -16,20 +12,14 @@ public class BeatsperMinute {
     long breakmilli;
     AudioOutput output;
     boolean playing = false;
-    Oscil oscil;
-    AudioPlayer player;
+    private String note ="C2";
+
 
 
     public BeatsperMinute(int Bpm, AudioOutput global) {
         super();
         output = global;
         setBpm(Bpm) ;//100;
-
-        Minim minim = new SimpleMinim(true);
-        player = minim.loadFile("F:\\GitHub\\Sampler\\src\\Sound\\KR Bass Drum.wav");
-        oscil = new Oscil(20,0.8f);
-
-
 
 
 
@@ -52,8 +42,8 @@ public class BeatsperMinute {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-                 //  oscil.patch(output);
-                    output.playNote("b");
+                    output.setTempo(bpm);
+                    output.playNote(200000.0f );//19912.1f
                 }
             }
         };
