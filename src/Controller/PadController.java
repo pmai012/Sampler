@@ -21,9 +21,7 @@ import java.util.Observer;
 import static javafx.scene.input.ScrollEvent.SCROLL;
 import static javafx.scene.input.ScrollEvent.SCROLL_STARTED;
 
-/**
- * Created by User on 21.12.2017.
- */
+
 public class PadController {
     private final int ANZAHL = 16;
     private SimpleMinim minim = new SimpleMinim(true);
@@ -181,8 +179,6 @@ public class PadController {
         beat.setBpm(bpm);
 
     }
-
-
 
     public void startpressing(int number) {
 

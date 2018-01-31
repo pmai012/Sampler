@@ -12,9 +12,6 @@ import javafx.scene.layout.VBox;
 
 import java.util.Observer;
 
-/**
- * Created by User on 21.12.2017.
- */
 public class RecordView extends Pane {
 
     private VBox rootRV;
@@ -24,8 +21,6 @@ public class RecordView extends Pane {
     private Button stop;
     private RecordController recordController;
     private Observer observer;
-
-
 
     public RecordView(PadController padController, Observer obs){
         observer = obs;

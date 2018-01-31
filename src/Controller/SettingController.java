@@ -13,9 +13,6 @@ import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
-/**
- * Created by User on 21.12.2017.
- */
 public class SettingController extends Observable {
 
     private Stage stage = null;
@@ -26,7 +23,6 @@ public class SettingController extends Observable {
     private String saveSourcelocation;
     private  Pad[] pads;
     private Observer observer;
-
 
     public SettingController(Stage stage, Pad[] pads, Observer observer, RecordController recordController) {
 
@@ -85,7 +81,6 @@ public class SettingController extends Observable {
         saveFilelocation = saveDialog.Savedialog(stage, "Wo möchten sie die Datei speichern?");
         saveDialog.save(pads, saveFilelocation, recordController.getPath());
     }
-
 
     public void open() {
 
@@ -160,6 +155,3 @@ public class SettingController extends Observable {
 
 
 }
-
-
-

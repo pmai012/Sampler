@@ -17,8 +17,6 @@ import java.util.ArrayList;
 
 public class SoundView extends Pane {
 
-
-
     private SoundController soundController;
     private VBox soundpane;
     private ObservableList<String> soundObList;
@@ -57,10 +55,7 @@ public class SoundView extends Pane {
 
         fxOff.setOnAction(padController.metronomaus);
         fxOn.setOnAction(padController.metronoman);
-
     }
-
-
 
     public SoundController getSoundController() {
         return soundController;
