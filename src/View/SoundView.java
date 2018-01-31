@@ -8,14 +8,16 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Observable;
 
 
-public class SoundView extends Pane {
+public class SoundView   extends Pane {
 
     private SoundController soundController;
     private VBox soundpane;
@@ -35,6 +37,7 @@ public class SoundView extends Pane {
             soundObList.add(name);
         }
         soundlistview.setItems(soundObList);
+        soundlistview.setOnDragDetected(soundController.take);
         fxOn = new RadioButton("An");
         fxOff = new RadioButton("Aus");
         fxOff.setSelected(true);
