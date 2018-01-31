@@ -2,10 +2,10 @@ Folgende Probleme haben wir noch (bei Beheben bitte löschen!
 
 
 
--Shortcuts müssen noch in Runtime initalisiert werden
- Kurzes drücken funktioniert nicht
+-Shortcuts müssen noch in Runtime initalisiert werden  keine prorität
 
- -recorddatei sollte nicht beim starten erstellt sondern beim aufnehmen
+
+ -recorddatei sollte nicht beim starten erstellt sondern beim aufnehmen hohe priorität
 
 -Beim starten des Programms soll ein ordner im musikordner
  des benutzers erstellt werden (falls noch nicht vorhanden),
@@ -17,3 +17,6 @@ Folgende Probleme haben wir noch (bei Beheben bitte löschen!
 
 -bpm anzeige durch doppelklick in ein textfield ändern
 und dort den wert für den oszillator
+
+- speichern überprüfen  --julian
+- neues projekt anlegen funzt nicht

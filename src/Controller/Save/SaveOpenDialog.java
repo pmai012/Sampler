@@ -68,6 +68,9 @@ private String recordpathfrompadsave;
     }
 
 
+    public void reset(){
+
+    }
 
 
     /**
