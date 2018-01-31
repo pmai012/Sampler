@@ -191,7 +191,7 @@ public class Pad extends Observable implements Serializable {
         endpoint = time;
     }
 
-    private boolean hasEffects() {
+    public boolean hasEffects() {
         if (this.effekte != null) {
             return !this.effekte.isEmpty();
         }

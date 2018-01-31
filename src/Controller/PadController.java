@@ -183,18 +183,14 @@ public class PadController {
             pad[number].threadstarten();
             pad[number].playSound();
 
-
         }
-
     }
-
     public void cleanpads(){
         for (int i = 0; i < 16; i++){
             pad[i] = null;
         }
 
     }
-
 
     public void padclick(int number) {
         if (pad[number] == null) {
