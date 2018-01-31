@@ -3,9 +3,12 @@ package View;
 import Controller.PadController;
 import Controller.SoundController;
 import Model.Pad;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -24,6 +27,7 @@ public class PadView extends Pane  {
     private Observer observer;
     private ContextMenu contextMenu;
     private MenuItem addEffect;
+    private MenuItem editEffect;
     private MenuItem deleteEffect;
     private Button[] pads;
     private Button pad1, pad2, pad3, pad4, pad5, pad6, pad7, pad8,
@@ -34,8 +38,11 @@ public class PadView extends Pane  {
         rootPV = new BorderPane();
         contextMenu = new ContextMenu();
         addEffect = new MenuItem("Effekt hinzufügen");
+        editEffect = new MenuItem("Effekt bearbeiten");
         deleteEffect = new MenuItem("Effekt löschen");
-        contextMenu.getItems().addAll(addEffect,deleteEffect);
+        editEffect.setDisable(true);
+        deleteEffect.setDisable(true);
+        contextMenu.getItems().addAll(addEffect,editEffect,deleteEffect);
         padBox = new TilePane(Orientation.HORIZONTAL);
         padBox.setHgap(10);
         padBox.setVgap(10);
@@ -99,6 +106,9 @@ public class PadView extends Pane  {
         }
         addEffect.setOnAction(padController.contextMenu_addEffectClicked);
     }
+        deleteEffect.setOnAction(padController.contextMenu_deleteEffectClicked);
+        editEffect.setOnAction(padController.contextMenu_editEffectClicked);
+
 
     public Pad[] getPads(){
         return padController.getPad();
@@ -131,7 +141,16 @@ public class PadView extends Pane  {
                     } else if (notnull[i] < 16) {
                         pads[notnull[i]].getStyleClass().add("padRUsed");
                     }
-
+                if(getPads()[notnull[i]].hasEffects()){
+                        addEffect.setDisable(true);
+                        deleteEffect.setDisable(false);
+                        editEffect.setDisable(false);
+                }
+                else {
+                    addEffect.setDisable(false);
+                    deleteEffect.setDisable(true);
+                    editEffect.setDisable(true);
+                }
             }
         }
 

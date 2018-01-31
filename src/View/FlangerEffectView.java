@@ -15,12 +15,12 @@ import javafx.scene.paint.Color;
 public class FlangerEffectView extends Pane {
 
     private GridPane root;
-    private Slider delayLevel = new Slider(0,1,0);
-    private Slider rate = new Slider(0,1,0);
-    private Slider depth = new Slider(0,1,0);
-    private Slider feedback = new Slider(0,1,0);
-    private Slider wet = new Slider(0,1,0);
-    private Slider dry = new Slider(0,1,0);
+    private Slider delayLevel;
+    private Slider rate;
+    private Slider depth;
+    private Slider feedback;
+    private Slider wet;
+    private Slider dry;
 
     final Label delay = new Label("Delay Level:");
     final Label effectRate = new Label("Flanger Rate:");
@@ -29,16 +29,47 @@ public class FlangerEffectView extends Pane {
     final Label wetRate = new Label("Wet Rate:");
     final Label dryRate = new Label("Dry Rate:");
 
-    final Label delayRate = new Label (Double.toString(delayLevel.getValue()));
-    final Label rateValue = new Label (Double.toString(rate.getValue()));
-    final Label depthValue = new Label (Double.toString(depth.getValue()));
-    final Label feedbackValue = new Label (Double.toString(feedback.getValue()));
-    final Label wetValue = new Label (Double.toString(wet.getValue()));
-    final Label dryValue = new Label (Double.toString(dry.getValue()));
+    private Label delayRate;
+    private Label rateValue;
+    private Label depthValue;
+    private Label feedbackValue;
+    private Label wetValue;
+    private Label dryValue;
 
     //delay,rate,depth,feedback,wet,dry
 
-    public FlangerEffectView(){
+    public FlangerEffectView(double delayValue, double rateValue, double depthValue, double feedbackValue, double wetValue, double dryValue){
+        this.delayLevel = new Slider(0,1,delayValue);
+        this.rate = new Slider(0,1,rateValue);
+        this.depth = new Slider(0,1,depthValue);
+        this.feedback = new Slider(0,1,feedbackValue);
+        this.wet = new Slider(0,1,wetValue);
+        this.dry = new Slider(0,1,dryValue);
+        this.delayRate = new Label (Double.toString(this.delayLevel.getValue()));
+        this.rateValue = new Label (Double.toString(this.rate.getValue()));
+        this.depthValue = new Label (Double.toString(this.depth.getValue()));
+        this.feedbackValue = new Label (Double.toString(this.feedback.getValue()));
+        this.wetValue = new Label (Double.toString(this.wet.getValue()));
+        this.dryValue = new Label (Double.toString(this.dry.getValue()));
+        init();
+    }
+
+    public FlangerEffectView() {
+       delayLevel = new Slider(0,1,0);
+       rate = new Slider(0,1,0);
+       depth = new Slider(0,1,0);
+       feedback = new Slider(0,1,0);
+       wet = new Slider(0,1,0);
+       dry = new Slider(0,1,0);
+        delayRate = new Label (Double.toString(delayLevel.getValue()));
+        rateValue = new Label (Double.toString(rate.getValue()));
+        depthValue = new Label (Double.toString(depth.getValue()));
+        feedbackValue = new Label (Double.toString(feedback.getValue()));
+        wetValue = new Label (Double.toString(wet.getValue()));
+        dryValue = new Label (Double.toString(dry.getValue()));
+       init();
+    }
+    private void init(){
         setId("Flanger");
         root = new GridPane();
         rate.setShowTickLabels(true);

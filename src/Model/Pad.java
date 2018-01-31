@@ -1,6 +1,7 @@
 package Model;
 
 import Controller.PadController;
+import Model.Effects.Effect;
 import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
@@ -41,22 +42,38 @@ public class Pad extends Observable implements Serializable {
     private Observer observer;
     private int starter = 0;
     private List<UGen> effekte;
+    private List<Effect> effects;
 
-    public String getPath() {
+    public String getPath(){
         return path;
     }
 
-    public List<UGen> getEffekte() {
+    public List<UGen> getEffekte(){
         return effekte;
     }
 
-    public void addEffect(UGen effect) {
+    public void addEffect(Effect effect){
         if (effekte == null) {
+            effects = new ArrayList<Effect>();
             effekte = new ArrayList<UGen>();
-            effekte.add(effect);
-        } else {
-            effekte.add(effect);
+            effects.add(effect);
+            effekte.add(effect.getEffect());
+            sendupdate();
         }
+    }
+    public void deleteEffect(){
+        if (effekte != null) {
+            effekte.remove(0);
+            effects.remove(0);
+            effekte = null;
+            effects = null;
+            sendupdate();
+        }
+
+    }
+    public Effect getEffect(){
+
+        return effects.get(0);
     }
 
     public KeyCode getShortcut() {
@@ -114,7 +131,6 @@ public class Pad extends Observable implements Serializable {
         filePlayer = new FilePlayer(minim.loadFileStream(pathtoSound, 1024, true));
         this.addObserver(this.observer);
         System.out.println("Observer: " + countObservers());
-
     }
 
     public void playSound() {
@@ -151,7 +167,6 @@ public class Pad extends Observable implements Serializable {
     public void sendupdate() {
         setChanged();
         notifyObservers("pad");
-
     }
 
     public AudioOutput getOutput() {

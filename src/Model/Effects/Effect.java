@@ -8,8 +8,11 @@ import ddf.minim.UGen;
 /**
  * Created by Pascal on 05.01.2018.
  */
-public abstract class Effect {
+public interface Effect {
 
-    abstract UGen getEffect();
-    abstract void patchToOutput(Pad actualPad);
+
+    String getName();
+    UGen getEffect();
+    void patchToOutput(Pad actualPad);
+    double[] returnValues();
 }

@@ -15,15 +15,32 @@ import javafx.scene.paint.Color;
  */
 public class DelayEffectView extends Pane {
 
-    private Slider decayLevel = new Slider(0,1,0);
-    private Slider delayLevel = new Slider(0,1,0);
+    private Slider decayLevel;
+    private Slider delayLevel;
     private GridPane root;
     final Label decay = new Label("Decay Level:");
     final Label delay = new Label("Delay Level:");
-    final Label decayRate = new Label (Double.toString(decayLevel.getValue()));
-    final Label delayRate = new Label (Double.toString(delayLevel.getValue()));
+    private Label decayRate;
+    private Label delayRate;
 
-    public DelayEffectView(){
+    public DelayEffectView(double decaylevel, double delaylevel)
+    {
+        decayLevel = new Slider(0,1,decaylevel);
+        delayLevel = new Slider(0,1,delaylevel);
+        decayRate = new Label (Double.toString(decayLevel.getValue()));
+        delayRate = new Label (Double.toString(delayLevel.getValue()));
+        init();
+    }
+
+    public DelayEffectView() {
+
+        decayLevel = new Slider(0, 1, 0);
+        delayLevel = new Slider(0, 1, 0);
+        decayRate = new Label (Double.toString(decayLevel.getValue()));
+        delayRate = new Label (Double.toString(delayLevel.getValue()));
+        init();
+    }
+     private void init(){
         setId("Delay");
         root = new GridPane();
         decayLevel.setShowTickLabels(true);
