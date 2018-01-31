@@ -10,12 +10,16 @@ import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.*;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observer;
+
+import static javafx.scene.input.ScrollEvent.SCROLL;
+import static javafx.scene.input.ScrollEvent.SCROLL_STARTED;
 
 /**
  * Created by User on 21.12.2017.
@@ -121,6 +125,8 @@ public class PadController {
 
     };
 
+
+
     public EventHandler<ActionEvent> metronomaus = new EventHandler<ActionEvent>() {
 
         @Override
@@ -142,6 +148,38 @@ public class PadController {
             }
         }
     };
+
+
+     public EventHandler<MouseEvent> scrollstartsbeatsperminute = new EventHandler<MouseEvent>() {
+
+
+         @Override
+         public void handle(MouseEvent event) {
+             TextInputDialog input = new TextInputDialog(Integer.toString(beat.getBpm()));
+             input.setTitle("Beats per Minute");
+             input.setHeaderText("Wie viel BPM?");
+             input.setContentText("Beats per Minute:");
+
+
+
+
+             }
+
+     };
+
+
+
+
+    public String beattoString(){
+        String beats = Integer.toString(beat.getBpm());
+        return beats +" BPM";
+    }
+
+    public void setMetronom (int bpm){
+        beat.setBpm(bpm);
+
+    }
+
 
 
     public void startpressing(int number) {

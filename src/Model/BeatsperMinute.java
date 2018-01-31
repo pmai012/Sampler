@@ -12,7 +12,7 @@ public class BeatsperMinute {
     long breakmilli;
     AudioOutput output;
     boolean playing = false;
-    private String note ="C2";
+
 
 
 
@@ -43,13 +43,17 @@ public class BeatsperMinute {
                         e.printStackTrace();
                     }
                     output.setTempo(bpm);
-                    output.playNote(200000.0f );//19912.1f
+                    output.playNote(200000.0f );
                 }
             }
         };
         play.start();
         return output;
     }
+
+    public int getBpm(){
+      return bpm;
+    };
 
     public void setBpm(int bpm) {
         this.bpm = bpm; //default bei 100

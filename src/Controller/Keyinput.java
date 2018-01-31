@@ -1,8 +1,12 @@
 package Controller;
 
 import javafx.event.EventHandler;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -28,6 +32,10 @@ public class Keyinput implements EventHandler<KeyEvent> {
         //BEispiel
         padshortcut[0] = KeyCode.Z;
     }
+
+
+
+
 
     //Tasteneingaben
     @Override
