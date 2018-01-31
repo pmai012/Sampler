@@ -17,9 +17,7 @@ public class Keyinput implements EventHandler<KeyEvent> {
 
 
 
-    public void setShortCut(KeyCode input, int number) {
-        padshortcut[number] = input;
-    }
+
 
     public Keyinput(){
 
