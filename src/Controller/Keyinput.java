@@ -52,7 +52,7 @@ public class Keyinput implements EventHandler<KeyEvent> {
         }
 
         for (int i = 0; i < 16; i++) {
-            if (event.getCode() == pads[i].getShortcut()) {
+            if (pads[i] != null && event.getCode() == pads[i].getShortcut()) {
 
                 padController.startpressing(i);
 

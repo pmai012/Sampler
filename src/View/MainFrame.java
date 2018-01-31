@@ -85,7 +85,7 @@ public class MainFrame extends Application implements Observer {
 
         if(arg.equals("padsnew") ){
 
-            padView.cleanVisual();
+      //      padView.cleanVisual();
 
         }
 
