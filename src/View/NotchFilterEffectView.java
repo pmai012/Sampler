@@ -38,9 +38,9 @@ public class NotchFilterEffectView extends Pane {
         lbl_CutoffValue.setTextFill(Color.WHITESMOKE);
         lbl_SampleRateValue.setTextFill(Color.WHITESMOKE);
 
-        root.setPadding(new Insets(10, 10, 10, 0));
+        root.setPadding(new Insets(10, 5, 10, 0));
         root.setVgap(50);
-        root.setHgap(40);
+        root.setHgap(30);
 
         this.getChildren().add(root);
         GridPane.setConstraints(lbl_Bandwidth,0,1);

@@ -26,7 +26,8 @@ public class SoundView extends Pane {
 
     public SoundView(PadController padController){
 
-        soundController = new SoundController("../Sound");
+        soundController = new SoundController(System.getProperty("user.home")
+                .concat("//Music").concat("//" + "SamplerSoundfiles"));
         soundlistview = new ListView();
         soundObList = FXCollections.observableArrayList();
 

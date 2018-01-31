@@ -38,7 +38,7 @@ public class BitCrushEffectView extends Pane {
 
         root.setPadding(new Insets(10, 10, 10, 0));
         root.setVgap(50);
-        root.setHgap(40);
+        root.setHgap(30);
 
         this.getChildren().add(root);
         GridPane.setConstraints(lbl_BitRes,0,1);
