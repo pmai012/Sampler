@@ -17,9 +17,15 @@ public class Record extends Observable{
     private AudioRecorder record;
     private Minim minim;
     private String defaultPath = System.getProperty("user.home").concat("//Music") + "/myrecording.wav";
-    private String recordPath;
+    private String recordPath = "";
     private Observer observer;
 
+    public Record(AudioOutput soundToRecord, Observer observer, String path){
+        this.minim = new SimpleMinim(true);
+        this.record = minim.createRecorder(soundToRecord, path);
+        this.observer = observer;
+        this.addObserver(this.observer);
+    }
 
     public Record(AudioOutput soundToRecord, Observer observer){
         this.minim = new SimpleMinim(true);
@@ -40,14 +46,12 @@ public class Record extends Observable{
         record.endRecord();
         record.save();
     }
+    public String getDefaultPath(){
+            return this.defaultPath;
+    }
 
     public String getRecordPath(){
-        if (recordPath == null){
-            return defaultPath;
-        }else {
-            return recordPath;
-        }
-
+        return this.recordPath;
     }
 
     public void sendupdate(){
