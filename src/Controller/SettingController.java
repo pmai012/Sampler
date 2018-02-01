@@ -110,7 +110,7 @@ public class SettingController extends Observable {
             pads[i] = null;
         }
         setChanged();
-        notifyObservers("padsnew");
+        notifyObservers("pad");
 
     }
 

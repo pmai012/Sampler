@@ -87,33 +87,7 @@ public class PadController {
     }
 
 
-    public int[] whoisnotnull() {
 
-        boolean[] isnotnull = new boolean[ANZAHL];
-        for (int i = 0; i < pad.length; i++) {
-
-
-            if (pad[i] != null) { //&& !pad[i].isNull()
-                isnotnull[i] = true;
-                System.out.println(i);
-            }
-        }
-        int trues = 0;
-        for (int i = 0; i < isnotnull.length; i++) {
-            if (isnotnull[i] == true) {
-                trues++;
-            }
-        }
-        int[] ausgabe = new int[trues];
-        int pos = 0;
-        for (int i = 0; i < isnotnull.length; i++) {
-            if (isnotnull[i] == true) {
-                ausgabe[pos] = i;
-                pos++;
-            }
-        }
-        return ausgabe;
-    }
 
     public void setPad(Pad[] pad) {
         this.pad = pad;
@@ -185,12 +159,7 @@ public class PadController {
 
         }
     }
-    public void cleanpads(){
-        for (int i = 0; i < 16; i++){
-            pad[i] = null;
-        }
 
-    }
 
     public void padclick(int number) {
         if (pad[number] == null) {

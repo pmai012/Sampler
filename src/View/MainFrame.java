@@ -81,11 +81,7 @@ public class MainFrame extends Application implements Observer {
     @Override
     public void update(Observable o, Object arg) {
 
-        if(arg.equals("padsnew") ){
 
-      //      padView.cleanVisual();
-
-        }
 
         if(arg.equals("padsladen") ){
         padView.getPadController().setPad(settingView.getSettingController().getpads());

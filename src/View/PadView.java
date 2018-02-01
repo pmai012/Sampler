@@ -131,48 +131,52 @@ public class PadView extends Pane {
 
 
         if(command.equals("pad") ){
-            int[] notnull = padController.whoisnotnull();
-            for (int i = 0; i < notnull.length; i++) {
+            Pad[] pad = getPads();
 
-                    if(notnull[i] < 4){
-                        pads[notnull[i]].getStyleClass().add("padGUsed");
-                    } else if (notnull[i] < 8) {
-                        pads[notnull[i]].getStyleClass().add("padBUsed");
-                    } else if (notnull[i] < 12) {
-                        pads[notnull[i]].getStyleClass().add("padPUsed");
-                    } else if (notnull[i] < 16) {
-                        pads[notnull[i]].getStyleClass().add("padRUsed");
+            for (int i = 0; i < 16; i++) {
+
+                if (pad[i] == null){
+                    pads[i].getStyleClass().add("pad");
+
+                    if (i < 4) {
+                        pads[i].getStyleClass().add("padG");
+                        pads[i].getStyleClass().remove("padGUsed");
+                    }else if (i < 8) {
+                        pads[i].getStyleClass().add("padB");
+                        pads[i].getStyleClass().remove("padBUsed");
+                    }else if (i < 12) {
+                        pads[i].getStyleClass().add("padP");
+                        pads[i].getStyleClass().remove("padPUsed");
+                    } else if (i < 16) {
+                        pads[i].getStyleClass().add("padR");
+                        pads[i].getStyleClass().remove("padRUsed");
                     }
-                if(getPads()[notnull[i]].hasEffects()){
+                }else{
+
+                    if(i < 4){
+                        pads[i].getStyleClass().add("padGUsed");
+                    } else if (i < 8) {
+                        pads[i].getStyleClass().add("padBUsed");
+                    } else if (i < 12) {
+                        pads[i].getStyleClass().add("padPUsed");
+                    } else if (i< 16) {
+                        pads[i].getStyleClass().add("padRUsed");
+                    }
+                    if(pad[i].hasEffects()){
                         addEffect.setDisable(true);
                         deleteEffect.setDisable(false);
                         editEffect.setDisable(false);
+                    }
+                    else {
+                        addEffect.setDisable(false);
+                        deleteEffect.setDisable(true);
+                        editEffect.setDisable(true);
+                    }
                 }
-                else {
-                    addEffect.setDisable(false);
-                    deleteEffect.setDisable(true);
-                    editEffect.setDisable(true);
-                }
+
             }
         }
 
     }
 
-    public void cleanVisual(int i) {
-        pads[i].getStyleClass().add("pad");
-
-        if (i < 4) {
-            pads[i].getStyleClass().add("padG");
-            pads[i].getStyleClass().remove("padGUsed");
-        }else if (i < 8) {
-            pads[i].getStyleClass().add("padB");
-            pads[i].getStyleClass().remove("padBUsed");
-        }else if (i < 12) {
-            pads[i].getStyleClass().add("padP");
-            pads[i].getStyleClass().remove("padPUsed");
-        } else if (i < 16) {
-            pads[i].getStyleClass().add("padR");
-            pads[i].getStyleClass().remove("padRUsed");
-        }
-    }
 }
