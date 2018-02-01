@@ -34,7 +34,7 @@ public class MainFrame extends Application implements Observer {
         padView = new PadView(this);
         recordView = new RecordView(padView.getPadController(),this);
         soundView = new SoundView(padView.getPadController());
-        soundView.getSoundController().createSounddir();
+
     }
 
     public void init() {
@@ -74,6 +74,7 @@ public class MainFrame extends Application implements Observer {
         root.setOnKeyPressed(keyinput);
 
         primaryStage.show();
+
     }
 
     @Override

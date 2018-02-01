@@ -6,12 +6,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.*;
 
 import java.io.*;
-import java.nio.channels.FileChannel;
 import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.nio.file.LinkOption.NOFOLLOW_LINKS;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 
@@ -122,21 +120,30 @@ public class SoundController {
         }
     };
 
+
     public void createSounddir() {
 
         String dirpath = "SamplerSoundfiles";
-        Path abspath = Paths.get(System.getProperty("user.home").concat("//Music").concat("//" + dirpath));
-        File sounddir = new File(System.getProperty("user.home").concat("//Music").concat("//" + dirpath));
-        System.out.println(sounddir.mkdir());
-        if (System.getProperty("user.home").concat("//Music").concat("//" + dirpath).isEmpty()) {
-            try {
-                Files.copy(Paths.get("Sound/F7 Bass 1.wav"),
-                        (Paths.get(System.getProperty("user.home").concat("//Music").concat("//" + dirpath))));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
 
+        File[] fileArray = new File[3];
+        fileArray[0] = new File("Sound/F7 Bass 1.wav");
+        fileArray[1] = new File("Sound/HiHat 1.wav");
+        fileArray[2] = new File("Sound/Snare 1.wav");
+
+        File sounddir = new File(System.getProperty("user.home").concat("//Music").concat("//" + dirpath));
+
+
+        for (File f : fileArray) {
+            if (f != null) {
+                try {
+                    Files.copy(f.toPath(),
+                            (Paths.get(System.getProperty("user.home").concat("//Music").concat("//" + dirpath + "//" + f.getName()))), REPLACE_EXISTING);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
+
 
     }
 }

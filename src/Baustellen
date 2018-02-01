@@ -2,7 +2,7 @@ Folgende Probleme haben wir noch (bei Beheben bitte löschen!
 
 
 
--Shortcuts müssen noch in Runtime initalisiert werden  keine prorität
+-Shortcuts müssen noch in Runtime initalisiert werden  nicht wichtig
 
 
  -recorddatei sollte nicht beim starten erstellt sondern beim aufnehmen hohe priorität
@@ -19,3 +19,5 @@ Folgende Probleme haben wir noch (bei Beheben bitte löschen!
 - speichern überprüfen  --julian
 
 Soundcontroll 111 Hat Probleme vom Oberverzeichnis ins unterverzeichnis dateien zu kopieren
+
+Files für default müssen aktualisiert hwerde
