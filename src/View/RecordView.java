@@ -7,6 +7,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -28,6 +29,8 @@ public class RecordView extends Pane {
     private RecordController recordController;
     private Observer observer;
     private PadController padController;
+    private Tooltip bpmTip;
+    private Tooltip recordTip;
 
     public RecordView(PadController padController, Observer obs){
         this.padController = padController;
@@ -42,8 +45,13 @@ public class RecordView extends Pane {
         recordButtons = new HBox(30);
         record = new Button();
         stop = new Button();
+        bpmTip = new Tooltip("Doppelklick zum ändern");
+        recordTip = new Tooltip("Drücken zum aufnehmen");
+        bpmTip.getStyleClass().add("tooltip");
+        recordTip.getStyleClass().add("tooltip");
         bpm1.textProperty().bind(bpmTf.textProperty());
-
+        bpm1.setTooltip(bpmTip);
+        record.setTooltip(recordTip);
         rootRV.setAlignment(Pos.BASELINE_CENTER);
         recordInfos.getChildren().addAll(time, bpm1,bpm2);
         recordButtons.getChildren().addAll(record, stop);

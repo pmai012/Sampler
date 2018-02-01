@@ -6,13 +6,11 @@ import Model.Pad;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
-import javafx.scene.control.Button;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 
+import javax.tools.Tool;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -30,6 +28,7 @@ public class PadView extends Pane {
     private MenuItem editEffect;
     private MenuItem deleteEffect;
     private MenuItem deleteSound;
+    private Tooltip padTip;
     private Button[] pads;
     private Button pad1, pad2, pad3, pad4, pad5, pad6, pad7, pad8,
             pad9, pad10, pad11, pad12, pad13, pad14, pad15, pad16;
@@ -73,6 +72,11 @@ public class PadView extends Pane {
         pads = new Button[]{pad1, pad2, pad3, pad4, pad5, pad6, pad7, pad8,
                 pad9, pad10, pad11, pad12, pad13, pad14, pad15, pad16};
         rootPV.setCenter(padBox);
+        padTip = new Tooltip("Linksklick zum abspielen\nRechtsklick für Effekte");
+        padTip.getStyleClass().add("tooltip");
+        for(Button pad: pads){
+            pad.setTooltip(padTip);
+        }
 
         for (Button pad : pads) {
             padBox.getChildren().add(pad);
