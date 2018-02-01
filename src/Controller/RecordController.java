@@ -10,6 +10,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+
+import java.io.File;
+import java.io.FilenameFilter;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -19,10 +22,12 @@ public class RecordController extends Observable{
     private Record record;
     private Observer observer;
     private RecordView view;
+    private PadController padController;
 
     public RecordController(PadController ref, Observer observer, RecordView view)
     {
-        this.record = new Record(ref.getGlobalOut(),observer);
+        this.padController = ref;
+        this.record = new Record(padController.getGlobalOut(),observer);
         this.observer = observer;
         this.view = view;
     }
@@ -52,8 +57,15 @@ public class RecordController extends Observable{
         else
         {
             System.out.println("START");
-            record.startRecording();
-
+            if (!record.getRecordPath().equals("")){
+                String path = record.getRecordPath();
+                record = null;
+                record = new Record(padController.getGlobalOut(),observer, countRecording(path));
+                record.startRecording();
+            }
+            else{
+                record.startRecording();
+            }
         }
     }
     public EventHandler<MouseEvent> stopClicked = new EventHandler<MouseEvent>() {
@@ -62,9 +74,6 @@ public class RecordController extends Observable{
             if (record.isRecording()){
                 System.out.println("STOP");
                 record.stopRecording();
-
-
-
             }
         }
     };
@@ -113,5 +122,23 @@ public class RecordController extends Observable{
             }
         }
     };
+    private String countRecording(String path){
+        File file = new File(path);
+        FilenameFilter filter = new FilenameFilter() {
+            @Override
+            public boolean accept(File dir, String name) {
+                String accept = name.toLowerCase();
+                if(accept.contains("recording") && accept.contains(".wav"))
+                {
+                    return true;
+                }
+                else {
+                    return false;
+                }
+            }
+        };
+        String[] recordings = file.list(filter);
+        return path.concat("//" + "recording("+recordings.length+").wav");
+    }
 
 }
