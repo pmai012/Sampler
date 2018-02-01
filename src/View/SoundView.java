@@ -33,11 +33,14 @@ public class SoundView   extends Pane {
         soundlistview = new ListView();
         soundObList = FXCollections.observableArrayList();
 
+
         for (String name: soundController.getDirList()) {
             soundObList.add(name);
         }
         soundlistview.setItems(soundObList);
         soundlistview.setOnDragDetected(soundController.take);
+        soundlistview.setOnDragOver(soundController.acceptdrag);
+        soundlistview.setOnDragDropped(soundController.getData);
         fxOn = new RadioButton("An");
         fxOff = new RadioButton("Aus");
         fxOff.setSelected(true);

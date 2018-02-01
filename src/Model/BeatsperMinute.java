@@ -42,7 +42,11 @@ public class BeatsperMinute {
                         e.printStackTrace();
                     }
                     output.setTempo(bpm);
-                    output.playNote(200000.0f);
+
+
+                    output.playNote(21000);
+
+
                 }
             }
         };
