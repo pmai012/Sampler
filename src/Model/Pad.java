@@ -122,7 +122,12 @@ public class Pad extends Observable implements Serializable {
         }
 
     }
-
+//Paddummy nur zum Informieren der Mainframe
+    public Pad (Observer observer, String msg){
+        addObserver(observer);
+        setChanged();
+        notifyObservers(msg);
+    }
     public Pad(String pathtoSound, Observer observer, AudioOutput globalOut) {
         this.observer = observer;
         path = pathtoSound;
