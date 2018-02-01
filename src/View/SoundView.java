@@ -31,6 +31,7 @@ public class SoundView   extends Pane {
         for (String name: soundController.getDirList()) {
             soundObList.add(name);
         }
+
         soundlistview.setItems(soundObList);
         soundlistview.setOnDragDetected(soundController.take);
         soundlistview.setOnDragOver(soundController.acceptdrag);
