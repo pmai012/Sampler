@@ -223,8 +223,8 @@ public class PadController {
         @Override
         public void handle(ActionEvent event) {
             getPadAtIndex(getClickedPadIndex()).stop();
-
             deletePad(getClickedPadIndex()-1);
+
             Pad dummy = new Pad(observer, "pad");
             return;
         }
