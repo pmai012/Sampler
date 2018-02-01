@@ -277,8 +277,13 @@ public class PadController {
                                 Keyinput keyinput = new Keyinput();
                                 pad[i].setShortcut(keyinput.getdefaultkeyCode(i));
 
-                                System.out.println(path);
-                                return;
+                               while (pad[i] != null && i < 16){
+                                   i++;
+                               }
+                               if (i >15){
+                                   return;
+                               }
+
                             }
                         }
 
