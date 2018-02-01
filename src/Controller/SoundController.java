@@ -5,9 +5,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.scene.input.*;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.nio.channels.FileChannel;
 import java.nio.file.*;
 import java.util.ArrayList;
@@ -102,14 +100,10 @@ public class SoundController {
                 String path = files.get(i).toPath().toString();
 
                 if (path.endsWith(".mp3") || path.endsWith(".wav")) {
-
-                    Path source = files.get(i).toPath();
-                    FileSystem fs = FileSystems.getDefault();
-                    String musicpath = System.getProperty("user.home").concat("//Music").concat("//" + "SamplerSoundfiles");
-                    Path target = fs.getPath(musicpath);
                     try {
 
-                        Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING);
+                        Files.copy(Paths.get(files.get(i).getAbsolutePath()),
+                                (Paths.get(System.getProperty("user.home").concat("//Music").concat("//SamplerSoundfiles//" + files.get(i).getName()))), REPLACE_EXISTING);
 
                     } catch (FileAlreadyExistsException e) {
                         Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -128,16 +122,16 @@ public class SoundController {
         }
     };
 
-    public void createSounddir(){
+    public void createSounddir() {
 
         String dirpath = "SamplerSoundfiles";
         Path abspath = Paths.get(System.getProperty("user.home").concat("//Music").concat("//" + dirpath));
-        File sounddir = new File(System.getProperty("user.home").concat("//Music").concat("//"+dirpath));
+        File sounddir = new File(System.getProperty("user.home").concat("//Music").concat("//" + dirpath));
         System.out.println(sounddir.mkdir());
-        if(System.getProperty("user.home").concat("//Music").concat("//"+dirpath).isEmpty()){
-            try{
+        if (System.getProperty("user.home").concat("//Music").concat("//" + dirpath).isEmpty()) {
+            try {
                 Files.copy(Paths.get("Sound/F7 Bass 1.wav"),
-                        (Paths.get(System.getProperty("user.home").concat("//Music").concat("//"+dirpath))));
+                        (Paths.get(System.getProperty("user.home").concat("//Music").concat("//" + dirpath))));
             } catch (IOException e) {
                 e.printStackTrace();
             }

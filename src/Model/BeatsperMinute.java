@@ -61,9 +61,12 @@ public class BeatsperMinute {
     ;
 
     public void setBpm(int bpm) {
-        this.bpm = bpm; //default bei 100
-        breaktime = (60.0f / bpm);
-        breakmilli = (long) (breaktime * 1000);
+        if (bpm > 1){
+            this.bpm = bpm; //default bei 100
+            breaktime = (60.0f / bpm);
+            breakmilli = (long) (breaktime * 1000);
+        }
+
     }
 
 

@@ -40,6 +40,7 @@ public class PadController {
     private int padIndex;
     private BeatsperMinute beat;
 
+
     public PadController(Button[] pads, Observer observer, PadView view) {
         pad = new Pad[ANZAHL];
         this.view = view;
@@ -49,8 +50,12 @@ public class PadController {
 
         for (int i = 0; i < ANZAHL; i++) {
             button[i] = pads[i];
+
         }
+
+
     }
+
 
     public void startbeat() {
         beat.play();
