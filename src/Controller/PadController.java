@@ -114,7 +114,7 @@ public class PadController {
         public void handle(MouseEvent event) {
 
             for (int i = 0; i < ANZAHL; i++) {
-                if (event.getSource().equals(button[i])) {
+                if (event.getSource().equals(button[i]) && event.getButton().equals(MouseButton.PRIMARY)) {
 
                     startpressing(i);
                 }
@@ -168,10 +168,11 @@ public class PadController {
             for (int i = 0; i < ANZAHL; i++) {
                 if (event.getSource().equals(button[i])) {
 
-                    padclick(i);
+
 
                     //LINKSKLICK
-                    if (event.getButton() == MouseButton.PRIMARY) {
+                    if (event.getButton().equals(MouseButton.PRIMARY)) {
+                        padclick(i);
                         System.out.println(i + " linksclick");
                         if (pad[i] != null) {
 
@@ -184,14 +185,13 @@ public class PadController {
                         }
 
                         return;
-                    }
-                    //RECHTSCLICK
-                    if (event.getButton() == MouseButton.SECONDARY) {
+                    }else                //RECHTSCLICK
+                    if (event.getButton().equals(MouseButton.SECONDARY)) {
                         System.out.println(i + " rechtsclick");
                         padIndex = i + 1;
                         return;
                     }
-
+                    return;
                 }
             }
         }
