@@ -110,13 +110,11 @@ public class PadView extends Pane {
     }
 
 
-
-
-    public Pad[] getPads(){
+    public Pad[] getPads() {
         return padController.getPad();
     }
 
-    public PadController getPadController(){
+    public PadController getPadController() {
         return padController;
     }
 
@@ -130,44 +128,48 @@ public class PadView extends Pane {
         String command = (String) arg;
 
 
-        if(command.equals("pad") ){
+        if (command.equals("pad")) {
             Pad[] pad = getPads();
 
             for (int i = 0; i < 16; i++) {
 
-                if (pad[i] == null){
+
+                if (pad[i] == null) {
                     pads[i].getStyleClass().add("pad");
 
                     if (i < 4) {
-                        pads[i].getStyleClass().add("padG");
                         pads[i].getStyleClass().remove("padGUsed");
-                    }else if (i < 8) {
-                        pads[i].getStyleClass().add("padB");
-                        pads[i].getStyleClass().remove("padBUsed");
-                    }else if (i < 12) {
-                        pads[i].getStyleClass().add("padP");
-                        pads[i].getStyleClass().remove("padPUsed");
-                    } else if (i < 16) {
-                        pads[i].getStyleClass().add("padR");
-                        pads[i].getStyleClass().remove("padRUsed");
-                    }
-                }else{
+                        pads[i].getStyleClass().add("padG");
 
-                    if(i < 4){
+
+                    } else if (i < 8) {
+
+                        pads[i].getStyleClass().remove("padBUsed");
+                        pads[i].getStyleClass().add("padB");
+                    } else if (i < 12) {
+
+                        pads[i].getStyleClass().remove("padPUsed");
+                        pads[i].getStyleClass().add("padP");
+                    } else if (i < 16) {
+                        pads[i].getStyleClass().remove("padRUsed");
+                        pads[i].getStyleClass().add("padR");
+                    }
+                } else {
+
+                    if (i < 4) {
                         pads[i].getStyleClass().add("padGUsed");
                     } else if (i < 8) {
                         pads[i].getStyleClass().add("padBUsed");
                     } else if (i < 12) {
                         pads[i].getStyleClass().add("padPUsed");
-                    } else if (i< 16) {
+                    } else if (i < 16) {
                         pads[i].getStyleClass().add("padRUsed");
                     }
-                    if(pad[i].hasEffects()){
+                    if (pad[i].hasEffects()) {
                         addEffect.setDisable(true);
                         deleteEffect.setDisable(false);
                         editEffect.setDisable(false);
-                    }
-                    else {
+                    } else {
                         addEffect.setDisable(false);
                         deleteEffect.setDisable(true);
                         editEffect.setDisable(true);

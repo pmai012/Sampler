@@ -17,11 +17,11 @@ public class SettingController extends Observable {
 
     private Stage stage = null;
     private String savelocation;
-    private  File file;
+    private File file;
     private RecordController recordController;
     private String saveFilelocation;
     private String saveSourcelocation;
-    private  Pad[] pads;
+    private Pad[] pads;
     private Observer observer;
 
     public SettingController(Stage stage, Pad[] pads, Observer observer, RecordController recordController) {
@@ -90,10 +90,10 @@ public class SettingController extends Observable {
         pads = openDialog.read(file.getAbsolutePath(), observer, null); //Muss noch bearbeitet werden!!!!
         setChanged();
         notifyObservers("padsladen");
-        if (openDialog.getRecordpathfrompadsave() == null){
+        if (openDialog.getRecordpathfrompadsave() == null) {
             recordController.setpath(System.getProperty("user.home").concat("//Music") + "/myrecording.wav");
-        }else
-        recordController.setpath(openDialog.getRecordpathfrompadsave());
+        } else
+            recordController.setpath(openDialog.getRecordpathfrompadsave());
     }
 
 
@@ -102,15 +102,14 @@ public class SettingController extends Observable {
     }
 
 
+    public void clean() {
 
-
-    public void clean(){
-
-        for (int i = 0; i < 16; i++){
+        for (int i = 0; i < 16; i++) {
             pads[i] = null;
+            setChanged();
+            notifyObservers("pad");
         }
-        setChanged();
-        notifyObservers("pad");
+
 
     }
 
@@ -125,11 +124,11 @@ public class SettingController extends Observable {
     public EventHandler<ActionEvent> openManual = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
-            try{
+            try {
                 File file = new File("../Anleitung.txt");
                 FileWriter fw = new FileWriter(file);
                 BufferedWriter bw = new BufferedWriter(fw);
-                if(file.length() == 0) {
+                if (file.length() == 0) {
                     bw.write("Sampler\n\n");
                     bw.newLine();
                     bw.write("ANLEITUNG:");
@@ -144,7 +143,7 @@ public class SettingController extends Observable {
                 }
                 bw.close();
 
-            }catch (IOException e){
+            } catch (IOException e) {
                 e.printStackTrace();
                 System.out.println("Anleitung konnte nicht erstellt werden.");
             }
