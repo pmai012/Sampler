@@ -83,6 +83,7 @@ public class RecordView extends Pane {
             recordInfos.getChildren().removeAll(bpmTf,bpm2);
             recordInfos.getChildren().addAll(bpm1, bpm2);
             recordInfos.setSpacing(10);
+
         }
 
     }
