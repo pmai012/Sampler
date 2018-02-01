@@ -27,8 +27,10 @@ public class RecordView extends Pane {
     private TextField bpmTf;
     private RecordController recordController;
     private Observer observer;
+    private PadController padController;
 
     public RecordView(PadController padController, Observer obs){
+        this.padController = padController;
         observer = obs;
         rootRV = new VBox(20);
         time = new Label("--:--/--:--");
@@ -77,11 +79,14 @@ public class RecordView extends Pane {
             recordInfos.getChildren().removeAll(bpm1,bpm2);
             recordInfos.getChildren().addAll(bpmTf,bpm2);
             bpmTf.requestFocus();
+
             recordInfos.setSpacing(10);
         } else if(recordInfos.getChildren().contains(bpmTf)){
             recordInfos.getChildren().removeAll(bpmTf,bpm2);
             recordInfos.getChildren().addAll(bpm1, bpm2);
             recordInfos.setSpacing(10);
+            int value = Integer.parseInt(bpmTf.getText());
+            padController.setbeat(value);
 
         }
 
