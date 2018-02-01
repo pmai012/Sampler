@@ -127,4 +127,22 @@ public class SoundController {
             ;
         }
     };
+
+    public void createSounddir(){
+
+        String dirpath = "SamplerSoundfiles";
+        Path abspath = Paths.get(System.getProperty("user.home").concat("//Music").concat("//" + dirpath));
+        File sounddir = new File(System.getProperty("user.home").concat("//Music").concat("//"+dirpath));
+        System.out.println(sounddir.mkdir());
+        if(System.getProperty("user.home").concat("//Music").concat("//"+dirpath).isEmpty()){
+            try{
+                Files.copy(Paths.get("Sound/F7 Bass 1.wav"),
+                        (Paths.get(System.getProperty("user.home").concat("//Music").concat("//"+dirpath))));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+    }
 }

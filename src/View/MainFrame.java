@@ -28,13 +28,13 @@ public class MainFrame extends Application implements Observer {
     private VBox configBox;
 
     public MainFrame(){
-        createSounddir();
+
         root = new BorderPane();
         configBox = new VBox(40);
         padView = new PadView(this);
         recordView = new RecordView(padView.getPadController(),this);
         soundView = new SoundView(padView.getPadController());
-
+        soundView.getSoundController().createSounddir();
     }
 
     public void init() {
@@ -89,21 +89,4 @@ public class MainFrame extends Application implements Observer {
         recordView.update(arg);
     }
 
-    public void createSounddir(){
-
-        String dirpath = "SamplerSoundfiles";
-        Path abspath = Paths.get(System.getProperty("user.home").concat("//Music").concat("//" + dirpath));
-        File sounddir = new File(System.getProperty("user.home").concat("//Music").concat("//"+dirpath));
-        System.out.println(sounddir.mkdir());
-        if(System.getProperty("user.home").concat("//Music").concat("//"+dirpath).isEmpty()){
-            try{
-                Files.copy(Paths.get("Sound/F7 Bass 1.wav"),
-                        (Paths.get(System.getProperty("user.home").concat("//Music").concat("//"+dirpath))));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-        }
-
-    }
 }
