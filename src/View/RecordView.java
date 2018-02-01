@@ -2,6 +2,7 @@ package View;
 
 import Controller.PadController;
 import Controller.RecordController;
+import javafx.event.Event;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -34,10 +35,12 @@ public class RecordView extends Pane {
         bpm1 = new Label("100");
         bpm2 = new Label("BPM");
         bpmTf = new TextField(bpm1.getText());
-        recordInfos = new HBox(5);
+        bpmTf.setPrefWidth(40);
+        recordInfos = new HBox(10);
         recordButtons = new HBox(30);
         record = new Button();
         stop = new Button();
+        bpm1.textProperty().bind(bpmTf.textProperty());
 
         rootRV.setAlignment(Pos.BASELINE_CENTER);
         recordInfos.getChildren().addAll(time, bpm1,bpm2);
@@ -52,16 +55,36 @@ public class RecordView extends Pane {
         bpm1.getStyleClass().addAll("title","time");
         bpm2.getStyleClass().addAll("title","time","textP");
 
-        recordController = new RecordController(padController, observer);
+        recordController = new RecordController(padController, observer,this);
 
         record.addEventHandler(MouseEvent.MOUSE_CLICKED, recordController.recordClicked);
         bpm1.addEventHandler(MouseEvent.MOUSE_CLICKED, recordController.changeBPM);
+        bpmTf.focusedProperty().addListener(recordController.changeBPMback);
+        bpmTf.setOnKeyPressed(recordController.changeBPMbackEnter);
     }
 
     public RecordController getRecordController() {
         return recordController;
     }
 
+    public Label getBpm2() { return bpm2; }
+
+    public TextField getBpmTf() { return bpmTf; }
+
+    public void changeBPMview (){
+
+        if(recordInfos.getChildren().contains(bpm1)){
+            recordInfos.getChildren().removeAll(bpm1,bpm2);
+            recordInfos.getChildren().addAll(bpmTf,bpm2);
+            bpmTf.requestFocus();
+            recordInfos.setSpacing(10);
+        } else if(recordInfos.getChildren().contains(bpmTf)){
+            recordInfos.getChildren().removeAll(bpmTf,bpm2);
+            recordInfos.getChildren().addAll(bpm1, bpm2);
+            recordInfos.setSpacing(10);
+        }
+
+    }
 
     public void update(Object arg) {
         String command = (String) arg;
@@ -74,7 +97,6 @@ public class RecordView extends Pane {
         if(command.equals("notrecord")){
             record.getStyleClass().add("recordButton");
             record.getStyleClass().remove("recordButtonUsed");
-
 
         }
     }
