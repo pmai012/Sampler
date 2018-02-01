@@ -32,11 +32,11 @@ public class RecordView extends Pane {
         observer = obs;
         rootRV = new VBox(20);
         time = new Label("--:--/--:--");
-        bpm1 = new Label("100");
+        bpm1 = new Label("120");
         bpm2 = new Label("BPM");
         bpmTf = new TextField(bpm1.getText());
         bpmTf.setPrefWidth(40);
-        recordInfos = new HBox(10);
+        recordInfos = new HBox(15);
         recordButtons = new HBox(30);
         record = new Button();
         stop = new Button();
@@ -60,6 +60,7 @@ public class RecordView extends Pane {
         record.addEventHandler(MouseEvent.MOUSE_CLICKED, recordController.recordClicked);
         bpm1.addEventHandler(MouseEvent.MOUSE_CLICKED, recordController.changeBPM);
         bpmTf.focusedProperty().addListener(recordController.changeBPMback);
+        bpmTf.textProperty().addListener(recordController.checkValue);
         bpmTf.setOnKeyPressed(recordController.changeBPMbackEnter);
     }
 

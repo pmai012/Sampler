@@ -79,6 +79,19 @@ public class RecordController extends Observable{
         }
     };
 
+    public ChangeListener<String> checkValue = new ChangeListener<String>() {
+        @Override
+        public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+            if(newValue.matches("//d{1,3}")){
+                return;
+                //view.getBpmTf().setText(oldValue);
+            }
+            else{
+
+            }
+        }
+    };
+
     public ChangeListener<Boolean> changeBPMback = new ChangeListener<Boolean>() {
         @Override
         public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
