@@ -57,17 +57,15 @@ public class PadController {
     }
 
 
-
-
     public void startbeat() {
         beat.play();
     }
 
-    public void stopbeat(){
+    public void stopbeat() {
         beat.stop();
     }
 
-    public void setbeat(int beatsperminute){
+    public void setbeat(int beatsperminute) {
         beat.setBpm(beatsperminute);
     }
 
@@ -87,8 +85,6 @@ public class PadController {
     }
 
 
-
-
     public void setPad(Pad[] pad) {
         this.pad = pad;
     }
@@ -102,7 +98,6 @@ public class PadController {
         }
 
     };
-
 
 
     public EventHandler<ActionEvent> metronomaus = new EventHandler<ActionEvent>() {
@@ -128,15 +123,12 @@ public class PadController {
     };
 
 
-
-
-
-    public String beattoString(){
+    public String beattoString() {
         String beats = Integer.toString(beat.getBpm());
-        return beats +" BPM";
+        return beats + " BPM";
     }
 
-    public void setMetronom (int bpm){
+    public void setMetronom(int bpm) {
         beat.setBpm(bpm);
 
     }
@@ -226,6 +218,24 @@ public class PadController {
         }
     };
 
+    public EventHandler<ActionEvent> contextMenu_deleteSoundClicked = new EventHandler<ActionEvent>() {
+
+        @Override
+        public void handle(ActionEvent event) {
+            getPadAtIndex(getClickedPadIndex()).stop();
+
+            deletePad(getClickedPadIndex()-1);
+            Pad dummy = new Pad(observer, "pad");
+            return;
+        }
+
+
+    };
+
+
+    public void deletePad(int number){
+        pad[number] = null;
+    }
 
     /**
      * Acceptdrag allows to drop something
@@ -258,14 +268,14 @@ public class PadController {
 
 
                             if (path.endsWith(".mp3") || path.endsWith(".wav")) {
-                                if (pad[i] != null){
+                                if (pad[i] != null) {
                                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                                     alert.setTitle("Bereits verwendet");
                                     alert.setHeaderText("Dieses Pad ist bereits belegt ");
                                     alert.setContentText("Wollen Sie dieses Pad überschreiben?");
 
                                     Optional<ButtonType> result = alert.showAndWait();
-                                    if (result.get() != ButtonType.OK){
+                                    if (result.get() != ButtonType.OK) {
                                         return;
                                     }
 
@@ -277,12 +287,12 @@ public class PadController {
                                 Keyinput keyinput = new Keyinput();
                                 pad[i].setShortcut(keyinput.getdefaultkeyCode(i));
 
-                               while (pad[i] != null && i < 16){
-                                   i++;
-                               }
-                               if (i >15){
-                                   return;
-                               }
+                                while (pad[i] != null && i < 16) {
+                                    i++;
+                                }
+                                if (i > 15) {
+                                    return;
+                                }
 
                             }
                         }

@@ -29,6 +29,7 @@ public class PadView extends Pane {
     private MenuItem addEffect;
     private MenuItem editEffect;
     private MenuItem deleteEffect;
+    private MenuItem deleteSound;
     private Button[] pads;
     private Button pad1, pad2, pad3, pad4, pad5, pad6, pad7, pad8,
             pad9, pad10, pad11, pad12, pad13, pad14, pad15, pad16;
@@ -40,9 +41,10 @@ public class PadView extends Pane {
         addEffect = new MenuItem("Effekt hinzufügen");
         editEffect = new MenuItem("Effekt bearbeiten");
         deleteEffect = new MenuItem("Effekt löschen");
+        deleteSound = new MenuItem("Sound löschen");
         editEffect.setDisable(true);
         deleteEffect.setDisable(true);
-        contextMenu.getItems().addAll(addEffect, editEffect, deleteEffect);
+        contextMenu.getItems().addAll(addEffect, editEffect, deleteEffect, deleteSound);
         padBox = new TilePane(Orientation.HORIZONTAL);
         padBox.setHgap(10);
         padBox.setVgap(10);
@@ -107,6 +109,7 @@ public class PadView extends Pane {
         addEffect.setOnAction(padController.contextMenu_addEffectClicked);
         deleteEffect.setOnAction(padController.contextMenu_deleteEffectClicked);
         editEffect.setOnAction(padController.contextMenu_editEffectClicked);
+        deleteSound.setOnAction(padController.contextMenu_deleteSoundClicked);
     }
 
 
