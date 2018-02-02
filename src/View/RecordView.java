@@ -68,6 +68,7 @@ public class RecordView extends Pane {
         recordController = new RecordController(padController, observer,this);
 
         record.addEventHandler(MouseEvent.MOUSE_CLICKED, recordController.recordClicked);
+        stop.addEventHandler(MouseEvent.MOUSE_CLICKED, recordController.stopClicked);
         bpm1.addEventHandler(MouseEvent.MOUSE_CLICKED, recordController.changeBPM);
         bpmTf.focusedProperty().addListener(recordController.changeBPMback);
         bpmTf.textProperty().addListener(recordController.checkValue);

@@ -40,7 +40,6 @@ private String recordpathfrompadsave;
         }else{
            return "none";
         }
-
     }
 
     public String getRecordpathfrompadsave() {

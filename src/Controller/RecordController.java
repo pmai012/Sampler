@@ -75,6 +75,7 @@ public class RecordController extends Observable{
                 System.out.println("STOP");
                 record.stopRecording();
             }
+            record.sendupdate();
         }
     };
     public EventHandler<MouseEvent> changeBPM = new EventHandler<MouseEvent>() {
