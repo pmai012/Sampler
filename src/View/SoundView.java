@@ -2,6 +2,7 @@ package View;
 
 import Controller.PadController;
 import Controller.SoundController;
+import com.sun.org.apache.xerces.internal.xs.datatypes.ObjectList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Label;
@@ -26,18 +27,22 @@ public class SoundView   extends Pane {
     private Label audioFX;
     private RadioButton fxOn, fxOff;
 
+
+
     public SoundView(PadController padController){
 
-        soundController = new SoundController(System.getProperty("user.home")
+
+        soundController = new SoundController(System.getProperty("user.home" )
                 .concat("//Music").concat("//" + "SamplerSoundfiles"));
         soundlistview = new ListView();
         soundObList = FXCollections.observableArrayList();
-
+        soundController.createSounddir(soundObList);
 
         for (String name: soundController.getDirList()) {
             soundObList.add(name);
         }
         soundlistview.setItems(soundObList);
+
         soundlistview.setOnDragDetected(soundController.take);
         soundlistview.setOnDragOver(soundController.acceptdrag);
         soundlistview.setOnDragDropped(soundController.getData);
@@ -60,8 +65,8 @@ public class SoundView   extends Pane {
         fxOff.getStyleClass().addAll("title", "radioButton");
         fxOn.getStyleClass().addAll("title", "radioButton");
 
-        Off.setOnAction(padController.metronomaus);
-        On.setOnAction(padController.metronoman);
+        fxOff.setOnAction(padController.metronomaus);
+        fxOn.setOnAction(padController.metronoman);
     }
 
     public SoundController getSoundController() {

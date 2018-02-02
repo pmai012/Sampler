@@ -1,5 +1,8 @@
 package Controller;
 
+
+import com.sun.org.apache.xerces.internal.xs.datatypes.ObjectList;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
@@ -14,13 +17,14 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 
 public class SoundController {
-
+    private ObservableList<String> soundObList;
     private String dirPath = null;
     private ArrayList<String> dirList;
     private ArrayList<String> pathList;
 
 
     public SoundController(String dirPath) {
+        this.soundObList = soundObList;
         this.dirPath = dirPath;
         this.dirList = new ArrayList<String>();
         this.pathList = new ArrayList<String>();
@@ -121,14 +125,14 @@ public class SoundController {
     };
 
 
-    public void createSounddir() {
-
+    public void createSounddir(ObservableList<String> soundObList) {
+        this.soundObList = soundObList;
         String dirpath = "SamplerSoundfiles";
 
         File[] fileArray = new File[3];
-        fileArray[0] = new File("Sound/F7 Bass 1.wav");
-        fileArray[1] = new File("Sound/HiHat 1.wav");
-        fileArray[2] = new File("Sound/Snare 1.wav");
+        fileArray[0] = new File("src/Sound/F7 Bass 1.wav");
+        fileArray[1] = new File("src/Sound/HiHat 1.wav");
+        fileArray[2] = new File("src/Sound/Snare 1.wav");
 
         File sounddir = new File(System.getProperty("user.home").concat("//Music").concat("//" + dirpath));
 
@@ -136,8 +140,20 @@ public class SoundController {
         for (File f : fileArray) {
             if (f != null) {
                 try {
+                    Path path = Paths.get(System.getProperty("user.home").concat("//Music").concat("//" + dirpath + "//" + f.getName()));
+                    //(System.getProperty("user.home").concat("//Music").concat("//" + dirpath + "//" + f.getName()))
+
+
                     Files.copy(f.toPath(),
-                            (Paths.get(System.getProperty("user.home").concat("//Music").concat("//" + dirpath + "//" + f.getName()))), REPLACE_EXISTING);
+                            (Paths.get(System.getProperty("user.home").concat("//Music").concat("//" + dirpath + "//" + f.getName()))));
+
+                   // soundObList.add(f.getName());
+                    this.dirList.add(f.getName());
+                    this.pathList.add(f.getAbsolutePath());
+
+                } catch (FileAlreadyExistsException e) {
+
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
