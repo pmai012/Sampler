@@ -4,10 +4,7 @@ import Controller.PadController;
 import Controller.SoundController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -22,6 +19,7 @@ public class SoundView   extends Pane {
     private ListView soundlistview;
     private Label audioFX;
     private RadioButton fxOn, fxOff;
+    private Tooltip listViewTip;
 
 
 
@@ -54,11 +52,13 @@ public class SoundView   extends Pane {
 
         soundpane = new VBox(10);
         this.getChildren().add(soundpane);
-
+        listViewTip = new Tooltip("Mit Linksklick Sounds auf die Pads ziehen.\n Mit Rechtsklick Datei anzeigen lassen. ");
+        soundlistview.setTooltip(listViewTip);
         soundpane.getChildren().add(soundlistview);
         soundpane.getChildren().add(audioFX);
         soundpane.getChildren().addAll(fxOn,fxOff);
 
+        listViewTip.getStyleClass().add("tooltip");
         audioFX.getStyleClass().addAll("title", "radioButton");
         fxOff.getStyleClass().addAll("title", "radioButton");
         fxOn.getStyleClass().addAll("title", "radioButton");
