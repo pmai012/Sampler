@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -77,7 +78,8 @@ public class RecordView extends Pane {
         stop.addEventHandler(MouseEvent.MOUSE_CLICKED, recordController.stopClicked);
         bpm1.addEventHandler(MouseEvent.MOUSE_CLICKED, recordController.changeBPM);
         bpmTf.focusedProperty().addListener(recordController.changeBPMback);
-        bpmTf.textProperty().addListener(recordController.checkValue);
+        //bpmTf.textProperty().addListener(recordController.checkValue);
+        bpmTf.addEventFilter(KeyEvent.KEY_TYPED, recordController.filterValue);
         bpmTf.setOnKeyPressed(recordController.changeBPMbackEnter);
     }
 

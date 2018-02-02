@@ -107,6 +107,18 @@ public class RecordController extends Observable {
         }
     };
 
+    public EventHandler<KeyEvent> filterValue = new EventHandler<KeyEvent>() {
+        @Override
+        public void handle(KeyEvent event) {
+            char ar[] = event.getCharacter().toCharArray();
+            char ch = ar[event.getCharacter().toCharArray().length - 1];
+            if (!(ch >= '0' && ch <= '9')) {
+                System.out.println("Keine Zahl");
+                event.consume();
+            }
+        }
+    };
+
     public ChangeListener<String> checkValue = new ChangeListener<String>() {
         @Override
         public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
