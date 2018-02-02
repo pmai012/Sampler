@@ -155,8 +155,12 @@
     -fx-padding: 0 0 0 30;
 }
 
--recordBPM {
+.recordBPM {
 
+}
+
+.timeBox {
+   /* -fx-padding: 0 10 0 10; */
 }
 
 .recordInfos {

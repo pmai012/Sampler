@@ -23,6 +23,7 @@ public class RecordView extends Pane {
     private VBox rootRV;
     private HBox recordButtons;
     private HBox recordInfos;
+    private HBox timeBox;
     private HBox recordBPM;
     private Button record;
     private Button stop;
@@ -48,6 +49,7 @@ public class RecordView extends Pane {
         recordInfos = new HBox(20);
         recordButtons = new HBox(30);
         recordBPM = new HBox(10);
+        timeBox =new HBox();
         record = new Button();
         stop = new Button();
         bpmTip = new Tooltip("Doppelklick zum ändern");
@@ -58,7 +60,8 @@ public class RecordView extends Pane {
         bpm1.setTooltip(bpmTip);
         record.setTooltip(recordTip);
         rootRV.setAlignment(Pos.BASELINE_CENTER);
-        recordInfos.getChildren().addAll(time, recordBPM);
+        timeBox.getChildren().add(time);
+        recordInfos.getChildren().addAll(timeBox, recordBPM);
         recordBPM.getChildren().addAll(bpm1,bpm2);
         recordButtons.getChildren().addAll(record, stop);
         this.getChildren().add(rootRV);
@@ -68,6 +71,7 @@ public class RecordView extends Pane {
         recordBPM.getStyleClass().add("recordBPM");
         record.getStyleClass().add("recordButton");
         stop.getStyleClass().add("stopButton");
+        timeBox.getStyleClass().add("timeBox");
         time.getStyleClass().addAll("title","time");
         bpm1.getStyleClass().addAll("title","time");
         bpm2.getStyleClass().addAll("title","time","textP");
