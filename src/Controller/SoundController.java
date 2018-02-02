@@ -197,10 +197,8 @@ public class SoundController {
         this.soundObList = soundObList;
         String dirpath = "SamplerSoundfiles";
 
-        File[] fileArray = new File[3];
-        fileArray[0] = new File("src/Sound/F7 Bass 1.wav");
-        fileArray[1] = new File("src/Sound/HiHat 1.wav");
-        fileArray[2] = new File("src/Sound/Snare 1.wav");
+        File files = new File("src/Sound");
+        File[] fileArray = files.listFiles();
 
         File sounddir = new File(System.getProperty("user.home").concat("//Music").concat("//" + dirpath));
 
