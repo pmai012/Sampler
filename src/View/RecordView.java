@@ -44,7 +44,7 @@ public class RecordView extends Pane {
         bpm1 = new Label("120");
         bpm2 = new Label("BPM");
         bpmTf = new TextField(bpm1.getText());
-        bpmTf.setPrefWidth(40);
+        bpmTf.setPrefWidth(42);
         recordInfos = new HBox(20);
         recordButtons = new HBox(30);
         recordBPM = new HBox(10);
