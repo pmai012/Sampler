@@ -60,6 +60,15 @@ public class Keyinput implements EventHandler<KeyEvent> {
             }
 
         }
+
+        for (int i = 0; i < 16; i++) {
+            if (pads[i] != null && event.getCode() == pads[i].getShortcut() && event.isAltDown()) {
+
+                padController.stopPlay(i);
+
+            }
+
+        }
     }
 
     public KeyCode getdefaultkeyCode(int padnumber) {

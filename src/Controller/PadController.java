@@ -139,8 +139,9 @@ public class PadController {
         if (pad[number] != null) {
 
             if (pad[number].isPlaying()) {
-                pad[number].stop();
-                return;
+                pad[number].setThreadrun(true);
+                pad[number].threadstarten();
+                pad[number].playSound();
             }
 
 
@@ -150,6 +151,19 @@ public class PadController {
             pad[number].playSound();
 
         }
+    }
+
+    public void stopPlay(int number){
+
+        if(pad[number] != null){
+            if(!pad[number].isPlaying()){
+                return;
+            }
+            else{
+                pad[number].stop();
+            }
+        }
+
     }
 
 
