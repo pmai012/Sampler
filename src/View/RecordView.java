@@ -2,6 +2,7 @@ package View;
 
 import Controller.PadController;
 import Controller.RecordController;
+import Controller.SettingController;
 import javafx.event.Event;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -12,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 import java.util.Observer;
 

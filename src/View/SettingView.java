@@ -26,7 +26,6 @@ public class SettingView extends Pane {
     private MenuItem itemNewPreset;
     private MenuItem itemOpen;
     private MenuItem itemSave;
-    private MenuItem itemLocation;
     private MenuItem itemSourceLocation;
     private MenuItem itemManual;
     private Pad[] pads;
@@ -47,12 +46,11 @@ public class SettingView extends Pane {
         itemNewPreset = new MenuItem("Default Vorlage");
         itemOpen = new MenuItem("Projekt Öffnen");
         itemSave = new MenuItem("Projekt speichern unter");
-        itemLocation = new MenuItem(("Speicherordner festlegen"));
         itemSourceLocation = new MenuItem("Quellordner festlegen");
         itemManual = new MenuItem("Anleitung");
 
         itemNew.getItems().addAll(itemNewNew, itemNewPreset);
-        menuFile.getItems().addAll(itemNew, itemOpen, itemSave, itemLocation, itemSourceLocation);
+        menuFile.getItems().addAll(itemNew, itemOpen, itemSave,  itemSourceLocation);
         menuHelp.getItems().add(itemManual);
         samplermenu.getMenus().addAll(menuFile, menuHelp);
         samplermenu.prefWidthProperty().bind(this.widthProperty());
@@ -67,7 +65,6 @@ public class SettingView extends Pane {
         itemNewPreset.getStyleClass().add("menuItem");
         itemOpen.getStyleClass().add("menuItem");
         itemSave.getStyleClass().add("menuItem");
-        itemLocation.getStyleClass().add("menuItem");
         itemSourceLocation.getStyleClass().add("menuItem");
         itemManual.getStyleClass().add("menuItem");
 
@@ -75,7 +72,6 @@ public class SettingView extends Pane {
         itemNewNew.setOnAction(settingController.cleanEvent);
         itemSave.setOnAction(settingController.save);
         itemOpen.setOnAction(settingController.openEvent);
-        itemLocation.setOnAction(settingController.openSaveLocationEvent);
         itemSourceLocation.setOnAction(settingController.openSourceLocation);
         itemManual.setOnAction(settingController.openManual);
         settingController.addObserver(refOb);

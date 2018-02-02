@@ -17,7 +17,35 @@ import java.util.Observer;
  */
 public class SaveOpenDialog {
 private FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Pascal-Julian-Deniz-File (*.pjd)", "*.pjd");
-private String recordpathfrompadsave;
+
+
+    /**
+     * Gibt ein Dialog zum Speichern von Dateien aus.
+     *
+     * @param stage Die Stage, wo der Dialog erscheinen soll
+     * @param title Den Titel des DIaloges
+     * @param description Filterdescription
+     * @param extension ending
+     * @return Gibt den ausgewählten Speicherort zurück
+     *
+     */
+    public String Savedialog(Stage stage, String title, String description, String extension) { //
+        extFilter =  new FileChooser.ExtensionFilter(description, "*."+extension);
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.getExtensionFilters().add(extFilter);
+        fileChooser.setTitle(title);
+
+        File defaultDirectory = new File(  System.getProperty("user.home").concat("//Desktop"));
+        fileChooser.setInitialDirectory(defaultDirectory);
+        File file = fileChooser.showSaveDialog(stage);
+
+        if (file != null){
+            return file.getAbsolutePath();
+        }else{
+            return "none";
+        }
+    }
+
     /**
      * Gibt ein Dialog zum Speichern von Dateien aus.
      *
@@ -42,13 +70,6 @@ private String recordpathfrompadsave;
         }
     }
 
-    public String getRecordpathfrompadsave() {
-        if (recordpathfrompadsave == null){
-            return "";
-        }else {
-            return recordpathfrompadsave;
-        }
-    }
 
     /**
      * Gibt ein Dialog für die Auswahl eines Ordners an
@@ -88,20 +109,24 @@ private String recordpathfrompadsave;
     }
 
 
+    public void setExtFilter(String description, String ending){
+        extFilter = new FileChooser.ExtensionFilter(description, "*." + ending);
+
+    }
     /**
      * Speichert Pads als File
      *
      * @param input PadArray
      * @param path  Speicherpfad
      */
-    public void save(Pad[] input, String path, String recordpath) {
+    public void save(Pad[] input, String path) {
 
 
 
         ArrayList<Padsaveclass> savelist = new ArrayList<Padsaveclass>();
 
        for (Pad i : input) {
-                savelist.add(new Padsaveclass(i,recordpath));
+                savelist.add(new Padsaveclass(i));
             }
         OutputStream pads = null;
 
@@ -147,9 +172,9 @@ private String recordpathfrompadsave;
             } catch (Exception e) {
             }
         }
-        System.out.println("Pads wurden geladen");
 
-        recordpathfrompadsave = pad.get(0).getSavepath();
+
+
         Pad[] ausgabe = new Pad[pad.size()];
 
        for (int i = 0; i< pad.size(); i++){

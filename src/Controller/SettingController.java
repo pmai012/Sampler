@@ -37,17 +37,9 @@ public class SettingController extends Observable {
         this.pads = pads;
     }
 
-    public String getSavelocation() {
-        return savelocation;
-    }
 
 
-    public EventHandler<ActionEvent> openSaveLocationEvent = new EventHandler<ActionEvent>() {
-        @Override
-        public void handle(ActionEvent event) {
-            openSaveLocation();
-        }
-    };
+
 
     public EventHandler<ActionEvent> save = new EventHandler<ActionEvent>() {
         @Override
@@ -70,16 +62,17 @@ public class SettingController extends Observable {
         }
     };
 
-    public void openSaveLocation() {
-        SaveOpenDialog directionDialog = new SaveOpenDialog();
-        savelocation = directionDialog.DirectionDialog(stage);
-        recordController.setpath(savelocation);
-    }
+  public String Savelocation(){
+      SaveOpenDialog saveDialog = new SaveOpenDialog();
+      saveDialog.setExtFilter("WAV - Datei","wav");
+      saveFilelocation = saveDialog.Savedialog(stage, "Wo möchten sie die Wav speichern?");
+     return saveFilelocation;
+  }
 
     public void save() {
         SaveOpenDialog saveDialog = new SaveOpenDialog();
         saveFilelocation = saveDialog.Savedialog(stage, "Wo möchten sie die Datei speichern?");
-        saveDialog.save(pads, saveFilelocation, recordController.getPath());
+        saveDialog.save(pads, saveFilelocation);
     }
 
     public void open() {
@@ -90,10 +83,7 @@ public class SettingController extends Observable {
         pads = openDialog.read(file.getAbsolutePath(), observer, null); //Muss noch bearbeitet werden!!!!
         setChanged();
         notifyObservers("padsladen");
-        if (openDialog.getRecordpathfrompadsave() == null) {
-            recordController.setpath(System.getProperty("user.home").concat("//Music") + "/myrecording.wav");
-        } else
-            recordController.setpath(openDialog.getRecordpathfrompadsave());
+
     }
 
 
