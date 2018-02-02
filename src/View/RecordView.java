@@ -20,6 +20,7 @@ public class RecordView extends Pane {
     private VBox rootRV;
     private HBox recordButtons;
     private HBox recordInfos;
+    private HBox recordBPM;
     private Button record;
     private Button stop;
     private Label time;
@@ -41,8 +42,9 @@ public class RecordView extends Pane {
         bpm2 = new Label("BPM");
         bpmTf = new TextField(bpm1.getText());
         bpmTf.setPrefWidth(40);
-        recordInfos = new HBox(15);
+        recordInfos = new HBox(20);
         recordButtons = new HBox(30);
+        recordBPM = new HBox(10);
         record = new Button();
         stop = new Button();
         bpmTip = new Tooltip("Doppelklick zum ändern");
@@ -53,12 +55,14 @@ public class RecordView extends Pane {
         bpm1.setTooltip(bpmTip);
         record.setTooltip(recordTip);
         rootRV.setAlignment(Pos.BASELINE_CENTER);
-        recordInfos.getChildren().addAll(time, bpm1,bpm2);
+        recordInfos.getChildren().addAll(time, recordBPM);
+        recordBPM.getChildren().addAll(bpm1,bpm2);
         recordButtons.getChildren().addAll(record, stop);
         this.getChildren().add(rootRV);
         rootRV.getChildren().addAll(recordInfos, recordButtons);
         recordButtons.getStyleClass().add("recordButtons");
         recordInfos.getStyleClass().add("recordInfos");
+        recordBPM.getStyleClass().add("recordBPM");
         record.getStyleClass().add("recordButton");
         stop.getStyleClass().add("stopButton");
         time.getStyleClass().addAll("title","time");
@@ -85,15 +89,15 @@ public class RecordView extends Pane {
 
     public void changeBPMview (){
 
-        if(recordInfos.getChildren().contains(bpm1)){
-            recordInfos.getChildren().removeAll(bpm1,bpm2);
-            recordInfos.getChildren().addAll(bpmTf,bpm2);
+        if(recordBPM.getChildren().contains(bpm1)){
+            recordBPM.getChildren().removeAll(bpm1,bpm2);
+            recordBPM.getChildren().addAll(bpmTf,bpm2);
             bpmTf.requestFocus();
-            recordInfos.setSpacing(10);
-        } else if(recordInfos.getChildren().contains(bpmTf)){
-            recordInfos.getChildren().removeAll(bpmTf,bpm2);
-            recordInfos.getChildren().addAll(bpm1, bpm2);
-            recordInfos.setSpacing(10);
+            recordBPM.setSpacing(10);
+        } else if(recordBPM.getChildren().contains(bpmTf)){
+            recordBPM.getChildren().removeAll(bpmTf,bpm2);
+            recordBPM.getChildren().addAll(bpm1, bpm2);
+            recordBPM.setSpacing(10);
             int value = Integer.parseInt(bpmTf.getText());
             padController.setbeat(value);
 
