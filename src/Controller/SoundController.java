@@ -70,9 +70,13 @@ public class SoundController {
             int index = soundlistview.getSelectionModel().getSelectedIndex();
             System.out.println(index);
             List<String> files = new ArrayList<String>();
+
+
             files.add(pathList.get(index));
             content.putFilesByPath(files);
             db.setContent(content);
+
+
 
         }
     };
@@ -106,6 +110,9 @@ public class SoundController {
 
                         Files.copy(Paths.get(files.get(i).getAbsolutePath()),
                                 (Paths.get(System.getProperty("user.home").concat("//Music").concat("//SamplerSoundfiles//" + files.get(i).getName()))), REPLACE_EXISTING);
+                        soundObList.add(files.get(i).getName());
+                        dirList.add(files.get(i).getName());
+                        pathList.add(files.get(i).getAbsolutePath());
 
                     } catch (FileAlreadyExistsException e) {
                         Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -147,7 +154,7 @@ public class SoundController {
                     Files.copy(f.toPath(),
                             (Paths.get(System.getProperty("user.home").concat("//Music").concat("//" + dirpath + "//" + f.getName()))));
 
-                   // soundObList.add(f.getName());
+
                     this.dirList.add(f.getName());
                     this.pathList.add(f.getAbsolutePath());
 
