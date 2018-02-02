@@ -48,7 +48,7 @@ public class MainFrame extends Application implements Observer {
     @Override
     public void start(Stage primaryStage) {
         settingView = new SettingView(primaryStage, padView.getPads(), this, recordView.getRecordController());
-        recordView.getRecordController().settingref(settingView.getSettingController());
+        recordView.getRecordController().refsettingController(settingView.getSettingController());
         configBox.getChildren().add(recordView);
         configBox.getChildren().add(soundView);
         VBox test = new VBox(10);

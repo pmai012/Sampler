@@ -10,34 +10,30 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.FilenameFilter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Observable;
 import java.util.Observer;
 
 
-public class RecordController extends Observable {
+public class RecordController extends Observable{
     private AudioOutput recordInput;
     private Record record;
     private Observer observer;
     private RecordView view;
     private PadController padController;
-    private long currenttime = 0;
-    private SettingController settingController;
+    SettingController settingController;
 
-
-    public RecordController(PadController ref, Observer observer, RecordView view) {
+    public RecordController(PadController ref, Observer observer, RecordView view)
+    {
         this.padController = ref;
-        this.record = new Record(padController.getGlobalOut(), observer);
+        this.record = new Record(padController.getGlobalOut(),observer);
         this.observer = observer;
         this.view = view;
-
-    }
-
-    public void settingref(SettingController settingController){
-        this.settingController = settingController;
     }
 
     public EventHandler<MouseEvent> recordClicked = new EventHandler<MouseEvent>() {
@@ -48,48 +44,48 @@ public class RecordController extends Observable {
         }
     };
 
-
-
-
-
-    public void makerecord() {
-        if (record.isRecording()) {
-            System.out.println("STOP");
-            record.stopRecording();
-            String path = settingController.Savelocation();
-            File old = new File(record.getDefaultPath());
-            old.renameTo(new File(path));
-
-
-        } else {
-            System.out.println("START");
-
-            Thread time = new Thread() {
-                private long starttime = System.currentTimeMillis();
-
-                @Override
-                public void run() {
-                    while (record.isRecording()) {
-                        try {
-                            Thread.sleep(100);
-                            currenttime = System.currentTimeMillis() - starttime;
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                }
-            };
-            time.start();
-           record.startRecording();
-
-        }
+    public void setpath(String path){
+        record.setRecordPath(path);
     }
 
+    public String getPath(){
+        return record.getRecordPath();
+    }
+
+    public void refsettingController(SettingController settingController){
+        this.settingController = settingController;
+    }
+
+    public void makerecord(){
+        if (record.isRecording()){
+            System.out.println("STOP");
+            record.stopRecording();
+String path = settingController.Savelocation();
+            try {
+                Files.copy(Paths.get("src/Controller/Save/record.wav"), Paths.get(path));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+        else
+        {
+            System.out.println("START");
+            if (!record.getRecordPath().equals("")){
+                String path = record.getRecordPath();
+                record = null;
+                record = new Record(padController.getGlobalOut(),observer, countRecording(path));
+                record.startRecording();
+            }
+            else{
+                record.startRecording();
+            }
+        }
+    }
     public EventHandler<MouseEvent> stopClicked = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent event) {
-            if (record.isRecording()) {
+            if (record.isRecording()){
                 System.out.println("STOP");
                 record.stopRecording();
             }
@@ -99,8 +95,8 @@ public class RecordController extends Observable {
     public EventHandler<MouseEvent> changeBPM = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent event) {
-            if (event.getButton() == MouseButton.PRIMARY) {
-                if (event.getClickCount() == 2) {
+            if(event.getButton() == MouseButton.PRIMARY){
+                if(event.getClickCount() == 2){
                     view.changeBPMview();
                 }
             }
@@ -122,10 +118,11 @@ public class RecordController extends Observable {
     public ChangeListener<String> checkValue = new ChangeListener<String>() {
         @Override
         public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-            if (newValue.matches("//d{1,3}")) {
+            if(newValue.matches("//d{1,3}")){
                 return;
                 //view.getBpmTf().setText(oldValue);
-            } else {
+            }
+            else{
 
             }
         }
@@ -134,9 +131,10 @@ public class RecordController extends Observable {
     public ChangeListener<Boolean> changeBPMback = new ChangeListener<Boolean>() {
         @Override
         public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
-            if (newValue) {
+            if(newValue){
                 System.out.println("focus");
-            } else {
+            }
+            else{
                 System.out.println("not focus");
                 view.changeBPMview();
             }
@@ -146,28 +144,28 @@ public class RecordController extends Observable {
     public EventHandler<KeyEvent> changeBPMbackEnter = new EventHandler<KeyEvent>() {
         @Override
         public void handle(KeyEvent event) {
-            if (event.getCode().equals(KeyCode.ENTER)) {
+            if(event.getCode().equals(KeyCode.ENTER)){
                 view.getBpm2().requestFocus();
             }
         }
     };
-
-    private String countRecording(String path) {
+    private String countRecording(String path){
         File file = new File(path);
         FilenameFilter filter = new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
                 String accept = name.toLowerCase();
-                if (accept.contains("recording") && accept.contains(".wav")) {
+                if(accept.contains("recording") && accept.contains(".wav"))
+                {
                     return true;
-                } else {
+                }
+                else {
                     return false;
                 }
             }
         };
         String[] recordings = file.list(filter);
-        return path.concat("//" + "recording(" + recordings.length + ").wav");
+        return path.concat("//" + "recording("+recordings.length+").wav");
     }
-
 
 }

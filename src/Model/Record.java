@@ -1,16 +1,12 @@
 package Model;
 import Controller.PadController;
-import Controller.Save.SaveOpenDialog;
-import Controller.SettingController;
 import ddf.minim.AudioOutput;
 import ddf.minim.AudioRecorder;
 import ddf.minim.Minim;
 import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
-import javafx.stage.Stage;
 
 import java.util.Observable;
 import java.util.Observer;
-import java.util.Set;
 
 
 /**
@@ -20,26 +16,27 @@ public class Record extends Observable{
 
     private AudioRecorder record;
     private Minim minim;
-    private String defaultPath = System.getProperty("user.home").concat("//Music") + "/SamplerSoundfiles/myrecording.wav";
+    private String defaultPath = System.getProperty("user.home").concat("//Music") + "/myrecording.wav";
+    private String recordPath = "";
     private Observer observer;
-
-
 
     public Record(AudioOutput soundToRecord, Observer observer, String path){
         this.minim = new SimpleMinim(true);
-        this.record = minim.createRecorder(soundToRecord, path);
+        this.record = minim.createRecorder(soundToRecord, "src\\Controller\\Save\\record.wav");
         this.observer = observer;
         this.addObserver(this.observer);
     }
 
     public Record(AudioOutput soundToRecord, Observer observer){
         this.minim = new SimpleMinim(true);
-        this.record = minim.createRecorder(soundToRecord, defaultPath);
+        this.record = minim.createRecorder(soundToRecord, "src\\Controller\\Save\\record.wav");
         this.observer = observer;
         this.addObserver(this.observer);
-
     }
 
+    public void setRecordPath(String path){
+        this.recordPath = path;
+    }
 
     public boolean isRecording() {return record.isRecording();}
 
@@ -47,14 +44,15 @@ public class Record extends Observable{
 
     public void stopRecording() {
         record.endRecord();
-
-
         record.save();
     }
     public String getDefaultPath(){
             return this.defaultPath;
     }
 
+    public String getRecordPath(){
+        return this.recordPath;
+    }
 
     public void sendupdate(){
         if(isRecording()){
