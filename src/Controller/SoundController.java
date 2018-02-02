@@ -149,10 +149,10 @@ public class SoundController {
                         e.printStackTrace();
                 }
 
-                } else if (system.contains("osx")) {
+                } else if (system.contains("mac")) {
                     //MAc System
                     try {
-                        Runtime.getRuntime().exec("open " + path);
+                        Runtime.getRuntime().exec("open -a Finder "+System.getProperty("user.home").concat("/Music").concat("/SamplerSoundfiles"));
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
