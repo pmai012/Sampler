@@ -20,21 +20,18 @@ public class Record extends Observable{
     private String recordPath = "";
     private Observer observer;
 
-
     public Record(AudioOutput soundToRecord, Observer observer, String path){
         this.minim = new SimpleMinim(true);
         this.record = minim.createRecorder(soundToRecord, "src\\Controller\\Save\\record.wav");
         this.observer = observer;
         this.addObserver(this.observer);
     }
-
     public Record(AudioOutput soundToRecord, Observer observer){
         this.minim = new SimpleMinim(true);
         this.record = minim.createRecorder(soundToRecord, "src\\Controller\\Save\\record.wav");
         this.observer = observer;
         this.addObserver(this.observer);
     }
-
     public void setRecordPath(String path){
         this.recordPath = path;
     }
@@ -45,15 +42,10 @@ public class Record extends Observable{
         record.beginRecord();
     }
 
-
     public void stopRecording() {
         record.endRecord();
         record.save();
     }
-    public String getDefaultPath(){
-            return this.defaultPath;
-    }
-
     public String getRecordPath(){
         return this.recordPath;
     }
@@ -67,7 +59,5 @@ public class Record extends Observable{
             setChanged();
             notifyObservers("notrecord");
         }
-
-
     }
 }

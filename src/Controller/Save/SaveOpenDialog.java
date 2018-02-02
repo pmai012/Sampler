@@ -121,15 +121,12 @@ private FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
      */
     public void save(Pad[] input, String path) {
 
-
-
         ArrayList<Padsaveclass> savelist = new ArrayList<Padsaveclass>();
 
        for (Pad i : input) {
                 savelist.add(new Padsaveclass(i));
             }
         OutputStream pads = null;
-
 
         try {
             pads = new FileOutputStream(path);
@@ -145,10 +142,7 @@ private FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
                 e.printStackTrace();
             }
         }
-
-
     }
-
 
     public Pad[] read(String path, Observer observer, AudioOutput audioOutput) {
 

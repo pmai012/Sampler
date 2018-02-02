@@ -33,7 +33,6 @@ public class BeatsperMinute {
             @Override
             public void run() {
 
-
                 while (playing) {
                     try {
                         Thread.sleep(breakmilli);
@@ -43,22 +42,16 @@ public class BeatsperMinute {
                     }
                     output.setTempo(bpm);
 
-
                     output.playNote(21000);
-
-
                 }
             }
         };
         play.start();
         return output;
     }
-
     public int getBpm() {
         return bpm;
     }
-
-    ;
 
     public void setBpm(int bpm) {
         if (bpm > 1){
@@ -68,8 +61,6 @@ public class BeatsperMinute {
         }
 
     }
-
-
     public void stop() {
         playing = false;
     }

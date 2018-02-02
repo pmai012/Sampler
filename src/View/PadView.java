@@ -19,7 +19,6 @@ public class PadView extends Pane {
     private final int WIDTH = 600;
     private final int HEIGHT = 600;
     private PadController padController;
-    private SoundController soundController;
     private BorderPane rootPV;
     private TilePane padBox;
     private Observer observer;
@@ -118,7 +117,6 @@ public class PadView extends Pane {
         deleteSound.setOnAction(padController.contextMenu_deleteSoundClicked);
     }
 
-
     public Pad[] getPads() {
         return padController.getPad();
     }
@@ -127,21 +125,15 @@ public class PadView extends Pane {
         return padController;
     }
 
-    public TilePane getPadBox() {
-        return padBox;
-    }
-
     public void update(Object arg) {
 
         System.out.println("update ");
         String command = (String) arg;
 
-
         if (command.equals("pad")) {
             Pad[] pad = getPads();
 
             for (int i = 0; i < 16; i++) {
-
 
                 if (pad[i] == null) {
                     pads[i].getStyleClass().add("pad");
@@ -149,7 +141,6 @@ public class PadView extends Pane {
                     if (i < 4) {
                         pads[i].getStyleClass().remove("padGUsed");
                         pads[i].getStyleClass().add("padG");
-
 
                     } else if (i < 8) {
 
@@ -175,19 +166,13 @@ public class PadView extends Pane {
                         pads[i].getStyleClass().add("padRUsed");
                     }
                     if (pad[i].hasEffects()) {
-
                         pads[padController.getClickedPadIndex()].getContextMenu().getItems().get(0).setDisable(true);
                         pads[padController.getClickedPadIndex()].getContextMenu().getItems().get(1).setDisable(false);
                         pads[padController.getClickedPadIndex()].getContextMenu().getItems().get(2).setDisable(false);
-//                        deleteEffect.setDisable(false);
-//                        editEffect.setDisable(false);
                     } else {
                         pads[padController.getClickedPadIndex()].getContextMenu().getItems().get(0).setDisable(false);
                         pads[padController.getClickedPadIndex()].getContextMenu().getItems().get(1).setDisable(true);
                         pads[padController.getClickedPadIndex()].getContextMenu().getItems().get(2).setDisable(true);
-/*                        addEffect.setDisable(false);
-                        deleteEffect.setDisable(true);
-                        editEffect.setDisable(true);*/
                     }
                 }
 

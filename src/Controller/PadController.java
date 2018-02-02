@@ -40,7 +40,6 @@ public class PadController {
     private int padIndex;
     private BeatsperMinute beat;
 
-
     public PadController(Button[] pads, Observer observer, PadView view) {
         pad = new Pad[ANZAHL];
         this.view = view;
@@ -52,10 +51,7 @@ public class PadController {
             button[i] = pads[i];
 
         }
-
-
     }
-
 
     public void startbeat() {
         beat.play();
@@ -84,11 +80,9 @@ public class PadController {
         return pad;
     }
 
-
     public void setPad(Pad[] pad) {
         this.pad = pad;
     }
-
 
     public EventHandler<ActionEvent> metronoman = new EventHandler<ActionEvent>() {
 
@@ -98,8 +92,6 @@ public class PadController {
         }
 
     };
-
-
     public EventHandler<ActionEvent> metronomaus = new EventHandler<ActionEvent>() {
 
         @Override
@@ -108,7 +100,6 @@ public class PadController {
         }
 
     };
-
     public EventHandler<MouseEvent> pressed = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent event) {
@@ -121,8 +112,6 @@ public class PadController {
             }
         }
     };
-
-
     public String beattoString() {
         String beats = Integer.toString(beat.getBpm());
         return beats + " BPM";
@@ -132,10 +121,7 @@ public class PadController {
         beat.setBpm(bpm);
 
     }
-
     public void startpressing(int number) {
-
-
         if (pad[number] != null) {
 
             if (pad[number].isPlaying()) {
@@ -145,17 +131,11 @@ public class PadController {
                 pad[number].playSound();
                 return;
             }
-
-
-
             pad[number].setThreadrun(true);
-
             pad[number].threadstarten();
             pad[number].playSound();
-
         }
     }
-
     public void stopPlay(int number){
 
         if(pad[number] != null){
@@ -166,27 +146,19 @@ public class PadController {
                 pad[number].stop();
             }
         }
-
     }
-
-
     public void padclick(int number) {
         if (pad[number] == null) {
             return;
         }
         pad[number].setThreadrun(false);
     }
-
-
     public EventHandler<MouseEvent> rightclick = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent event) {
 
             for (int i = 0; i < ANZAHL; i++) {
                 if (event.getSource().equals(button[i])) {
-
-
-
                     //LINKSKLICK
                     if (event.getButton().equals(MouseButton.PRIMARY)) {
                         padclick(i);
@@ -197,10 +169,7 @@ public class PadController {
 
                                 pad[i].stop();
                             }
-
-
                         }
-
                         return;
                     }else                //RECHTSCLICK
                     if (event.getButton().equals(MouseButton.SECONDARY)) {
@@ -234,22 +203,16 @@ public class PadController {
             getPadAtIndex(getClickedPadIndex()).stop();
         }
     };
-
     public EventHandler<ActionEvent> contextMenu_deleteSoundClicked = new EventHandler<ActionEvent>() {
 
         @Override
         public void handle(ActionEvent event) {
             getPadAtIndex(getClickedPadIndex()).stop();
             deletePad(getClickedPadIndex()-1);
-
             Pad dummy = new Pad(observer, "pad");
             return;
         }
-
-
     };
-
-
     public void deletePad(int number){
         pad[number] = null;
     }
@@ -263,8 +226,6 @@ public class PadController {
             event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
         }
     };
-
-
     /**
      * getData get the Data. it has to be mp3 or wav. If you put more files it looks for the first wav or mp3
      */
@@ -283,7 +244,6 @@ public class PadController {
                         for (int f = 0; f < list.size(); f++) {
                             String path = list.get(f).toPath().toString();
 
-
                             if (path.endsWith(".mp3") || path.endsWith(".wav")) {
                                 if (pad[i] != null) {
                                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -295,8 +255,6 @@ public class PadController {
                                     if (result.get() != ButtonType.OK) {
                                         return;
                                     }
-
-
                                 }
                                 pad[i] = new Pad(path, observer, globalOut);
                                 pad[i].sendupdate();
@@ -310,21 +268,16 @@ public class PadController {
                                 if (i > 15) {
                                     return;
                                 }
-
                             }
                         }
-
                     }
                 }
             }
         }
     };
-
     public AudioOutput getGlobalOut() {
         return this.globalOut;
     }
-
-
     public int getClickedPadIndex() {
         return this.padIndex;
     }

@@ -22,7 +22,6 @@ public class SoundController {
     private ArrayList<String> dirList;
     private ArrayList<String> pathList;
 
-
     public SoundController(String dirPath) {
         this.soundObList = soundObList;
         this.dirPath = dirPath;
@@ -33,10 +32,6 @@ public class SoundController {
 
     public ArrayList<String> getDirList() {
         return dirList;
-    }
-
-    public String getPath(int index) {
-        return pathList.get(index);
     }
 
     public void loadSoundfiles(String dirPath) {
@@ -53,11 +48,7 @@ public class SoundController {
                 }
             }
         }
-
-
     }
-
-
     public EventHandler<MouseEvent> take = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent event) {
@@ -66,28 +57,21 @@ public class SoundController {
             Dragboard db = soundlistview.startDragAndDrop(TransferMode.ANY);
             ClipboardContent content = new ClipboardContent();
 
-
             int index = soundlistview.getSelectionModel().getSelectedIndex();
             System.out.println(index);
             List<String> files = new ArrayList<String>();
 
-
             files.add(pathList.get(index));
             content.putFilesByPath(files);
             db.setContent(content);
-
-
         }
     };
-
     public EventHandler<DragEvent> acceptdrag = new EventHandler<DragEvent>() {
         @Override
         public void handle(DragEvent event) {
             event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
         }
     };
-
-
     /**
      * getData get the Datainto the list
      */
@@ -99,7 +83,6 @@ public class SoundController {
             Dragboard dragboard = event.getDragboard();
 
             List<File> files = dragboard.getFiles();
-
 
             for (int i = 0; i < files.size(); i++) {
                 String path = files.get(i).toPath().toString();
@@ -117,7 +100,6 @@ public class SoundController {
                             FileAlreadyExistsException e = new FileAlreadyExistsException(null);
                             throw e ;
                         }
-
                     } catch (FileAlreadyExistsException e) {
                         Alert alert = new Alert(Alert.AlertType.WARNING);
                         alert.setTitle("Datei bereits vorhanden");
@@ -128,13 +110,10 @@ public class SoundController {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
                 }
             }
-            ;
         }
     };
-
     public EventHandler<MouseEvent> mouseEventEventHandler = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent event) {
@@ -148,7 +127,6 @@ public class SoundController {
                     } catch (IOException e) {
                         e.printStackTrace();
                 }
-
                 } else if (system.contains("mac")) {
                     //MAc System
                     try {
@@ -156,18 +134,10 @@ public class SoundController {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
-
-                   }
-
                 }
-
-
-
+            }
         }
     };
-
-
     public EventHandler<KeyEvent> keyinput = new EventHandler<KeyEvent>() {
         @Override
         public void handle(KeyEvent event) {
@@ -183,12 +153,9 @@ public class SoundController {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
                     dirList.remove(index);
                     pathList.remove(index);
                 }
-
-
             }
         }
     };
@@ -200,32 +167,18 @@ public class SoundController {
         File files = new File("src/Sound");
         File[] fileArray = files.listFiles();
 
-        File sounddir = new File(System.getProperty("user.home").concat("//Music").concat("//" + dirpath));
-
-
         for (File f : fileArray) {
             if (f != null) {
                 try {
-                    Path path = Paths.get(System.getProperty("user.home").concat("//Music").concat("//" + dirpath + "//" + f.getName()));
-                    //(System.getProperty("user.home").concat("//Music").concat("//" + dirpath + "//" + f.getName()))
-
-
                     Files.copy(f.toPath(),
                             (Paths.get(System.getProperty("user.home").concat("//Music").concat("//" + dirpath + "//" + f.getName()))));
-
-
                     this.dirList.add(f.getName());
                     this.pathList.add(f.getAbsolutePath());
-
                 } catch (FileAlreadyExistsException e) {
-
-
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         }
-
-
     }
 }

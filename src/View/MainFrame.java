@@ -56,8 +56,6 @@ public class MainFrame extends Application implements Observer {
         root.setTop(settingView);
         root.setRight(configBox);
         root.setLeft(padView);
-        //padView.prefWidthProperty().bind(root.widthProperty());
-        //padView.prefHeightProperty().bind(root.heightProperty());
 
         Scene scene = new Scene(root, WIDTH, HEIGHT);
         scene.getStylesheets().add("CSS/SamplerGUI.css");
@@ -76,13 +74,10 @@ public class MainFrame extends Application implements Observer {
         root.setOnKeyPressed(keyinput);
 
         primaryStage.show();
-
     }
 
     @Override
     public void update(Observable o, Object arg) {
-
-
 
         if(arg.equals("padsladen") ){
         padView.getPadController().setPad(settingView.getSettingController().getpads());

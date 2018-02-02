@@ -24,7 +24,6 @@ public class BitCrushEffectView extends Pane {
     private Label lbl_BitResValue;
     private Label lbl_BitRateValue;
 
-    //delay,rate,depth,feedback,wet,dry
     public BitCrushEffectView(double bitres, double bitrate){
         bitRes = new Slider(0,16, bitres);
         bitRate = new Slider(0,44100, bitrate);

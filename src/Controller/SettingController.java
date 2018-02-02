@@ -32,15 +32,9 @@ public class SettingController extends Observable {
         if (observer == null) {
             System.out.println("null Observer");
         }
-
         this.stage = stage;
         this.pads = pads;
     }
-
-
-
-
-
     public EventHandler<ActionEvent> save = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {

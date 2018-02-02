@@ -84,8 +84,6 @@ public class RecordController extends Observable {
                     while (record.isRecording()) {
                         try {
                             Thread.sleep(100);
-
-
                             Platform.runLater(() -> {
                                 currenttime = System.currentTimeMillis() - starttime;
                                 long secs = currenttime / 1000;
@@ -103,21 +101,14 @@ public class RecordController extends Observable {
                                 } else {
                                     sec = String.valueOf(restsecs);
                                 }
-
-
                                 timelabel.setText(min + ":" + sec);
                             });
-
-
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
-
                     }
-
                 }
             };
-
             looktime.start();
             System.out.println("START");
             if (!record.getRecordPath().equals("")) {
@@ -130,7 +121,6 @@ public class RecordController extends Observable {
             }
         }
     }
-
     public EventHandler<MouseEvent> stopClicked = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent event) {
@@ -187,7 +177,6 @@ public class RecordController extends Observable {
             }
         }
     };
-
     public EventHandler<KeyEvent> changeBPMbackEnter = new EventHandler<KeyEvent>() {
         @Override
         public void handle(KeyEvent event) {
@@ -213,5 +202,4 @@ public class RecordController extends Observable {
         String[] recordings = file.list(filter);
         return path.concat("//" + "recording(" + recordings.length + ").wav");
     }
-
 }

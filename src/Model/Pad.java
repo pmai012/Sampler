@@ -69,7 +69,6 @@ public class Pad extends Observable implements Serializable {
             effects = null;
             sendupdate();
         }
-
     }
     public Effect getEffect(){
 
@@ -96,14 +95,6 @@ public class Pad extends Observable implements Serializable {
         return presstime;
     }
 
-    public void setPresstime(long presstime) {
-        this.presstime = presstime;
-    }
-
-    public boolean isThreadrun() {
-        return threadrun;
-    }
-
     public void setThreadrun(boolean threadrun) {
         this.threadrun = threadrun;
     }
@@ -120,7 +111,6 @@ public class Pad extends Observable implements Serializable {
         if (effekte.size() != 0) {
             effekte.clear();
         }
-
     }
 //Paddummy nur zum Informieren der Mainframe
     public Pad (Observer observer, String msg){
@@ -137,7 +127,6 @@ public class Pad extends Observable implements Serializable {
         this.addObserver(this.observer);
         System.out.println("Observer: " + countObservers());
     }
-
     public void playSound() {
 
         if (this.hasEffects()) {
@@ -150,8 +139,6 @@ public class Pad extends Observable implements Serializable {
             }
         }
     }
-
-
     public void playSound(UGen effect) {
 
         if (starter < 1) {
@@ -159,26 +146,17 @@ public class Pad extends Observable implements Serializable {
             filePlayer.patch(effect).patch(audioOut);
             starter++;
         }
-
     }
-
     public void stop() {
         filePlayer.pause();
         starter = 0;
         filePlayer = new FilePlayer(minim.loadFileStream(path, 1024, true));
 
     }
-
     public void sendupdate() {
         setChanged();
         notifyObservers("pad");
     }
-
-    public AudioOutput getOutput() {
-        return audioOut;
-    }
-
-
     public void setStartpoint(int time) {
 
         startpoint = time;
@@ -202,7 +180,6 @@ public class Pad extends Observable implements Serializable {
         }
         return false;
     }
-
     public void threadstarten() {
         Thread time = new Thread() {
             @Override
@@ -216,8 +193,6 @@ public class Pad extends Observable implements Serializable {
                         e.printStackTrace();
                     }
                     presstime = System.currentTimeMillis() - start;
-
-
                 }
                 try {
                     this.join();
@@ -228,14 +203,5 @@ public class Pad extends Observable implements Serializable {
 
         };
         time.start();
-    }
-
-
-    public boolean isNull() {
-        if (filePlayer == null) {
-            return true;
-        } else {
-            return false;
-        }
     }
 }

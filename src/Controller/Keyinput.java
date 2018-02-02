@@ -15,22 +15,14 @@ public class Keyinput implements EventHandler<KeyEvent> {
     SettingController settingController;
     RecordController recordController;
 
-
-
-
-
     public Keyinput(){
 
     }
-
     public Keyinput(PadController padController, SettingController settingController, RecordController recordController) {
 
         this.padController = padController;
         this.settingController = settingController;
         this.recordController = recordController;
-
-        //BEispiel
-
     }
 
     //Tasteneingaben
@@ -40,7 +32,6 @@ public class Keyinput implements EventHandler<KeyEvent> {
 
         if (event.getCode() == KeyCode.S && event.isControlDown()) {
             settingController.save();
-
         }
 
         if (event.getCode() == KeyCode.O && event.isControlDown()) {
@@ -55,17 +46,13 @@ public class Keyinput implements EventHandler<KeyEvent> {
             if (pads[i] != null && event.getCode() == pads[i].getShortcut()) {
 
                 padController.startpressing(i);
-
-
             }
-
         }
 
         for (int i = 0; i < 16; i++) {
             if (pads[i] != null && event.getCode() == pads[i].getShortcut() && event.isShiftDown()) {
 
                 padController.stopPlay(i);
-
             }
 
         }
@@ -105,7 +92,6 @@ public class Keyinput implements EventHandler<KeyEvent> {
                 return KeyCode.C;
             case 15:
                 return KeyCode.V;
-
         }
         return null;
     }

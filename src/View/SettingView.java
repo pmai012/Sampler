@@ -54,8 +54,6 @@ public class SettingView extends Pane {
         samplermenu.prefWidthProperty().bind(this.widthProperty());
         this.getChildren().add(samplermenu);
 
-
-
         samplermenu.getStyleClass().add("menuBar");
         menuFile.getStyleClass().addAll("context-menu");
         itemNew.getStyleClass().addAll("context-menu", "menuItem");

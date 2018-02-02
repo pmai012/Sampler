@@ -108,18 +108,15 @@ public class RecordView extends Pane {
             recordBPM.setSpacing(10);
             int value = Integer.parseInt(bpmTf.getText());
             padController.setbeat(value);
-
         }
 
     }
-
     public void update(Object arg) {
         String command = (String) arg;
         System.out.println("recorder");
         if(command.equals("record")){
             record.getStyleClass().add("recordButtonUsed");
             record.getStyleClass().remove("recordButton");
-
         }
         if(command.equals("notrecord")){
             record.getStyleClass().add("recordButton");
