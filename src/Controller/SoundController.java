@@ -106,12 +106,14 @@ public class SoundController {
 
                 if (path.endsWith(".mp3") || path.endsWith(".wav")) {
                     try {
-
-                        Files.copy(Paths.get(files.get(i).getAbsolutePath()),
-                                (Paths.get(System.getProperty("user.home").concat("//Music").concat("//SamplerSoundfiles//" + files.get(i).getName()))), REPLACE_EXISTING);
-                        soundObList.add(files.get(i).getName());
-                        dirList.add(files.get(i).getName());
-                        pathList.add(files.get(i).getAbsolutePath());
+                        File s = new File(System.getProperty("user.home").concat("//Music").concat("//SamplerSoundfiles//" + files.get(i).getName()));
+                        if (!Files.exists(s.toPath())) {
+                            Files.copy(Paths.get(files.get(i).getAbsolutePath()),
+                                    (Paths.get(System.getProperty("user.home").concat("//Music").concat("//SamplerSoundfiles//" + files.get(i).getName()))));
+                            soundObList.add(files.get(i).getName());
+                            dirList.add(files.get(i).getName());
+                            pathList.add(files.get(i).getAbsolutePath());
+                        }
 
                     } catch (FileAlreadyExistsException e) {
                         Alert alert = new Alert(Alert.AlertType.WARNING);
