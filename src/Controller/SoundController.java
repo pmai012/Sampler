@@ -113,6 +113,9 @@ public class SoundController {
                             soundObList.add(files.get(i).getName());
                             dirList.add(files.get(i).getName());
                             pathList.add(files.get(i).getAbsolutePath());
+                        }else{
+                            FileAlreadyExistsException e = new FileAlreadyExistsException(null);
+                            throw e ;
                         }
 
                     } catch (FileAlreadyExistsException e) {
