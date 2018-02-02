@@ -155,8 +155,13 @@
     -fx-padding: 0 0 0 30;
 }
 
+-recordBPM {
+
+}
+
 .recordInfos {
-    -fx-padding: 10 10 0 0;
+    -fx-padding: 10 10 0 20;
+    -fx-max-width: 280px;
 }
 
 .stopButton {
@@ -184,7 +189,7 @@
 }
 
 .time {
-    -fx-padding: 0 0 0 20;
+    -fx-padding: 0 0 0 0;
     -fx-font-size: 20px;
 }
 
@@ -199,11 +204,7 @@
 
 .toggle-button {
 
-    -fx-background-color:
-            #000000,
-            linear-gradient(#202020 100%, #1f2429 20%, #191d22 100%)
-    /*,radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(0,0,0,0))*/
-;
+    -fx-background-color: #000000, linear-gradient(#202020 100%, #1f2429 20%, #191d22 100%);
     -fx-min-width: 106px;
     -fx-background-radius: 0px;
     -fx-background-insets: 0,1,20,0;
