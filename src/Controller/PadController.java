@@ -139,10 +139,13 @@ public class PadController {
         if (pad[number] != null) {
 
             if (pad[number].isPlaying()) {
+                pad[number].stop();
                 pad[number].setThreadrun(true);
                 pad[number].threadstarten();
                 pad[number].playSound();
+                return;
             }
+
 
 
             pad[number].setThreadrun(true);
