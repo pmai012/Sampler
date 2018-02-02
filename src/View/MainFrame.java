@@ -27,6 +27,7 @@ public class MainFrame extends Application implements Observer {
     private SoundView soundView;
     private VBox configBox;
 
+
     public MainFrame(){
 
         root = new BorderPane();
