@@ -65,7 +65,7 @@ public class SettingController extends Observable {
   public String Savelocation(){
       SaveOpenDialog saveDialog = new SaveOpenDialog();
       saveDialog.setExtFilter("WAV - Datei","wav");
-      saveFilelocation = saveDialog.Savedialog(stage, "Wo möchten sie die Wav speichern?");
+      saveFilelocation = saveDialog.Savedialog(stage, "Wo möchten sie die Aufnahme speichern?");
      return saveFilelocation;
   }
 
