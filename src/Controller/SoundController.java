@@ -131,6 +131,27 @@ public class SoundController {
         }
     };
 
+    public EventHandler<KeyEvent> delete = new EventHandler<KeyEvent>() {
+        @Override
+        public void handle(KeyEvent event) {
+            ListView soundlistview = (ListView) event.getSource();
+            if (soundlistview.getSelectionModel().isSelected(soundlistview.getSelectionModel().getSelectedIndex()) && event.getCode() == KeyCode.DELETE){
+
+                int index = soundlistview.getSelectionModel().getSelectedIndex();
+                soundObList.remove(index);
+                Path path = Paths.get(pathList.get(index));
+                try {
+                    Files.delete(path);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+                dirList.remove(index);
+                pathList.remove(index);
+
+            }
+        }
+    };
 
     public void createSounddir(ObservableList<String> soundObList) {
         this.soundObList = soundObList;

@@ -2,14 +2,22 @@ package View;
 
 import Controller.PadController;
 import Controller.SoundController;
+import com.sun.org.apache.xerces.internal.xs.datatypes.ObjectList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Observable;
 
 
 public class SoundView   extends Pane {
@@ -19,7 +27,7 @@ public class SoundView   extends Pane {
     private ObservableList<String> soundObList;
     private ListView soundlistview;
     private Label audioFX;
-    private RadioButton on, off;
+    private RadioButton fxOn, fxOff;
 
 
 
@@ -40,12 +48,13 @@ public class SoundView   extends Pane {
         soundlistview.setOnDragDetected(soundController.take);
         soundlistview.setOnDragOver(soundController.acceptdrag);
         soundlistview.setOnDragDropped(soundController.getData);
-        on = new RadioButton("An");
-        off = new RadioButton("Aus");
-        off.setSelected(true);
+        soundlistview.addEventHandler(KeyEvent.KEY_RELEASED,soundController.delete);
+        fxOn = new RadioButton("An");
+        fxOff = new RadioButton("Aus");
+        fxOff.setSelected(true);
 
         ToggleGroup activeGroup =new ToggleGroup();
-        activeGroup.getToggles().addAll(on, off);
+        activeGroup.getToggles().addAll(fxOn,fxOff);
         audioFX = new Label("Metronom");
 
         soundpane = new VBox(10);
@@ -53,14 +62,14 @@ public class SoundView   extends Pane {
 
         soundpane.getChildren().add(soundlistview);
         soundpane.getChildren().add(audioFX);
-        soundpane.getChildren().addAll(on, off);
+        soundpane.getChildren().addAll(fxOn,fxOff);
 
         audioFX.getStyleClass().addAll("title", "radioButton");
-        off.getStyleClass().addAll("title", "radioButton");
-        on.getStyleClass().addAll("title", "radioButton");
+        fxOff.getStyleClass().addAll("title", "radioButton");
+        fxOn.getStyleClass().addAll("title", "radioButton");
 
-        off.setOnAction(padController.metronomaus);
-        on.setOnAction(padController.metronoman);
+        fxOff.setOnAction(padController.metronomaus);
+        fxOn.setOnAction(padController.metronoman);
     }
 
     public SoundController getSoundController() {
