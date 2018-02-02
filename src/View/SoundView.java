@@ -2,22 +2,16 @@ package View;
 
 import Controller.PadController;
 import Controller.SoundController;
-import com.sun.org.apache.xerces.internal.xs.datatypes.ObjectList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.TransferMode;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Observable;
 
 
 public class SoundView   extends Pane {
@@ -48,7 +42,8 @@ public class SoundView   extends Pane {
         soundlistview.setOnDragDetected(soundController.take);
         soundlistview.setOnDragOver(soundController.acceptdrag);
         soundlistview.setOnDragDropped(soundController.getData);
-        soundlistview.addEventHandler(KeyEvent.KEY_RELEASED,soundController.delete);
+        soundlistview.addEventHandler(KeyEvent.KEY_RELEASED,soundController.keyinput);
+        soundlistview.addEventHandler(MouseEvent.MOUSE_CLICKED, soundController.mouseEventEventHandler);
         fxOn = new RadioButton("An");
         fxOff = new RadioButton("Aus");
         fxOff.setSelected(true);
