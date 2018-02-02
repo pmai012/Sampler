@@ -77,7 +77,6 @@ public class SoundController {
             db.setContent(content);
 
 
-
         }
     };
 
@@ -131,23 +130,59 @@ public class SoundController {
         }
     };
 
-    public EventHandler<KeyEvent> delete = new EventHandler<KeyEvent>() {
+    public EventHandler<MouseEvent> mouseEventEventHandler = new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent event) {
+            String path = System.getProperty("user.home").concat("\\Music").concat("\\SamplerSoundfiles");
+            if (event.getButton() == MouseButton.SECONDARY) {
+                String system = System.getProperty("os.name").toLowerCase();
+                if (system.contains("win")) {
+                    //Windows
+                    try {
+                        Runtime.getRuntime().exec("explorer.exe " + path);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                }
+
+                } else if (system.contains("osx")) {
+                    //MAc System
+                    try {
+                        Runtime.getRuntime().exec("open " + path);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+
+                   }
+
+                }
+
+
+
+        }
+    };
+
+
+    public EventHandler<KeyEvent> keyinput = new EventHandler<KeyEvent>() {
         @Override
         public void handle(KeyEvent event) {
             ListView soundlistview = (ListView) event.getSource();
-            if (soundlistview.getSelectionModel().isSelected(soundlistview.getSelectionModel().getSelectedIndex()) && event.getCode() == KeyCode.DELETE){
+            if (soundlistview.getSelectionModel().isSelected(soundlistview.getSelectionModel().getSelectedIndex())) {
 
-                int index = soundlistview.getSelectionModel().getSelectedIndex();
-                soundObList.remove(index);
-                Path path = Paths.get(pathList.get(index));
-                try {
-                    Files.delete(path);
-                } catch (IOException e) {
-                    e.printStackTrace();
+                if (event.getCode() == KeyCode.DELETE) {
+                    int index = soundlistview.getSelectionModel().getSelectedIndex();
+                    soundObList.remove(index);
+                    Path path = Paths.get(pathList.get(index));
+                    try {
+                        Files.delete(path);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    dirList.remove(index);
+                    pathList.remove(index);
                 }
 
-                dirList.remove(index);
-                pathList.remove(index);
 
             }
         }
