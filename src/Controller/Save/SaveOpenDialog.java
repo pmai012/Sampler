@@ -42,7 +42,7 @@ private FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
         if (file != null){
             return file.getAbsolutePath();
         }else{
-            return "none";
+            return "";
         }
     }
 
@@ -66,7 +66,7 @@ private FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
         if (file != null){
             return file.getAbsolutePath();
         }else{
-           return "none";
+           return "";
         }
     }
 
@@ -83,7 +83,7 @@ private FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
         if (file != null) {
             return file.getAbsolutePath();
         } else {
-            return "none";
+            return "";
         }
     }
 
