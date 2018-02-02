@@ -3,9 +3,11 @@ package Controller;
 import Model.Record;
 import View.RecordView;
 import ddf.minim.AudioOutput;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
@@ -26,10 +28,13 @@ public class RecordController extends Observable{
     private Observer observer;
     private RecordView view;
     private PadController padController;
+    private long currenttime;
     SettingController settingController;
+    Label timelabel;
 
-    public RecordController(PadController ref, Observer observer, RecordView view)
+    public RecordController(PadController ref, Observer observer, RecordView view, Label time)
     {
+        this.timelabel = time;
         this.padController = ref;
         this.record = new Record(padController.getGlobalOut(),observer);
         this.observer = observer;
@@ -70,6 +75,49 @@ String path = settingController.Savelocation();
         }
         else
         {
+            Thread looktime = new Thread() {
+                @Override
+                public void run() {
+                    long starttime = System.currentTimeMillis();
+
+                    while (record.isRecording()){
+                        try {
+                            Thread.sleep(100);
+
+
+                            Platform.runLater(() -> {
+                                currenttime = System.currentTimeMillis() - starttime;
+                                long secs = currenttime / 1000;
+                                long mins = secs / 60;
+                                long restsecs = secs % 60;
+                                String min = "0";
+                                if (mins < 10) {
+                                    min = "0" + String.valueOf(mins);
+                                } else {
+                                    min = String.valueOf(mins);
+                                }
+                                String sec = "0";
+                                if (restsecs < 10) {
+                                    sec = "0" + String.valueOf(restsecs);
+                                } else {
+                                    sec = String.valueOf(restsecs);
+                                }
+
+
+                                timelabel.setText(min + ":" + sec);
+                                    });
+
+
+
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                }
+            };
+
+            looktime.start();
             System.out.println("START");
             if (!record.getRecordPath().equals("")){
                 String path = record.getRecordPath();

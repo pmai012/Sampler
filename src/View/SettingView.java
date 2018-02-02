@@ -11,9 +11,7 @@ import javafx.stage.Stage;
 
 import java.util.Observer;
 
-/**
- * Created by User on 21.12.2017.
- */
+
 public class SettingView extends Pane {
 
     private MenuBar samplermenu;

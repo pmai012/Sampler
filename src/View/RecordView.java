@@ -72,7 +72,7 @@ public class RecordView extends Pane {
         bpm1.getStyleClass().addAll("title","time");
         bpm2.getStyleClass().addAll("title","time","textP");
 
-        recordController = new RecordController(padController, observer,this);
+        recordController = new RecordController(padController, observer,this, time);
 
         record.addEventHandler(MouseEvent.MOUSE_CLICKED, recordController.recordClicked);
         stop.addEventHandler(MouseEvent.MOUSE_CLICKED, recordController.stopClicked);

@@ -20,6 +20,7 @@ public class Record extends Observable{
     private String recordPath = "";
     private Observer observer;
 
+
     public Record(AudioOutput soundToRecord, Observer observer, String path){
         this.minim = new SimpleMinim(true);
         this.record = minim.createRecorder(soundToRecord, "src\\Controller\\Save\\record.wav");
@@ -40,7 +41,10 @@ public class Record extends Observable{
 
     public boolean isRecording() {return record.isRecording();}
 
-    public void startRecording() {record.beginRecord();}
+    public void startRecording() {
+        record.beginRecord();
+    }
+
 
     public void stopRecording() {
         record.endRecord();
