@@ -167,16 +167,18 @@ public class SoundController {
         File files = new File("src/Sound");
         File[] fileArray = files.listFiles();
 
-        for (File f : fileArray) {
-            if (f != null) {
-                try {
-                    Files.copy(f.toPath(),
-                            (Paths.get(System.getProperty("user.home").concat("//Music").concat("//" + dirpath + "//" + f.getName()))));
-                    this.dirList.add(f.getName());
-                    this.pathList.add(f.getAbsolutePath());
-                } catch (FileAlreadyExistsException e) {
-                } catch (IOException e) {
-                    e.printStackTrace();
+        if(fileArray != null) {
+            for (File f : fileArray) {
+                if (f != null) {
+                    try {
+                        Files.copy(f.toPath(),
+                                (Paths.get(System.getProperty("user.home").concat("//Music").concat("//" + dirpath + "//" + f.getName()))));
+                        this.dirList.add(f.getName());
+                        this.pathList.add(f.getAbsolutePath());
+                    } catch (FileAlreadyExistsException e) {
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }

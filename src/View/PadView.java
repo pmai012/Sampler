@@ -1,12 +1,15 @@
 package View;
 
+import Controller.Keyinput;
 import Controller.PadController;
 import Controller.SoundController;
 import Model.Pad;
+import javafx.css.PseudoClass;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 
@@ -73,6 +76,7 @@ public class PadView extends Pane {
         rootPV.setCenter(padBox);
         padTip = new Tooltip("Linksklick zum abspielen\nRechtsklick für Effekte");
         padTip.getStyleClass().add("tooltip");
+        Keyinput input = new Keyinput();
         for(Button pad: pads){
             pad.setTooltip(padTip);
         }
