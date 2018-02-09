@@ -2,6 +2,8 @@ package View;
 
 import Controller.Keyinput;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
@@ -47,8 +49,9 @@ public class MainFrame extends Application implements Observer {
     }
 
     @Override
-    public void start(Stage primaryStage) {
-        settingView = new SettingView(primaryStage, padView.getPads(), this, recordView.getRecordController());
+    public void start(Stage primaryStage) throws IOException {
+
+         settingView = new SettingView(primaryStage, padView.getPads(), this, recordView.getRecordController());
         recordView.getRecordController().refsettingController(settingView.getSettingController());
         configBox.getChildren().add(recordView);
         configBox.getChildren().add(soundView);

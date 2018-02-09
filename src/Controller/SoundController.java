@@ -1,6 +1,7 @@
 package Controller;
 
 
+import Sound.Soundadmin;
 import com.sun.org.apache.xerces.internal.xs.datatypes.ObjectList;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -9,10 +10,12 @@ import javafx.scene.control.ListView;
 import javafx.scene.input.*;
 
 import java.io.*;
+import java.net.URL;
 import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.lang.ClassLoader.getSystemResource;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 
@@ -166,11 +169,15 @@ public class SoundController {
 
         File sounddir = new File(System.getProperty("user.home").concat("//Music").concat("//"+dirpath));
         System.out.println(sounddir.mkdir());
-        File files = new File("src/Sound");
-        File[] fileArray = files.listFiles();
+
+        Soundadmin soundadmin = new Soundadmin();
+        //String path = this.getClass().getResource("Sound/HiHat 1.wav").getPath();
+       // URL url = this.getClass().getResource("/src/Sound/HiHat 1.wav");
+        //File[]files = new File(this.getClass().getResource("/src/Sound/").getPath()).listFiles();
+        File[] fileArray = new File(soundadmin.getClass().getResource("").getPath()).listFiles();
 
         if(System.getProperty("user.home").concat("//Music").concat("//"+dirpath).isEmpty()) {
-            if (fileArray != null) {
+       //     if (fileArray != null) { die Datei darf und kann nicht null sein!
                 for (File f : fileArray) {
                     if (f != null) {
                         try {
@@ -184,7 +191,7 @@ public class SoundController {
                         }
                     }
                 }
-            }
+        //    }
         }
     }
 }

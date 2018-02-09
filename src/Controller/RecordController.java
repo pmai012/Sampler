@@ -67,7 +67,7 @@ public class RecordController extends Observable {
             record.stopRecording();
             String path = settingController.Savelocation();
             try {
-                Files.copy(Paths.get("src/Controller/Save/record.wav"), Paths.get(path));
+                Files.copy(Paths.get("src/Controller/Save/file.wav"), Paths.get(path));
                 timelabel.setText("00:00");
 
             } catch (FileAlreadyExistsException e) {

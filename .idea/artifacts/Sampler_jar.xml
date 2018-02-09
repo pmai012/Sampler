@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="Sampler:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts</output-path>
+    <root id="archive" name="Sampler.jar">
+      <element id="module-output" name="Sampler" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../mp3-PlayerNew/libraries/eibo_simpleminim.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../mp3-PlayerNew/libraries/eibo_staticscanner.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../mp3-PlayerNew/libraries/jl1.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../mp3-PlayerNew/libraries/jsminim.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../mp3-PlayerNew/libraries/minim.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../mp3-PlayerNew/libraries/mp3agic.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../mp3-PlayerNew/libraries/mp3spi1.9.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../mp3-PlayerNew/libraries/tritonus_aos.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/../mp3-PlayerNew/libraries/tritonus_share.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
