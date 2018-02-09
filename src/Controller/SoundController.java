@@ -164,20 +164,24 @@ public class SoundController {
         this.soundObList = soundObList;
         String dirpath = "SamplerSoundfiles";
 
+        File sounddir = new File(System.getProperty("user.home").concat("//Music").concat("//"+dirpath));
+        System.out.println(sounddir.mkdir());
         File files = new File("src/Sound");
         File[] fileArray = files.listFiles();
 
-        if(fileArray != null) {
-            for (File f : fileArray) {
-                if (f != null) {
-                    try {
-                        Files.copy(f.toPath(),
-                                (Paths.get(System.getProperty("user.home").concat("//Music").concat("//" + dirpath + "//" + f.getName()))));
-                        this.dirList.add(f.getName());
-                        this.pathList.add(f.getAbsolutePath());
-                    } catch (FileAlreadyExistsException e) {
-                    } catch (IOException e) {
-                        e.printStackTrace();
+        if(System.getProperty("user.home").concat("//Music").concat("//"+dirpath).isEmpty()) {
+            if (fileArray != null) {
+                for (File f : fileArray) {
+                    if (f != null) {
+                        try {
+                            Files.copy(f.toPath(),
+                                    (Paths.get(System.getProperty("user.home").concat("//Music").concat("//" + dirpath + "//" + f.getName()))));
+                            this.dirList.add(f.getName());
+                            this.pathList.add(f.getAbsolutePath());
+                        } catch (FileAlreadyExistsException e) {
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
             }

@@ -11,7 +11,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
 
-public class SoundView   extends Pane {
+public class SoundView  extends Pane {
 
     private SoundController soundController;
     private VBox soundpane;
