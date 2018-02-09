@@ -171,10 +171,7 @@ public class SoundController {
         System.out.println(sounddir.mkdir());
 
         Soundadmin soundadmin = new Soundadmin();
-        //String path = this.getClass().getResource("Sound/HiHat 1.wav").getPath();
-       // URL url = this.getClass().getResource("/src/Sound/HiHat 1.wav");
-        //File[]files = new File(this.getClass().getResource("/src/Sound/").getPath()).listFiles();
-        File[] fileArray = new File(soundadmin.getClass().getResource("").getPath()).listFiles();
+        File[] fileArray = soundadmin.getfiles();
 
         if(System.getProperty("user.home").concat("//Music").concat("//"+dirpath).isEmpty()) {
        //     if (fileArray != null) { die Datei darf und kann nicht null sein!
