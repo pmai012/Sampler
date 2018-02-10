@@ -45,6 +45,7 @@ public class MainFrame extends Application implements Observer {
     }
 
     public void stop() {
+        recordView.getRecordController().deleteRecordfile();
         System.exit(1);
     }
 

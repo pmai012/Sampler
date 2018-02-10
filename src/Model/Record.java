@@ -16,22 +16,21 @@ public class Record extends Observable{
 
     private AudioRecorder record;
     private Minim minim;
-    private String defaultPath = System.getProperty("user.home").concat("//Music") + "/myrecording.wav";
     private String recordPath = "";
     private Observer observer;
 
     public Record(AudioOutput soundToRecord, Observer observer, String path){
         this.minim = new SimpleMinim(true);
-        this.record = minim.createRecorder(soundToRecord, "src\\Controller\\Save\\record.wav");
+        this.record = minim.createRecorder(soundToRecord, path);
         this.observer = observer;
         this.addObserver(this.observer);
     }
-    public Record(AudioOutput soundToRecord, Observer observer){
+   /* public Record(AudioOutput soundToRecord, Observer observer){
         this.minim = new SimpleMinim(true);
-        this.record = minim.createRecorder(soundToRecord, "src\\Controller\\Save\\record.wav");
+        this.record = minim.createRecorder(soundToRecord, recordPath);
         this.observer = observer;
         this.addObserver(this.observer);
-    }
+    }*/
     public void setRecordPath(String path){
         this.recordPath = path;
     }

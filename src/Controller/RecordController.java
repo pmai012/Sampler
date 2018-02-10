@@ -18,6 +18,7 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Observable;
 import java.util.Observer;
@@ -32,11 +33,19 @@ public class RecordController extends Observable {
     private long currenttime;
     SettingController settingController;
     Label timelabel;
+    File recordfile;
 
     public RecordController(PadController ref, Observer observer, RecordView view, Label time) {
         this.timelabel = time;
+
+        try {
+            recordfile = File.createTempFile("myrecord", ".wav");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         this.padController = ref;
-        this.record = new Record(padController.getGlobalOut(), observer);
+        this.record = new Record(padController.getGlobalOut(), observer, recordfile.getPath());
         this.observer = observer;
         this.view = view;
     }
@@ -61,21 +70,40 @@ public class RecordController extends Observable {
         this.settingController = settingController;
     }
 
+
+    /**
+     * Löscht die temporäre Recordfile.
+     */
+    public void deleteRecordfile() {
+        recordfile.deleteOnExit();
+    }
+
     public void makerecord() {
         if (record.isRecording()) {
             System.out.println("STOP");
             record.stopRecording();
-            String path = settingController.Savelocation();
+            String targetpath = settingController.Savelocation();
             try {
-                Files.copy(Paths.get("src/Controller/Save/file.wav"), Paths.get(path));
+                System.out.println(recordfile.getAbsolutePath());
+                Path recordpath = Paths.get(recordfile.getPath()); //Paths.get(this.getClass().getResource("/Save/file.wav").getPath());
+                Files.copy(recordpath, Paths.get(targetpath));
                 timelabel.setText("00:00");
+
 
             } catch (FileAlreadyExistsException e) {
             } catch (IOException e) {
                 e.printStackTrace();
+            } finally {
+                recordfile.deleteOnExit();
+                try {
+                    recordfile = File.createTempFile("myrecord", ".wav");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
 
         } else {
+
             Thread looktime = new Thread() {
                 @Override
                 public void run() {
@@ -109,18 +137,13 @@ public class RecordController extends Observable {
                     }
                 }
             };
-            looktime.start();
+
             System.out.println("START");
-            if (!record.getRecordPath().equals("")) {
-                String path = record.getRecordPath();
-                record = null;
-                record = new Record(padController.getGlobalOut(), observer, countRecording(path));
-                record.startRecording();
-            } else {
-                record.startRecording();
-            }
+            record.startRecording();
+            looktime.start();
         }
     }
+
     public EventHandler<MouseEvent> stopClicked = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent event) {

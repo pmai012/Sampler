@@ -9,6 +9,7 @@ import java.io.File;
 public class Soundadmin {
 
     public File[] getfiles(){
+
        return new File(this.getClass().getResource("").getPath()).listFiles();
     }
 }
