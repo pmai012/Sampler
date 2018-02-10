@@ -85,7 +85,7 @@ public class RecordController extends Observable {
             String targetpath = settingController.Savelocation();
             try {
                 System.out.println(recordfile.getAbsolutePath());
-                Path recordpath = Paths.get(recordfile.getPath()); //Paths.get(this.getClass().getResource("/Save/file.wav").getPath());
+                Path recordpath = Paths.get(recordfile.getPath());
                 Files.copy(recordpath, Paths.get(targetpath));
                 timelabel.setText("00:00");
 
@@ -93,13 +93,6 @@ public class RecordController extends Observable {
             } catch (FileAlreadyExistsException e) {
             } catch (IOException e) {
                 e.printStackTrace();
-            } finally {
-                recordfile.deleteOnExit();
-                try {
-                    recordfile = File.createTempFile("myrecord", ".wav");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
             }
 
         } else {
