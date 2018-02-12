@@ -76,6 +76,7 @@ public class MainFrame extends Application implements Observer {
 
         Keyinput keyinput = new Keyinput(padView.getPadController(), settingView.getSettingController(), recordView.getRecordController());
         root.setOnKeyPressed(keyinput);
+        root.setOnKeyReleased(keyinput);
 
         primaryStage.show();
     }

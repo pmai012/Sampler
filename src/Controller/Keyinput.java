@@ -1,6 +1,7 @@
 package Controller;
 
 import Model.Pad;
+import javafx.css.PseudoClass;
 import javafx.event.EventHandler;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCode;
@@ -43,10 +44,16 @@ public class Keyinput implements EventHandler<KeyEvent> {
         }
 
         for (int i = 0; i < 16; i++) {
-            if (pads[i] != null && event.getCode() == pads[i].getShortcut()) {
-
-                padController.startpressing(i);
+            if(event.getEventType().equals(KeyEvent.KEY_PRESSED) && event.getCode() == getdefaultkeyCode(i)) {
+                padController.getButton()[i].pseudoClassStateChanged(PseudoClass.getPseudoClass("pressed"), true);
+                if (pads[i] != null && event.getCode() == pads[i].getShortcut()) {
+                    padController.startpressing(i);
+                }
             }
+            if(event.getEventType().equals(KeyEvent.KEY_RELEASED) && event.getCode() == getdefaultkeyCode(i)) {
+                padController.getButton()[i].pseudoClassStateChanged(PseudoClass.getPseudoClass("pressed"), false);
+            }
+
         }
 
         for (int i = 0; i < 16; i++) {
@@ -85,7 +92,7 @@ public class Keyinput implements EventHandler<KeyEvent> {
             case 11:
                 return KeyCode.F;
             case 12:
-                return KeyCode.Y;
+                return KeyCode.Z;
             case 13:
                 return KeyCode.X;
             case 14:

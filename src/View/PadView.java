@@ -110,8 +110,6 @@ public class PadView extends Pane {
         padController = new PadController(pads, observer, this);
 
         for (Button pad : pads) {
-            pad.setOnKeyPressed(padController.keyPressed);
-            pad.setOnKeyReleased(padController.keyReleased);
             pad.setOnDragOver(padController.acceptdrag);
             pad.setOnDragDropped(padController.getData);
             pad.addEventHandler(MouseEvent.MOUSE_PRESSED, padController.pressed);
