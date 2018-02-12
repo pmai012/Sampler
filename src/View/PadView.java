@@ -110,10 +110,12 @@ public class PadView extends Pane {
         padController = new PadController(pads, observer, this);
 
         for (Button pad : pads) {
-            pad.addEventHandler(MouseEvent.MOUSE_PRESSED, padController.pressed);
-            pad.addEventHandler(MouseEvent.MOUSE_RELEASED, padController.rightclick);
+            pad.setOnKeyPressed(padController.keyPressed);
+            pad.setOnKeyReleased(padController.keyReleased);
             pad.setOnDragOver(padController.acceptdrag);
             pad.setOnDragDropped(padController.getData);
+            pad.addEventHandler(MouseEvent.MOUSE_PRESSED, padController.pressed);
+            pad.addEventHandler(MouseEvent.MOUSE_RELEASED, padController.rightclick);
         }
         addEffect.setOnAction(padController.contextMenu_addEffectClicked);
         deleteEffect.setOnAction(padController.contextMenu_deleteEffectClicked);

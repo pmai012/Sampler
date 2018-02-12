@@ -8,6 +8,7 @@ import View.PadView;
 import ddf.minim.AudioOutput;
 import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
 import javafx.collections.ObservableList;
+import javafx.css.PseudoClass;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
@@ -121,6 +122,35 @@ public class PadController {
         beat.setBpm(bpm);
 
     }
+    public EventHandler<KeyEvent> keyPressed = new EventHandler<KeyEvent>() {
+        @Override
+        public void handle(KeyEvent event) {
+            for(int i = 0; i < ANZAHL; i++){
+                if(event.getSource().equals(button[i])){
+                    Keyinput keyinput = new Keyinput();
+                    if(event.getCode() == keyinput.getdefaultkeyCode(i)){
+                        button[i].pseudoClassStateChanged(PseudoClass.getPseudoClass("pressed"), true);
+                    }
+                }
+            }
+
+        }
+    };
+
+    public EventHandler<KeyEvent> keyReleased = new EventHandler<KeyEvent>() {
+        @Override
+        public void handle(KeyEvent event) {
+            for(int i = 0; i < ANZAHL; i++){
+                if(event.getSource().equals(button[i])){
+                    Keyinput keyinput = new Keyinput();
+                    if(event.getCode() == keyinput.getdefaultkeyCode(i)){
+                        button[i].pseudoClassStateChanged(PseudoClass.getPseudoClass("pressed"),false);
+                    }
+                }
+            }
+        }
+    };
+
     public void startpressing(int number) {
         if (pad[number] != null) {
 
