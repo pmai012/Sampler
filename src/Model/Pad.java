@@ -1,23 +1,13 @@
 package Model;
 
-import Controller.PadController;
 import Model.Effects.Effect;
-import com.mpatric.mp3agic.InvalidDataException;
-import com.mpatric.mp3agic.Mp3File;
-import com.mpatric.mp3agic.UnsupportedTagException;
 import ddf.minim.AudioOutput;
-import ddf.minim.AudioPlayer;
 import ddf.minim.Minim;
 import ddf.minim.UGen;
-import ddf.minim.spi.AudioOut;
-import ddf.minim.ugens.Delay;
 import ddf.minim.ugens.FilePlayer;
-import de.hsrm.mi.eibo.simpleplayer.SimpleAudioPlayer;
 import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
 import javafx.scene.input.KeyCode;
 
-
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +33,7 @@ public class Pad extends Observable implements Serializable {
     private int starter = 0;
     private List<UGen> effekte;
     private List<Effect> effects;
+    private long lenght;
 
     public String getPath(){
         return path;
@@ -75,6 +66,8 @@ public class Pad extends Observable implements Serializable {
         return effects.get(0);
     }
 
+
+
     public KeyCode getShortcut() {
         return shortcut;
     }
@@ -91,6 +84,9 @@ public class Pad extends Observable implements Serializable {
         return endpoint;
     }
 
+    public long getLenght(){
+        return lenght;
+    }
     public long getPresstime() {
         return presstime;
     }
@@ -126,6 +122,7 @@ public class Pad extends Observable implements Serializable {
         filePlayer = new FilePlayer(minim.loadFileStream(pathtoSound, 1024, true));
         this.addObserver(this.observer);
         System.out.println("Observer: " + countObservers());
+        lenght = filePlayer.length();
     }
     public void playSound() {
 

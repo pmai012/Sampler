@@ -4,7 +4,6 @@ import Model.BeatsperMinute;
 import Model.Pad;
 import View.EffectView;
 import View.PadView;
-import View.PropertyView;
 import ddf.minim.AudioOutput;
 import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
 import javafx.event.ActionEvent;
@@ -192,13 +191,6 @@ public class PadController {
         }
     };
 
-    public EventHandler<ActionEvent> contextMenu_properties = new EventHandler<ActionEvent>() {
-        @Override
-        public void handle(ActionEvent event) {
-            PropertyView view = new PropertyView(pad[getClickedPadIndex()]);
-        }
-    };
-
     public EventHandler<ActionEvent> contextMenu_editEffectClicked = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
@@ -218,6 +210,15 @@ public class PadController {
             return;
         }
     };
+
+    public EventHandler<ActionEvent> contextMenu_setstartpoint = new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent event) {
+          setstarttime(getClickedPadIndex());
+        }
+    };
+
+
     public void deletePad(int number){
         pad[number] = null;
         Pad dummy = new Pad(observer,"pad");
@@ -286,5 +287,21 @@ public class PadController {
     }
     public int getClickedPadIndex() {
         return this.padIndex;
+    }
+
+
+    public void setstarttime(int i){
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Lege den Startpunkt fest");
+        String akt = String.valueOf((pad[i].getStartpoint()/1000));
+        alert.setHeaderText("");
+
+        String s ="Der Start liegt bei "+ akt + " Sekunden";
+
+        alert.setContentText(s);
+
+        alert.show();
+
+
     }
 }

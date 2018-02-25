@@ -26,7 +26,7 @@ public class PadView extends Pane {
     private ContextMenu contextMenu;
     private MenuItem addEffect;
     private MenuItem editEffect;
-    private MenuItem padproperty;
+    private MenuItem setstartpoint;
     private MenuItem deleteEffect;
     private MenuItem deleteSound;
     private Tooltip padTip;
@@ -43,12 +43,12 @@ public class PadView extends Pane {
         editEffect = new MenuItem("Effekt bearbeiten");
         deleteEffect = new MenuItem("Effekt löschen");
         deleteSound = new MenuItem("Sound löschen");
-        padproperty = new MenuItem("Eigenschaften");
+        setstartpoint = new MenuItem("Startpunkt festlegen");
         editEffect.setDisable(true);
         addEffect.setDisable(true);
         deleteEffect.setDisable(true);
         deleteSound.setDisable(true);
-        contextMenu.getItems().addAll(addEffect, editEffect, deleteEffect, deleteSound, padproperty);
+        contextMenu.getItems().addAll(addEffect, editEffect, deleteEffect, deleteSound, setstartpoint);
         padBox = new TilePane(Orientation.HORIZONTAL);
         padBox.setHgap(10);
         padBox.setVgap(10);
@@ -120,7 +120,7 @@ public class PadView extends Pane {
         deleteEffect.setOnAction(padController.contextMenu_deleteEffectClicked);
         editEffect.setOnAction(padController.contextMenu_editEffectClicked);
         deleteSound.setOnAction(padController.contextMenu_deleteSoundClicked);
-        padproperty.setOnAction(padController.contextMenu_properties);
+        setstartpoint.setOnAction(padController.contextMenu_setstartpoint);
     }
 
     public Pad[] getPads() {
