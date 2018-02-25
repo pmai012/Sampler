@@ -8,10 +8,10 @@ import ddf.minim.AudioOutput;
 import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
+import javafx.scene.control.*;
 import javafx.scene.input.*;
+import javafx.scene.layout.GridPane;
+import javafx.util.Callback;
 
 import java.io.File;
 import java.util.List;
@@ -43,6 +43,7 @@ public class PadController {
 
         }
     }
+
     public Button[] getButton() {
         return button;
     }
@@ -106,6 +107,7 @@ public class PadController {
             }
         }
     };
+
     public String beattoString() {
         String beats = Integer.toString(beat.getBpm());
         return beats + " BPM";
@@ -131,23 +133,25 @@ public class PadController {
             pad[number].playSound();
         }
     }
-    public void stopPlay(int number){
 
-        if(pad[number] != null){
-            if(!pad[number].isPlaying()){
+    public void stopPlay(int number) {
+
+        if (pad[number] != null) {
+            if (!pad[number].isPlaying()) {
                 return;
-            }
-            else{
+            } else {
                 pad[number].stop();
             }
         }
     }
+
     public void padclick(int number) {
         if (pad[number] == null) {
             return;
         }
         pad[number].setThreadrun(false);
     }
+
     public EventHandler<MouseEvent> rightclick = new EventHandler<MouseEvent>() {
         @Override
         public void handle(MouseEvent event) {
@@ -166,12 +170,12 @@ public class PadController {
                             }
                         }
                         return;
-                    }else                //RECHTSCLICK
-                    if (event.getButton().equals(MouseButton.SECONDARY)) {
-                        System.out.println(i + " rechtsclick");
-                        padIndex = i + 1;
-                        return;
-                    }
+                    } else                //RECHTSCLICK
+                        if (event.getButton().equals(MouseButton.SECONDARY)) {
+                            System.out.println(i + " rechtsclick");
+                            padIndex = i + 1;
+                            return;
+                        }
                     return;
                 }
             }
@@ -205,7 +209,7 @@ public class PadController {
         public void handle(ActionEvent event) {
             System.out.println(getClickedPadIndex());
             getPadAtIndex(getClickedPadIndex()).stop();
-            deletePad(getClickedPadIndex()-1);
+            deletePad(getClickedPadIndex() - 1);
 
             return;
         }
@@ -214,14 +218,14 @@ public class PadController {
     public EventHandler<ActionEvent> contextMenu_setstartpoint = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
-          setstarttime(getClickedPadIndex());
+            setstarttime(getClickedPadIndex() - 1);
         }
     };
 
 
-    public void deletePad(int number){
+    public void deletePad(int number) {
         pad[number] = null;
-        Pad dummy = new Pad(observer,"pad");
+        Pad dummy = new Pad(observer, "pad");
     }
 
     /**
@@ -282,26 +286,58 @@ public class PadController {
             }
         }
     };
+
     public AudioOutput getGlobalOut() {
         return this.globalOut;
     }
+
     public int getClickedPadIndex() {
         return this.padIndex;
     }
 
 
-    public void setstarttime(int i){
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Lege den Startpunkt fest");
-        String akt = String.valueOf((pad[i].getStartpoint()/1000));
-        alert.setHeaderText("");
+    public void setstarttime(int i) {
+        Dialog<Integer> dialog = new Dialog<>();
+        dialog.setTitle("Geben Sie einen Startpunkt ein");
+        dialog.setHeaderText("Geben Sie einen Startpunkt an");
+        dialog.setResizable(false);
+        Label label1 = new Label("Startpunkt: ");
+        int laenge = (int) (pad[i].getLenght() / 1000);
 
-        String s ="Der Start liegt bei "+ akt + " Sekunden";
+        Slider slider = new Slider(0, laenge, 1);
+        slider.setMin(0);
+        slider.setMax(laenge);
+        slider.setValue((pad[i].getStartpoint() / 1000));
+        slider.setShowTickLabels(true);
+        slider.setShowTickMarks(true);
+        slider.setMajorTickUnit(50);
+        slider.setMinorTickCount(5);
 
-        alert.setContentText(s);
 
-        alert.show();
+        GridPane grid = new GridPane();
 
+        grid.add(label1, 1, 1);
+
+        grid.add(slider, 2, 1);
+
+
+        dialog.getDialogPane().setContent(grid);
+        ButtonType buttonTypeOk = new ButtonType("setzen", ButtonBar.ButtonData.OK_DONE);
+        dialog.getDialogPane().getButtonTypes().add(buttonTypeOk);
+        dialog.setResultConverter(new Callback<ButtonType, Integer>() {
+            @Override
+            public Integer call(ButtonType b) {
+                if (b == buttonTypeOk) {
+                    int wert = (int) slider.getValue();
+
+                    return wert;
+                }
+
+                return pad[i].getStartpoint();
+            }
+        });
+        Optional<Integer> result = dialog.showAndWait();
+        pad[i].setStartpoint(result.get());
 
     }
 }
