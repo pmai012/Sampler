@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Record;
 import View.RecordView;
+
 import ddf.minim.AudioOutput;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
@@ -25,6 +26,7 @@ import java.util.Observer;
 
 
 public class RecordController extends Observable {
+
     private AudioOutput recordInput;
     private Record record;
     private Observer observer;

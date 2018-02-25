@@ -50,7 +50,7 @@ private FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(
      * Gibt ein Dialog zum Speichern von Dateien aus.
      *
      * @param stage Die Stage, wo der Dialog erscheinen soll
-     * @param title Den Titel des DIaloges
+     * @param title Den Titel des Dialoges
      * @return Gibt den ausgewählten Speicherort zurück
      */
     public String Savedialog(Stage stage, String title) { //

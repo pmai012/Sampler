@@ -28,10 +28,6 @@ public class SettingController extends Observable {
 
         this.recordController = recordController;
         this.observer = observer;
-
-        if (observer == null) {
-            System.out.println("null Observer");
-        }
         this.stage = stage;
         this.pads = pads;
     }
@@ -108,6 +104,8 @@ public class SettingController extends Observable {
     public EventHandler<ActionEvent> openManual = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
+
+
             try {
                 File file = new File("../Anleitung.txt");
                 FileWriter fw = new FileWriter(file);

@@ -2,19 +2,13 @@ package View;
 
 import Controller.Keyinput;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javax.imageio.IIOException;
-import java.io.File;
+
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -88,8 +82,11 @@ public class MainFrame extends Application implements Observer {
         padView.getPadController().setPad(settingView.getSettingController().getpads());
          arg ="pad";
         }
+
         padView.update(arg);
         recordView.update(arg);
     }
+
+
 
 }

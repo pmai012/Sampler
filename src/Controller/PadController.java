@@ -1,32 +1,23 @@
 package Controller;
 
 import Model.BeatsperMinute;
-import Model.Effects.Effect;
 import Model.Pad;
 import View.EffectView;
 import View.PadView;
+import View.PropertyView;
 import ddf.minim.AudioOutput;
 import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
-import javafx.collections.ObservableList;
-import javafx.css.PseudoClass;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
 import javafx.scene.input.*;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Observer;
 import java.util.Optional;
-
-import static javafx.scene.input.ScrollEvent.SCROLL;
-import static javafx.scene.input.ScrollEvent.SCROLL_STARTED;
 
 
 public class PadController {
@@ -200,6 +191,14 @@ public class PadController {
             getPadAtIndex(getClickedPadIndex()).stop();
         }
     };
+
+    public EventHandler<ActionEvent> contextMenu_properties = new EventHandler<ActionEvent>() {
+        @Override
+        public void handle(ActionEvent event) {
+            PropertyView view = new PropertyView(pad[getClickedPadIndex()]);
+        }
+    };
+
     public EventHandler<ActionEvent> contextMenu_editEffectClicked = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
@@ -212,14 +211,16 @@ public class PadController {
 
         @Override
         public void handle(ActionEvent event) {
+            System.out.println(getClickedPadIndex());
             getPadAtIndex(getClickedPadIndex()).stop();
             deletePad(getClickedPadIndex()-1);
-            Pad dummy = new Pad(observer, "pad");
+
             return;
         }
     };
     public void deletePad(int number){
         pad[number] = null;
+        Pad dummy = new Pad(observer,"pad");
     }
 
     /**
