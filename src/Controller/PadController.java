@@ -6,6 +6,8 @@ import View.EffectView;
 import View.PadView;
 import ddf.minim.AudioOutput;
 import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.*;
@@ -303,15 +305,26 @@ public class PadController {
         dialog.setHeaderText("Geben Sie einen Startpunkt an");
         dialog.setResizable(false);
         Label label1 = new Label("Startpunkt: ");
-        long laenge = (pad[i].getLenght() );
+        Label zeit = new Label(String.valueOf(pad[i].getStartpoint()/1000) + " Sekunden");
+        long laenge = (pad[i].getLenght());
         System.out.println(laenge);
-        Slider slider = new Slider(0, laenge, 1);
-        slider.setValue((pad[i].getStartpoint()/1000 ));
+        Slider slider = new Slider(0, laenge / 1000, 1);
+        slider.setValue((pad[i].getStartpoint() / 1000));
         slider.setShowTickLabels(true);
         slider.setShowTickMarks(true);
+        slider.valueProperty().addListener(new ChangeListener<Number>() {
+
+
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+               zeit.setText(String.valueOf(newValue.intValue()) + " Sekunden");
+
+            }
+        });
         GridPane grid = new GridPane();
         grid.add(label1, 1, 1);
         grid.add(slider, 2, 1);
+        grid.add(zeit, 1, 2);
         dialog.getDialogPane().setContent(grid);
         ButtonType buttonTypeOk = new ButtonType("setzen", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().add(buttonTypeOk);
@@ -319,12 +332,12 @@ public class PadController {
             @Override
             public Long call(ButtonType b) {
                 if (b == buttonTypeOk) {
-                    Long wert = new Long((long) (slider.getValue()*1000));
 
-                    return wert;
+
+                    return Long.valueOf((int) (slider.getValue()*1000));
                 }
 
-                return new Long(pad[i].getStartpoint()/1000);
+                return new Long(pad[i].getStartpoint() / 1000);
             }
         });
         Optional<Long> result = dialog.showAndWait();
