@@ -297,47 +297,38 @@ public class PadController {
 
 
     public void setstarttime(int i) {
-        Dialog<Integer> dialog = new Dialog<>();
+
+        Dialog<Long> dialog = new Dialog<>();
         dialog.setTitle("Geben Sie einen Startpunkt ein");
         dialog.setHeaderText("Geben Sie einen Startpunkt an");
         dialog.setResizable(false);
         Label label1 = new Label("Startpunkt: ");
-        int laenge = (int) (pad[i].getLenght() / 1000);
-
+        long laenge = (pad[i].getLenght() );
+        System.out.println(laenge);
         Slider slider = new Slider(0, laenge, 1);
-        slider.setMin(0);
-        slider.setMax(laenge);
-        slider.setValue((pad[i].getStartpoint() / 1000));
+        slider.setValue((pad[i].getStartpoint()/1000 ));
         slider.setShowTickLabels(true);
         slider.setShowTickMarks(true);
-        slider.setMajorTickUnit(50);
-        slider.setMinorTickCount(5);
-
-
         GridPane grid = new GridPane();
-
         grid.add(label1, 1, 1);
-
         grid.add(slider, 2, 1);
-
-
         dialog.getDialogPane().setContent(grid);
         ButtonType buttonTypeOk = new ButtonType("setzen", ButtonBar.ButtonData.OK_DONE);
         dialog.getDialogPane().getButtonTypes().add(buttonTypeOk);
-        dialog.setResultConverter(new Callback<ButtonType, Integer>() {
+        dialog.setResultConverter(new Callback<ButtonType, Long>() {
             @Override
-            public Integer call(ButtonType b) {
+            public Long call(ButtonType b) {
                 if (b == buttonTypeOk) {
-                    int wert = (int) slider.getValue();
+                    Long wert = new Long((long) (slider.getValue()*1000));
 
                     return wert;
                 }
 
-                return pad[i].getStartpoint();
+                return new Long(pad[i].getStartpoint()/1000);
             }
         });
-        Optional<Integer> result = dialog.showAndWait();
-        pad[i].setStartpoint(result.get());
+        Optional<Long> result = dialog.showAndWait();
+        pad[i].setStartpoint(result.get().intValue());
 
     }
 }

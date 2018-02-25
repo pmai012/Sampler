@@ -155,7 +155,7 @@ public class Pad extends Observable implements Serializable {
         notifyObservers("pad");
     }
     public void setStartpoint(int time) {
-
+    System.out.println(time);
         startpoint = time;
     }
 
