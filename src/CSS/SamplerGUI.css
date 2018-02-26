@@ -35,13 +35,16 @@
 
 }
 
+.manualPage1 {
+   -fx-graphic: "../Picture/ManualPage1";
+}
+
 .context-menu {
     -fx-skin: "com.sun.javafx.scene.control.skin.ContextMenuSkin";
     -fx-background-color: black;
     -fx-padding: 0 0 0 0;
 
 }
-
 
 
 .menuItem {

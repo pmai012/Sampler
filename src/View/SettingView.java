@@ -69,7 +69,7 @@ public class SettingView extends Pane {
         itemSave.setOnAction(settingController.save);
         itemOpen.setOnAction(settingController.openEvent);
         itemSourceLocation.setOnAction(settingController.openSourceLocation);
-        itemManual.setOnAction(settingController.openManual);
+        itemManual.setOnAction(settingController.openManualView);
         settingController.addObserver(refOb);
     }
 

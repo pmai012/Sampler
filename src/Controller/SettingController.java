@@ -2,6 +2,7 @@ package Controller;
 
 import Controller.Save.SaveOpenDialog;
 import Model.Pad;
+import View.ManualView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
@@ -23,11 +24,16 @@ public class SettingController extends Observable {
     private String saveSourcelocation;
     private Pad[] pads;
     private Observer observer;
+    private ManualView manualView;
 
     public SettingController(Stage stage, Pad[] pads, Observer observer, RecordController recordController) {
 
         this.recordController = recordController;
         this.observer = observer;
+
+        if (observer == null) {
+            System.out.println("null Observer");
+        }
         this.stage = stage;
         this.pads = pads;
     }
@@ -101,36 +107,10 @@ public class SettingController extends Observable {
         }
     };
 
-    public EventHandler<ActionEvent> openManual = new EventHandler<ActionEvent>() {
+    public EventHandler<ActionEvent> openManualView = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
-
-
-            try {
-                File file = new File("../Anleitung.txt");
-                FileWriter fw = new FileWriter(file);
-                BufferedWriter bw = new BufferedWriter(fw);
-                if (file.length() == 0) {
-                    bw.write("Sampler\n\n");
-                    bw.newLine();
-                    bw.write("ANLEITUNG:");
-                    bw.newLine();
-                    bw.write("\nDer Sampler stellt ihnen 16 Pads zur Verfügung, die Sie per Tastendruck " +
-                            "\nabspielen können. Ziehen Sie ganz einfach ihre Sounddateien auf die Pads um " +
-                            "\ndiese zu füllen. Nun können Sie ihre Eingabefolge aufnehmen indem Sie die Recordtaste" +
-                            "\nbetätigen, ihre Folge drücken und dann auf die Stoptaste drücken. ");
-                    bw.newLine();
-                    bw.write("Viel Spaß mit noch mit dem Sampler. ");
-
-                }
-                bw.close();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-                System.out.println("Anleitung konnte nicht erstellt werden.");
-            }
-
-
+            manualView = new ManualView();
         }
     };
 
