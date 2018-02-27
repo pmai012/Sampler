@@ -7,7 +7,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" exported="" name="eibo_simpleminim" level="project" />
+    <orderEntry type="library" name="eibo_simpleminim" level="project" />
     <orderEntry type="module-library">
       <library>
         <CLASSES>
@@ -19,6 +19,7 @@
         </SOURCES>
       </library>
     </orderEntry>
+    <orderEntry type="library" name="libraries" level="application" />
     <orderEntry type="library" name="libraries" level="project" />
   </component>
 </module>

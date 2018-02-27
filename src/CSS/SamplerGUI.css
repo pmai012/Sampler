@@ -35,8 +35,82 @@
 
 }
 
+.headBox {
+    -fx-padding: 15 0 0 0;
+}
+
+.headline {
+    -fx-font-family: "Helvetica";
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.manualBox {
+    -fx-padding: 10 50 10 50;
+    -fx-max-width: 400;
+    -fx-max-height: 200;
+
+}
+
+.toggleBox {
+    -fx-padding: 0 0 20 0;
+    -fx-spacing: 20;
+}
+
+.manualButton {
+    -fx-background-color: transparent;
+    -fx-graphic: url("../Picture/Toggle.png");
+}
+
+.manualButtonOnPress {
+    -fx-background-color: transparent;
+    -fx-graphic: url("../Picture/ToggleOnPress.png");
+}
+
+/*
+.manualButton:pressed {
+    -fx-graphic: url("../Picture/ToggleOnPress.png");
+}
+*/
+.PictureBox {
+    -fx-padding: 20 20 20 20;
+}
+
 .manualPage1 {
-   -fx-graphic: "../Picture/ManualPage1";
+    -fx-background-image: url("../Picture/ManualPage1.png");
+    -fx-min-height: 518px;
+    -fx-min-width: 640px;
+    -fx-background-size: 640px 518px;
+    -fx-background-repeat: no-repeat;
+
+}
+
+.manualPage2 {
+    -fx-background-image: url("../Picture/ManualPage2.png");
+    -fx-min-height: 518px;
+    -fx-min-width: 640px;
+    -fx-background-size: 640px 518px;
+    -fx-background-repeat: no-repeat;
+
+}
+
+.manualPage3 {
+    -fx-background-image: url("../Picture/ManualPage3.png");
+    -fx-min-height: 518px;
+    -fx-min-width: 640px;
+    -fx-background-size: 640px 518px;
+    -fx-background-repeat: no-repeat;
+
+}
+
+.manualPage4 {
+    -fx-background-image: url("../Picture/ManualPage4.png");
+    -fx-min-height: 518px;
+    -fx-min-width: 640px;
+    -fx-background-size: 640px 518px;
+    -fx-background-repeat: no-repeat;
+
 }
 
 .context-menu {
@@ -209,7 +283,7 @@
 }
 
 
-.toggle-button {
+.toggleButton {
 
     -fx-background-color: #000000, linear-gradient(#202020 100%, #1f2429 20%, #191d22 100%);
     -fx-min-width: 106px;
@@ -222,7 +296,7 @@
     -fx-padding: 10 15 10 15;
 }
 
-.toggle-Button:hover {
+.toggleButton:hover {
     -fx-text-fill: white;
 }
 

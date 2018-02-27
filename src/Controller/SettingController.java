@@ -3,8 +3,11 @@ package Controller;
 import Controller.Save.SaveOpenDialog;
 import Model.Pad;
 import View.ManualView;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Toggle;
 import javafx.stage.Stage;
 
 import java.io.BufferedWriter;
@@ -110,7 +113,14 @@ public class SettingController extends Observable {
     public EventHandler<ActionEvent> openManualView = new EventHandler<ActionEvent>() {
         @Override
         public void handle(ActionEvent event) {
-            manualView = new ManualView();
+            manualView = new ManualView(SettingController.this);
+        }
+    };
+
+    public ChangeListener<Toggle> change = new ChangeListener<Toggle>() {
+        @Override
+        public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+
         }
     };
 

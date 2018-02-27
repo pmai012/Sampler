@@ -82,10 +82,10 @@ public class EffectView extends Stage{
             flangerEffect.setToggleGroup(allEffects);
             bitCrushEffect.setToggleGroup(allEffects);
             notchFilter.setToggleGroup(allEffects);
-            delayEffect.getStyleClass().add("toggle-button");
-            flangerEffect.getStyleClass().add("toggle-button");
-            bitCrushEffect.getStyleClass().add("toggle-button");
-            notchFilter.getStyleClass().add("toggle-button");
+            delayEffect.getStyleClass().add("toggleButton");
+            flangerEffect.getStyleClass().add("toggleButton");
+            bitCrushEffect.getStyleClass().add("toggleButton");
+            notchFilter.getStyleClass().add("toggleButton");
             effectsBox.getChildren().addAll(delayEffect, flangerEffect, bitCrushEffect, notchFilter);
             effectsBox.getStyleClass().add("effectsBox");
             root.getChildren().add(effectsBox);
