@@ -36,7 +36,7 @@
 }
 
 .headBox {
-    -fx-padding: 15 0 0 0;
+    -fx-padding: 15 0 20 0;
 }
 
 .headline {
@@ -54,27 +54,25 @@
 }
 
 .toggleBox {
-    -fx-padding: 0 0 20 0;
-    -fx-spacing: 20;
+    -fx-padding: 25 0 20 0;
+    -fx-spacing: 30;
 }
 
 .manualButton {
     -fx-background-color: transparent;
+    -fx-background-radius: 20px;
     -fx-graphic: url("../Picture/Toggle.png");
 }
 
 .manualButtonOnPress {
     -fx-background-color: transparent;
+    -fx-background-radius: 20px;
     -fx-graphic: url("../Picture/ToggleOnPress.png");
 }
 
-/*
-.manualButton:pressed {
-    -fx-graphic: url("../Picture/ToggleOnPress.png");
-}
-*/
 .PictureBox {
-    -fx-padding: 20 20 20 20;
+    -fx-margin: 10 10 10 10;
+    -fx-padding: 10 10 10 10;
 }
 
 .manualPage1 {

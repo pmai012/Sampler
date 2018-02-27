@@ -49,7 +49,7 @@ public class ManualView extends Stage {
         headBox = new HBox();
         pictureBox = new HBox();
         manualBox = new HBox();
-        togglebox = new HBox(10);
+        togglebox = new HBox();
         manualPageButton = new Button();
         manualBox.getChildren().add(pictureBox);
         pictureBox.getChildren().add(manualPageButton);
@@ -74,18 +74,18 @@ public class ManualView extends Stage {
         stage.setTitle("Anleitung");
         stage.getIcons().add(new Image("Picture/LogoSampler.png"));
         stage.setMinWidth(700);
-        stage.setMinHeight(650);
-        stage.setMaxWidth(850);
+        stage.setMinHeight(690);
+        stage.setMaxWidth(800);
         stage.setMaxHeight(720);
         stage.initStyle(StageStyle.UTILITY);
         stage.setScene(scene);
         stage.setX(870);
         stage.setY(163);
 
-        headline.getStyleClass().add("headline");
         headBox.setAlignment(Pos.BASELINE_CENTER);
         togglebox.setAlignment(Pos.BASELINE_CENTER);
         pictureBox.setAlignment(Pos.CENTER);
+        headline.getStyleClass().add("headline");
         headBox.getStyleClass().add("headBox");
         pictureBox.getStyleClass().add("PictureBox");
         manualPageButton.getStyleClass().add("manualPage1");
@@ -94,43 +94,51 @@ public class ManualView extends Stage {
         page3.getStyleClass().add("manualButton");
         page4.getStyleClass().add("manualButton");
         togglebox.getStyleClass().add("toggleBox");
+
         pages.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             @Override
             public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
                 if(newValue != null){
                     if(newValue.equals(page1) && newValue.isSelected()) {
                         manualPageButton.getStyleClass().clear();
+                        page1.getStyleClass().removeAll("manualButton", "manualButtonOnPress");
+                        page2.getStyleClass().removeAll("manualButton", "manualButtonOnPress");
+                        page3.getStyleClass().removeAll("manualButton", "manualButtonOnPress");
+                        page4.getStyleClass().removeAll("manualButton", "manualButtonOnPress");
+                        headline.getStyleClass().add("headline");
+                        headBox.getStyleClass().add("headBox");
+                        pictureBox.getStyleClass().add("PictureBox");
                         manualPageButton.getStyleClass().add("manualPage1");
-                        page1.getStyleClass().clear();
-                        page2.getStyleClass().clear();
-                        page3.getStyleClass().clear();
-                        page4.getStyleClass().clear();
                         page1.getStyleClass().add("manualButtonOnPress");
                         page2.getStyleClass().add("manualButton");
                         page3.getStyleClass().add("manualButton");
                         page4.getStyleClass().add("manualButton");
                         togglebox.getStyleClass().add("togglebox");
+                        togglebox.setAlignment(Pos.BOTTOM_CENTER);
+
                     }
                     else if(newValue.equals(page2) && newValue.isSelected()){
                         manualPageButton.getStyleClass().clear();
                         manualPageButton.getStyleClass().add("manualPage2");
-                        page1.getStyleClass().clear();
-                        page2.getStyleClass().clear();
-                        page3.getStyleClass().clear();
-                        page4.getStyleClass().clear();
+                        page1.getStyleClass().removeAll("manualButton", "manualButtonOnPress");
+                        page2.getStyleClass().removeAll("manualButton", "manualButtonOnPress");
+                        page3.getStyleClass().removeAll("manualButton", "manualButtonOnPress");
+                        page4.getStyleClass().removeAll("manualButton", "manualButtonOnPress");
                         page1.getStyleClass().add("manualButton");
                         page2.getStyleClass().add("manualButtonOnPress");
                         page3.getStyleClass().add("manualButton");
                         page4.getStyleClass().add("manualButton");
                         togglebox.getStyleClass().add("togglebox");
+                        togglebox.setAlignment(Pos.CENTER);
+
                     }
                     else if(newValue.equals(page3) && newValue.isSelected()){
                         manualPageButton.getStyleClass().clear();
                         manualPageButton.getStyleClass().add("manualPage3");
-                        page1.getStyleClass().clear();
-                        page2.getStyleClass().clear();
-                        page3.getStyleClass().clear();
-                        page4.getStyleClass().clear();
+                        page1.getStyleClass().removeAll("manualButton", "manualButtonOnPress");
+                        page2.getStyleClass().removeAll("manualButton", "manualButtonOnPress");
+                        page3.getStyleClass().removeAll("manualButton", "manualButtonOnPress");
+                        page4.getStyleClass().removeAll("manualButton", "manualButtonOnPress");
                         page1.getStyleClass().add("manualButton");
                         page2.getStyleClass().add("manualButton");
                         page3.getStyleClass().add("manualButtonOnPress");
@@ -140,10 +148,10 @@ public class ManualView extends Stage {
                     else if(newValue.equals(page4) && newValue.isSelected()){
                         manualPageButton.getStyleClass().clear();
                         manualPageButton.getStyleClass().add("manualPage4");
-                        page1.getStyleClass().clear();
-                        page2.getStyleClass().clear();
-                        page3.getStyleClass().clear();
-                        page4.getStyleClass().clear();
+                        page1.getStyleClass().removeAll("manualButton", "manualButtonOnPress");
+                        page2.getStyleClass().removeAll("manualButton", "manualButtonOnPress");
+                        page3.getStyleClass().removeAll("manualButton", "manualButtonOnPress");
+                        page4.getStyleClass().removeAll("manualButton", "manualButtonOnPress");
                         page1.getStyleClass().add("manualButton");
                         page2.getStyleClass().add("manualButton");
                         page3.getStyleClass().add("manualButton");
