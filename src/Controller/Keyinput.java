@@ -6,7 +6,8 @@ import javafx.event.EventHandler;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-
+import java.awt.im.*;
+import java.awt.im.InputContext;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,6 +67,7 @@ public class Keyinput implements EventHandler<KeyEvent> {
     }
 
     public KeyCode getdefaultkeyCode(int padnumber) {
+        InputContext context = InputContext.getInstance();
         switch (padnumber){
             case 0:
                 return KeyCode.DIGIT1;
@@ -92,6 +94,10 @@ public class Keyinput implements EventHandler<KeyEvent> {
             case 11:
                 return KeyCode.F;
             case 12:
+                if (context.getLocale().toLanguageTag().equals("de-DE"))
+                {
+                    return KeyCode.Y;
+                }
                 return KeyCode.Z;
             case 13:
                 return KeyCode.X;
