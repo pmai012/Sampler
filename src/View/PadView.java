@@ -23,12 +23,12 @@ public class PadView extends Pane {
     private BorderPane rootPV;
     private TilePane padBox;
     private Observer observer;
-    private ContextMenu contextMenu;
-    private MenuItem addEffect;
-    private MenuItem editEffect;
-    private MenuItem setstartpoint;
-    private MenuItem deleteEffect;
-    private MenuItem deleteSound;
+    private ContextMenu[] contextMenu;
+    private MenuItem[] addEffect;
+    private MenuItem[] editEffect;
+    private MenuItem[] setstartpoint;
+    private MenuItem[] deleteEffect;
+    private MenuItem[] deleteSound;
     private Tooltip padTip;
     private Button[] pads;
     private Button pad1, pad2, pad3, pad4, pad5, pad6, pad7, pad8,
@@ -38,17 +38,34 @@ public class PadView extends Pane {
     public PadView(Observer obs) {
         observer = obs;
         rootPV = new BorderPane();
-        contextMenu = new ContextMenu();
-        addEffect = new MenuItem("Effekt hinzufügen");
-        editEffect = new MenuItem("Effekt bearbeiten");
-        deleteEffect = new MenuItem("Effekt löschen");
-        deleteSound = new MenuItem("Sound löschen");
-        setstartpoint = new MenuItem("Startpunkt festlegen");
-        editEffect.setDisable(true);
-        addEffect.setDisable(true);
-        deleteEffect.setDisable(true);
-        deleteSound.setDisable(true);
-        contextMenu.getItems().addAll(addEffect, editEffect, deleteEffect, deleteSound, setstartpoint);
+        contextMenu = new ContextMenu[16];
+        addEffect = new MenuItem[16];
+        editEffect = new MenuItem[16];
+        deleteEffect = new MenuItem[16];
+        deleteSound = new MenuItem[16];
+        setstartpoint = new MenuItem[16];
+
+
+
+        for (int i = 0; i < contextMenu.length; i++) {
+            contextMenu[i] = new ContextMenu();
+            addEffect[i] = new MenuItem("Effekt hinzufügen");
+            editEffect[i] = new MenuItem("Effekt bearbeiten");
+            deleteEffect[i] = new MenuItem("Effekt löschen");
+            deleteSound[i] = new MenuItem("Sound löschen");
+            setstartpoint[i] = new MenuItem("Startpunkt festlegen");
+
+
+
+            editEffect[i].setDisable(true);
+            addEffect[i].setDisable(true);
+            deleteEffect[i].setDisable(true);
+            deleteSound[i].setDisable(true);
+            setstartpoint[i].setDisable(true);
+            contextMenu[i].getItems().addAll(addEffect[i], editEffect[i], deleteEffect[i], deleteSound[i], setstartpoint[i]);
+        }
+
+
         padBox = new TilePane(Orientation.HORIZONTAL);
         padBox.setHgap(10);
         padBox.setVgap(10);
@@ -82,14 +99,17 @@ public class PadView extends Pane {
             pad.setTooltip(padTip);
         }
 
-        for (Button pad : pads) {
-            padBox.getChildren().add(pad);
-            pad.setContextMenu(contextMenu);
+        for (int i = 0; i < pads.length; i++) {
+            padBox.getChildren().add(pads[i]);
+            pads[i].setContextMenu(contextMenu[i]);
         }
 
         this.getChildren().add(padBox);
         padBox.getStyleClass().addAll("padBox");
-        contextMenu.getStyleClass().addAll("menuItem", "context-menu");
+        for (ContextMenu c : contextMenu) {
+            c.getStyleClass().addAll("menuItem", "context-menu");
+        }
+
 
         for (Button pad : pads) {
             pad.getStyleClass().add("pad");
@@ -116,11 +136,13 @@ public class PadView extends Pane {
             pad.addEventHandler(MouseEvent.MOUSE_PRESSED, padController.pressed);
             pad.addEventHandler(MouseEvent.MOUSE_RELEASED, padController.rightclick);
         }
-        addEffect.setOnAction(padController.contextMenu_addEffectClicked);
-        deleteEffect.setOnAction(padController.contextMenu_deleteEffectClicked);
-        editEffect.setOnAction(padController.contextMenu_editEffectClicked);
-        deleteSound.setOnAction(padController.contextMenu_deleteSoundClicked);
-        setstartpoint.setOnAction(padController.contextMenu_setstartpoint);
+        for (int i = 0; i < contextMenu.length; i++) {
+            addEffect[i].setOnAction(padController.contextMenu_addEffectClicked);
+            deleteEffect[i].setOnAction(padController.contextMenu_deleteEffectClicked);
+            editEffect[i].setOnAction(padController.contextMenu_editEffectClicked);
+            deleteSound[i].setOnAction(padController.contextMenu_deleteSoundClicked);
+            setstartpoint[i].setOnAction(padController.contextMenu_setstartpoint);
+        }
     }
 
     public Pad[] getPads() {
@@ -151,13 +173,12 @@ public class PadView extends Pane {
 
                 if (pad[i] == null) {
 
-                    //es werden nuller erkennt Probleme bei dem removen und adden
-                    //Das erste mal funktioniert es aber danach nicht
-                    // Grund unbekannt
+
+                    addEffect[i].setDisable(true);
+                    deleteSound[i].setDisable(true);
+                    setstartpoint[i].setDisable(true);
 
                     pads[i].getStyleClass().add("pad");
-
-
                     if (i < 4) {
                         pads[i].getStyleClass().remove("padGUsed");
                         pads[i].getStyleClass().add("padG");
@@ -174,8 +195,10 @@ public class PadView extends Pane {
                         pads[i].getStyleClass().add("padR");
                     }
                 } else {
+                    addEffect[i].setDisable(false);
+                    deleteSound[i].setDisable(false);
+                    setstartpoint[i].setDisable(false);
 
-                    deleteSound.setDisable(false);
                     if (i < 4) {
                         pads[i].getStyleClass().remove("padGUsed");
                         pads[i].getStyleClass().add("padGUsed");
@@ -190,13 +213,14 @@ public class PadView extends Pane {
                         pads[i].getStyleClass().add("padRUsed");
                     }
                     if (pad[i].hasEffects()) {
-                        pads[padController.getClickedPadIndex()].getContextMenu().getItems().get(0).setDisable(true);
-                        pads[padController.getClickedPadIndex()].getContextMenu().getItems().get(1).setDisable(false);
-                        pads[padController.getClickedPadIndex()].getContextMenu().getItems().get(2).setDisable(false);
+                        addEffect[i].setDisable(true);
+                        editEffect[i].setDisable(false);
+                        deleteEffect[i].setDisable(false);
+
                     } else {
-                        pads[padController.getClickedPadIndex()].getContextMenu().getItems().get(0).setDisable(false);
-                        pads[padController.getClickedPadIndex()].getContextMenu().getItems().get(1).setDisable(true);
-                        pads[padController.getClickedPadIndex()].getContextMenu().getItems().get(2).setDisable(true);
+                        addEffect[i].setDisable(false);
+                        editEffect[i].setDisable(true);
+                        deleteEffect[i].setDisable(true);
                     }
                 }
 

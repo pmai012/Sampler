@@ -191,6 +191,7 @@ public class RecordController extends Observable {
                 System.out.println("focus");
             } else {
                 System.out.println("not focus");
+
                 view.changeBPMview();
             }
         }
@@ -200,6 +201,7 @@ public class RecordController extends Observable {
         public void handle(KeyEvent event) {
             if (event.getCode().equals(KeyCode.ENTER)) {
                 view.getBpm2().requestFocus();
+
             }
         }
     };

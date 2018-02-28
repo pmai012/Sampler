@@ -4,8 +4,6 @@ import ddf.minim.AudioOutput;
 import ddf.minim.Minim;
 import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
 
-import javax.sound.midi.MidiDevice;
-
 
 /**
  * Created by User on 30.01.2018.

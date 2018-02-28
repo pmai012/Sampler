@@ -20,13 +20,14 @@ public class SoundView  extends Pane {
     private Label audioFX;
     private RadioButton fxOn, fxOff;
     private Tooltip listViewTip;
+    String currentselected = "";
 
 
 
     public SoundView(PadController padController){
 
         soundController = new SoundController(System.getProperty("user.home" )
-                .concat("//Music").concat("//" + "SamplerSoundfiles"));
+                .concat("//Music").concat("//" + "SamplerSoundfiles"), currentselected);
         soundlistview = new ListView();
         soundObList = FXCollections.observableArrayList();
         soundController.createSounddir(soundObList);
@@ -51,7 +52,7 @@ public class SoundView  extends Pane {
 
         soundpane = new VBox(10);
         this.getChildren().add(soundpane);
-        listViewTip = new Tooltip("Mit Linksklick Sounds auf die Pads ziehen.\n Mit Rechtsklick Datei anzeigen lassen. ");
+        listViewTip = new Tooltip(currentselected+" Mit Linksklick Sounds auf die Pads ziehen.\n Mit Rechtsklick Datei anzeigen lassen. ");
         soundlistview.setTooltip(listViewTip);
         soundpane.getChildren().add(soundlistview);
         soundpane.getChildren().add(audioFX);

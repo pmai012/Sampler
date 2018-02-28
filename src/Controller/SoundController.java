@@ -2,21 +2,20 @@ package Controller;
 
 
 import Sound.Soundadmin;
-import com.sun.org.apache.xerces.internal.xs.datatypes.ObjectList;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ListView;
 import javafx.scene.input.*;
 
-import java.io.*;
-import java.net.URL;
-import java.nio.file.*;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.FileAlreadyExistsException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.lang.ClassLoader.getSystemResource;
-import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 
 public class SoundController {
@@ -24,8 +23,10 @@ public class SoundController {
     private String dirPath = null;
     private ArrayList<String> dirList;
     private ArrayList<String> pathList;
+    String current;
 
-    public SoundController(String dirPath) {
+    public SoundController(String dirPath, String current) {
+        this.current = current;
         this.soundObList = soundObList;
         this.dirPath = dirPath;
         this.dirList = new ArrayList<String>();
@@ -57,11 +58,12 @@ public class SoundController {
         public void handle(MouseEvent event) {
 
             ListView soundlistview = (ListView) event.getSource();
+
             Dragboard db = soundlistview.startDragAndDrop(TransferMode.ANY);
             ClipboardContent content = new ClipboardContent();
 
             int index = soundlistview.getSelectionModel().getSelectedIndex();
-            System.out.println(index);
+            current = dirList.get(index) + "\n " ;
             List<String> files = new ArrayList<String>();
 
             files.add(pathList.get(index));

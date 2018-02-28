@@ -62,6 +62,7 @@ public class PadController {
         beat.setBpm(beatsperminute);
     }
 
+    public int getbeat(){return beat.getBpm();}
     /**
      * Gibt Pad an der Position des übergebenen Index - 1 zurück.
      * - 1, weil der Index für die Padbeschriftung von 1 - 16 gewählt wurde.
@@ -307,7 +308,7 @@ public class PadController {
         Label label1 = new Label("Startpunkt: ");
         Label zeit = new Label(String.valueOf(pad[i].getStartpoint()/1000) + " Sekunden");
         long laenge = (pad[i].getLenght());
-        System.out.println(laenge);
+
         Slider slider = new Slider(0, laenge / 1000, 1);
         slider.setValue((pad[i].getStartpoint() / 1000));
         slider.setShowTickLabels(true);
