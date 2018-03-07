@@ -291,7 +291,7 @@
     -fx-font-family: "";
     -fx-text-fill: linear-gradient(white, whitesmoke);
     -fx-font-size: 12px;
-    -fx-padding: 5 10 5 10;
+    -fx-padding: 10 10 10 10;
 }
 
 .toggleButton:hover {
