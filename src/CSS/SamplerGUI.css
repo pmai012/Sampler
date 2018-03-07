@@ -284,14 +284,14 @@
 .toggleButton {
 
     -fx-background-color: #000000, linear-gradient(#202020 100%, #1f2429 20%, #191d22 100%);
-    -fx-min-width: 106px;
+    -fx-min-width: 85px;
     -fx-background-radius: 0px;
     -fx-background-insets: 0,1,20,0;
     -fx-text-fill: c0c0c0;
     -fx-font-family: "";
     -fx-text-fill: linear-gradient(white, whitesmoke);
     -fx-font-size: 12px;
-    -fx-padding: 10 15 10 15;
+    -fx-padding: 5 10 5 10;
 }
 
 .toggleButton:hover {

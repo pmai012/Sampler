@@ -1,9 +1,6 @@
 package Controller;
 
-import Model.Effects.BitCrushEffect;
-import Model.Effects.DelayEffect;
-import Model.Effects.FlangerEffect;
-import Model.Effects.NotchFilterEffect;
+import Model.Effects.*;
 import Model.Pad;
 import View.EffectView;
 import javafx.event.EventHandler;
@@ -29,27 +26,33 @@ public class EffectController {
 
             switch(view.getActiveView().getId())
             {
+                case("Gain"):
+                    GainEffect gainEffect = new GainEffect(view.getGainView().getGainValue());
+                    clickedPad =padController.getPadAtIndex(padController.getClickedPadIndex());
+                    clickedPad.deleteEffect();
+                    clickedPad.addEffect(gainEffect);
+                    break;
                 case("Delay"):
-                    DelayEffect delayEffect = new DelayEffect((float)view.returnDelayView().getDelayValue(), (float)view.returnDelayView().getDecayValue());
+                    DelayEffect delayEffect = new DelayEffect((float)view.getDelayView().getDelayValue(), (float)view.getDelayView().getDecayValue());
                     clickedPad = padController.getPadAtIndex(padController.getClickedPadIndex());
                     clickedPad.deleteEffect();
                     clickedPad.addEffect(delayEffect);
                     break;
                 case("Flanger"):
-                    FlangerEffect flanger = new FlangerEffect((float)view.returnFlangerView().getDelayValue(),(float)view.returnFlangerView().getFlangerRate(), (float)view.returnFlangerView().getDepth(),
-                            (float)view.returnFlangerView().getFeedback(),(float)view.returnFlangerView().getWetValue(),(float)view.returnFlangerView().getDryValue());
+                    FlangerEffect flanger = new FlangerEffect((float)view.getFlangerView().getDelayValue(),(float)view.getFlangerView().getFlangerRate(), (float)view.getFlangerView().getDepth(),
+                            (float)view.getFlangerView().getFeedback(),(float)view.getFlangerView().getWetValue(),(float)view.getFlangerView().getDryValue());
                     clickedPad = padController.getPadAtIndex(padController.getClickedPadIndex());
                     clickedPad.deleteEffect();
                     clickedPad.addEffect(flanger);
                     break;
                 case("BitCrush"):
-                    BitCrushEffect bitcrusher = new BitCrushEffect((float)view.returnBitCrushView().getBitRes(),(float)view.returnBitCrushView().getBitRate());
+                    BitCrushEffect bitcrusher = new BitCrushEffect((float)view.getBitCrushView().getBitRes(),(float)view.getBitCrushView().getBitRate());
                     clickedPad = padController.getPadAtIndex(padController.getClickedPadIndex());
                     clickedPad.deleteEffect();
                     clickedPad.addEffect(bitcrusher);
                     break;
                 case("NotchFilter"):
-                    NotchFilterEffect notchfilter = new NotchFilterEffect((float)view.returnNotchFilterView().getCutoff(),(float)view.returnNotchFilterView().getBandwidth(),(float)view.returnNotchFilterView().getSampleRate());
+                    NotchFilterEffect notchfilter = new NotchFilterEffect((float)view.getNotchFilterView().getCutoff(),(float)view.getNotchFilterView().getBandwidth(),(float)view.getNotchFilterView().getSampleRate());
                     clickedPad = padController.getPadAtIndex(padController.getClickedPadIndex());
                     clickedPad.deleteEffect();
                     clickedPad.addEffect(notchfilter);

@@ -52,7 +52,7 @@ public class DelayEffectView extends Pane {
         delayLevel.setShowTickMarks(true);
         delayLevel.setMajorTickUnit(0.5);
         delayLevel.setMinorTickCount(5);
-        delayLevel.setBlockIncrement(0.1);
+        delayLevel.setBlockIncrement(0.5);
 
         decayRate.setTextFill(Color.WHITESMOKE);
         delayRate.setTextFill(Color.WHITESMOKE);

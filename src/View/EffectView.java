@@ -2,12 +2,10 @@ package View;
 
 import Controller.EffectController;
 import Controller.PadController;
-import Model.Effects.DelayEffect;
 import Model.Effects.Effect;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Toggle;
@@ -18,7 +16,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.scene.input.MouseEvent;
@@ -43,11 +40,13 @@ public class EffectView extends Stage{
     private Effect currentEffect;
 
     private ToggleGroup allEffects = new ToggleGroup();
+    private ToggleButton gainEffect = new ToggleButton("Gain");
     private ToggleButton delayEffect = new ToggleButton("Delay");
     private ToggleButton flangerEffect = new ToggleButton("Flanger");
     private ToggleButton bitCrushEffect = new ToggleButton("Bit Crush");
-    private ToggleButton notchFilter = new ToggleButton("Notch Filter");
+    private ToggleButton notchFilter = new ToggleButton("NotchFilter");
 
+    private GainEffectView gainEffectView;
     private DelayEffectView delayEffectView;
     private FlangerEffectView flangerEffectView;
     private BitCrushEffectView bitCrushEffectView;
@@ -78,15 +77,17 @@ public class EffectView extends Stage{
             sliderBox.setMaxWidth(300);
             sliderBox.setAlignment(Pos.CENTER);
             root.setCenter(sliderBox);
+            gainEffect.setToggleGroup(allEffects);
             delayEffect.setToggleGroup(allEffects);
             flangerEffect.setToggleGroup(allEffects);
             bitCrushEffect.setToggleGroup(allEffects);
             notchFilter.setToggleGroup(allEffects);
+            gainEffect.getStyleClass().add("toggleButton");
             delayEffect.getStyleClass().add("toggleButton");
             flangerEffect.getStyleClass().add("toggleButton");
             bitCrushEffect.getStyleClass().add("toggleButton");
             notchFilter.getStyleClass().add("toggleButton");
-            effectsBox.getChildren().addAll(delayEffect, flangerEffect, bitCrushEffect, notchFilter);
+            effectsBox.getChildren().addAll(gainEffect, delayEffect, flangerEffect, bitCrushEffect, notchFilter);
             effectsBox.getStyleClass().add("effectsBox");
             root.getChildren().add(effectsBox);
             submitBox.getChildren().add(submitButton);
@@ -107,7 +108,17 @@ public class EffectView extends Stage{
             if (currentEffect != null) {
                 double[] values = currentEffect.returnValues();
                 root.setBottom(submitBox);
+                submitBox.getStyleClass().add("submitBox");
                 switch (currentEffect.getName()){
+                    case "Gain":
+                        if(gainEffectView == null){
+                            gainEffectView = new GainEffectView(values[0]);
+                        }
+
+                        activeView = gainEffectView;
+                        gainEffect.setSelected(true);
+                        sliderBox.getChildren().add(gainEffectView);
+                        break;
                     case "Delay":
                         if (delayEffectView == null)
                         {
@@ -124,7 +135,6 @@ public class EffectView extends Stage{
                             flangerEffectView = new FlangerEffectView(values[0], values[1],values[2],values[3],values[4],values[5]);
                         }
 
-
                         activeView = flangerEffectView;
                         flangerEffect.setSelected(true);
                         sliderBox.getChildren().add(flangerEffectView);
@@ -134,7 +144,6 @@ public class EffectView extends Stage{
                             bitCrushEffectView = new BitCrushEffectView(values[0],values[1]);
                         }
 
-
                         activeView = bitCrushEffectView;
                         bitCrushEffect.setSelected(true);
                         sliderBox.getChildren().add(bitCrushEffectView);
@@ -143,7 +152,6 @@ public class EffectView extends Stage{
                         if (notchFilterEffectView == null){
                             notchFilterEffectView = new NotchFilterEffectView(values[0], values[1], values[2]);
                         }
-
 
                         activeView = notchFilterEffectView;
                         notchFilter.setSelected(true);
@@ -160,13 +168,17 @@ public class EffectView extends Stage{
                     if (new_toggle == null) {
                         if (root.getChildren().contains(submitBox)) {
                             root.getChildren().removeAll(submitBox);
+                            submitBox.getStyleClass().removeAll("submitBox");
                         }
                         sliderBox.getChildren().clear();
                     } else {
                         new_toggle.setSelected(true);
                         root.setBottom(submitBox);
-                        submitBox.getStyleClass().add("submitBox");
+
                         sliderBox.getChildren().clear();
+                        if(new_toggle.equals(gainEffect)) {
+                            showGainSettings();
+                        }
                         if (new_toggle.equals(delayEffect)) {
 
                             showDelaySettings();
@@ -183,11 +195,21 @@ public class EffectView extends Stage{
 
                             showNotchFilterSettings();
                         }
+                        submitBox.getStyleClass().add("submitBox");
                     }
                 }
             });
         submitButton.addEventHandler(MouseEvent.MOUSE_CLICKED, effectController.submit);
     }
+    private  void showGainSettings(){
+        if(gainEffectView == null){
+            gainEffectView = new GainEffectView();
+        }
+
+        activeView = gainEffectView;
+        sliderBox.getChildren().add(gainEffectView);
+    }
+
     private void showDelaySettings()
     {
         if (delayEffectView == null){delayEffectView = new DelayEffectView();}
@@ -219,14 +241,16 @@ public class EffectView extends Stage{
         activeView = notchFilterEffectView;
         sliderBox.getChildren().add(notchFilterEffectView);
     }
-    public Pane getActiveView(){return this.activeView;}
 
-    public DelayEffectView returnDelayView()
+    public Pane getActiveView(){return this.activeView;}
+    public GainEffectView getGainView()
+    {return this.gainEffectView; }
+    public DelayEffectView getDelayView()
     {return this.delayEffectView;}
-    public FlangerEffectView returnFlangerView()
+    public FlangerEffectView getFlangerView()
     {return this.flangerEffectView;}
-    public BitCrushEffectView returnBitCrushView()
+    public BitCrushEffectView getBitCrushView()
     {return this.bitCrushEffectView;}
-    public NotchFilterEffectView returnNotchFilterView()
+    public NotchFilterEffectView getNotchFilterView()
     {return this.notchFilterEffectView;}
 }

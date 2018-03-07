@@ -66,34 +66,28 @@ public class Pad extends Observable implements Serializable {
         return effects.get(0);
     }
 
-
-
     public KeyCode getShortcut() {
         return shortcut;
     }
-
     public void setShortcut(KeyCode keyCode){
         this.shortcut = keyCode;
     }
-
     public int getStartpoint() {
         return startpoint;
     }
-
     public long getEndpoint() {
         return endpoint;
     }
-
     public long getLenght(){
         return lenght;
     }
     public long getPresstime() {
         return presstime;
     }
-
     public void setThreadrun(boolean threadrun) {
         this.threadrun = threadrun;
     }
+
 
     public void clear() {
         startpoint = 0;
