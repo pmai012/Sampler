@@ -93,6 +93,15 @@ public class RecordController extends Observable {
 
 
             } catch (FileAlreadyExistsException e) {
+                try {
+                    Files.delete(Paths.get(targetpath));
+                    Files.copy(Paths.get(recordfile.getPath()), Paths.get(targetpath));
+                } catch (IOException e1) {
+                    e1.printStackTrace();
+                }
+                timelabel.setText("00:00");
+
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
