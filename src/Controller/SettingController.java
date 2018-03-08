@@ -8,12 +8,12 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Toggle;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 import javafx.stage.Stage;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -74,6 +74,14 @@ public class SettingController extends Observable {
         saveDialog.save(pads, saveFilelocation);
     }
 
+    public void open(String Url){
+        file = new File(Url);
+        SaveOpenDialog openDialog = new SaveOpenDialog();
+        pads = openDialog.read(file.getAbsolutePath(), observer, null); //Muss noch bearbeitet werden!!!!
+        setChanged();
+        notifyObservers("padsladen");
+    }
+
     public void open() {
 
         SaveOpenDialog openDialog = new SaveOpenDialog();
@@ -124,5 +132,27 @@ public class SettingController extends Observable {
         }
     };
 
+
+    /**
+     * Laden per Drag and Drop -akzeptieren
+     */
+    public EventHandler<DragEvent> acceptdrag = new EventHandler<DragEvent>() {
+        @Override
+        public void handle(DragEvent event) {
+            event.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+        }
+    };
+    /**
+     * Laden per Drag and Drop -anwenden
+     */
+    public EventHandler<DragEvent> getData = new EventHandler<DragEvent>() {
+        @Override
+        public void handle(DragEvent event) {
+            Dragboard db = event.getDragboard();
+            if (db.getFiles().size() == 1 && db.getFiles().get(0).getAbsolutePath().endsWith(".pjd")){
+                open(db.getFiles().get(0).getPath());
+            }
+        }
+    };
 
 }

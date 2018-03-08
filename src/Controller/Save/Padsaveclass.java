@@ -47,7 +47,7 @@ class Padsaveclass implements Serializable {
 
             Pad ausgabe = new Pad(path, observer,out);
             ausgabe.setStartpoint(startpoint);
-            ausgabe.setEndpoint(endpoint);
+
 
             return ausgabe;
         } else{

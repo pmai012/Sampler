@@ -122,6 +122,7 @@ public class Pad extends Observable implements Serializable {
 
         if (this.hasEffects()) {
             playSound(effekte.get(0));
+
         } else {
             if (starter < 1) {
                 filePlayer.play(startpoint);
@@ -131,8 +132,7 @@ public class Pad extends Observable implements Serializable {
         }
     }
     public void playSound(UGen effect) {
-
-        if (starter < 1) {
+         if (starter < 1) {
             filePlayer.play(startpoint);
             filePlayer.patch(effect).patch(audioOut);
             starter++;
@@ -161,9 +161,7 @@ public class Pad extends Observable implements Serializable {
         return false;
     }
 
-    public void setEndpoint(long time) {
-        endpoint = time;
-    }
+
 
     public boolean hasEffects() {
         if (this.effekte != null) {

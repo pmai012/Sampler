@@ -5,6 +5,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -22,6 +23,7 @@ public class MainFrame extends Application implements Observer {
     private SettingView settingView;
     private SoundView soundView;
     private VBox configBox;
+    private StackPane padviewroot;
 
 
     public MainFrame(){
@@ -29,8 +31,10 @@ public class MainFrame extends Application implements Observer {
         root = new BorderPane();
         configBox = new VBox(40);
         padView = new PadView(this);
+        padviewroot = new StackPane();
         recordView = new RecordView(padView.getPadController(),this);
         soundView = new SoundView(padView.getPadController());
+
 
     }
 
@@ -53,7 +57,11 @@ public class MainFrame extends Application implements Observer {
         VBox test = new VBox(10);
         root.setTop(settingView);
         root.setRight(configBox);
-        root.setLeft(padView);
+        root.setLeft(padviewroot);
+        padviewroot.getChildren().add(padView);
+        root.setOnDragOver(settingView.getSettingController().acceptdrag);
+        root.setOnDragDropped(settingView.getSettingController().getData);
+
 
         Scene scene = new Scene(root, WIDTH, HEIGHT);
         scene.getStylesheets().add("CSS/SamplerGUI.css");
